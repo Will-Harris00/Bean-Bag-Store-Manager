@@ -1,68 +1,67 @@
 package beanbags;
 import java.io.IOException;
 
-
 /**
- * BadStore is a minimally compiling, but non-functioning implementor of the
- * BeanBagStore interface.
- * 
- * @author Jonathan Fieldsend 
- * @version 1.1
+ * BeanBagStore interface. The no-argument constructor of a class
+ * implementing this interface should initialise the BeanBagStore
+ * as an empty store with no initial bean bags contained within it.
+ *
+ * @author Jonathan Fieldsend
+ * @version 1.3
  */
-public class Store implements BeanBagStore
-{
- 
-    public void addBeanBags(int num, String manufacturer, String name, 
-    String id, short year, byte month)
-    throws IllegalNumberOfBeanBagsAddedException, BeanBagMismatchException,
-    IllegalIDException, InvalidMonthException {
+
+public class Store implements BeanBagStore {
+    public void addBeanBags(int num, String manufacturer, String name,
+                            String id, short year, byte month)
+            throws IllegalNumberOfBeanBagsAddedException, BeanBagMismatchException,
+            IllegalIDException, InvalidMonthException {
 
 
 
     }
 
 
-    public void addBeanBags(int num, String manufacturer, String name, 
-    String id, short year, byte month, String information)
-    throws IllegalNumberOfBeanBagsAddedException, BeanBagMismatchException,
-    IllegalIDException, InvalidMonthException {
+    public void addBeanBags(int num, String manufacturer, String name,
+                            String id, short year, byte month, String information)
+            throws IllegalNumberOfBeanBagsAddedException, BeanBagMismatchException,
+            IllegalIDException, InvalidMonthException {
 
 
     }
 
 
-    public void setBeanBagPrice(String id, int priceInPence) 
-    throws InvalidPriceException, BeanBagIDNotRecognisedException, IllegalIDException {
+    public void setBeanBagPrice(String id, int priceInPence)
+            throws InvalidPriceException, BeanBagIDNotRecognisedException, IllegalIDException {
 
 
     }
 
 
     public void sellBeanBags(int num, String id) throws BeanBagNotInStockException,
-    InsufficientStockException, IllegalNumberOfBeanBagsSoldException,
-    PriceNotSetException, BeanBagIDNotRecognisedException, IllegalIDException {
+            InsufficientStockException, IllegalNumberOfBeanBagsSoldException,
+            PriceNotSetException, BeanBagIDNotRecognisedException, IllegalIDException {
 
 
     }
 
 
     public int reserveBeanBags(int num, String id) throws BeanBagNotInStockException,
-    InsufficientStockException, IllegalNumberOfBeanBagsReservedException,
-    PriceNotSetException, BeanBagIDNotRecognisedException, IllegalIDException {
+            InsufficientStockException, IllegalNumberOfBeanBagsReservedException,
+            PriceNotSetException, BeanBagIDNotRecognisedException, IllegalIDException {
 
 
         return 0;
     }
 
     public void unreserveBeanBags(int reservationNumber)
-    throws ReservationNumberNotRecognisedException {
+            throws ReservationNumberNotRecognisedException {
 
 
     }
 
 
     public void sellBeanBags(int reservationNumber)
-    throws ReservationNumberNotRecognisedException {
+            throws ReservationNumberNotRecognisedException {
 
 
     }
@@ -81,7 +80,7 @@ public class Store implements BeanBagStore
     }
 
     public int beanBagsInStock(String id) throws BeanBagIDNotRecognisedException,
-    IllegalIDException {
+            IllegalIDException {
 
 
         return 0;
@@ -93,7 +92,7 @@ public class Store implements BeanBagStore
     }
 
     public void loadStoreContents(String filename) throws IOException,
-    ClassNotFoundException {
+            ClassNotFoundException {
 
 
     }
@@ -111,7 +110,7 @@ public class Store implements BeanBagStore
     }
 
     public int getNumberOfSoldBeanBags(String id) throws
-    BeanBagIDNotRecognisedException, IllegalIDException {
+            BeanBagIDNotRecognisedException, IllegalIDException {
 
 
         return 0;
@@ -124,7 +123,7 @@ public class Store implements BeanBagStore
     }
 
     public int getTotalPriceOfSoldBeanBags(String id) throws
-    BeanBagIDNotRecognisedException, IllegalIDException {
+            BeanBagIDNotRecognisedException, IllegalIDException {
 
 
         return 0;
@@ -137,7 +136,7 @@ public class Store implements BeanBagStore
     }
 
     public String getBeanBagDetails(String id) throws
-    BeanBagIDNotRecognisedException, IllegalIDException {
+            BeanBagIDNotRecognisedException, IllegalIDException {
 
 
         return "";
@@ -147,14 +146,14 @@ public class Store implements BeanBagStore
 
 
     }
-     
+
     public void resetSaleAndCostTracking() {
 
 
     }
-     
-    public void replace(String oldId, String replacementId) 
-    throws BeanBagIDNotRecognisedException, IllegalIDException {
+
+    public void replace(String oldId, String replacementId)
+            throws BeanBagIDNotRecognisedException, IllegalIDException {
 
 
     }
