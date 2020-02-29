@@ -11,13 +11,18 @@ import java.io.IOException;
  */
 
 public class Store implements BeanBagStore {
+    private ObjectArrayList obj = new ObjectArrayList();
     public void addBeanBags(int num, String manufacturer, String name,
                             String id, short year, byte month)
             throws IllegalNumberOfBeanBagsAddedException, BeanBagMismatchException,
             IllegalIDException, InvalidMonthException {
-
-
-
+        if (num < 0) throw new IllegalNumberOfBeanBagsAddedException ("Illegal Number of Beanbags");
+        else {
+            for (int i = 0; i < num; i++){
+                BeanBag o = new BeanBag(manufacturer, name, id, year, month, "");
+                obj.add(o);
+            }
+        }
     }
 
 
@@ -25,8 +30,13 @@ public class Store implements BeanBagStore {
                             String id, short year, byte month, String information)
             throws IllegalNumberOfBeanBagsAddedException, BeanBagMismatchException,
             IllegalIDException, InvalidMonthException {
-
-
+        if (num < 0) throw new IllegalNumberOfBeanBagsAddedException ("Illegal Number of Beanbags");
+        else {
+            for (int i = 0; i < num; i++){
+                BeanBag o = new BeanBag(manufacturer, name, id, year, month, information);
+                obj.add(o);
+            }
+        }
     }
 
 

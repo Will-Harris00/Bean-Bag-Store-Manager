@@ -2,26 +2,24 @@ package beanbags;
 
 public class BeanBag {
     // private instance variables
-    private String id;
-    private String name;
     private String manufacturer;
+    private String name;
+    private String id;
     private short year;
     private byte month;
-    private int penceInPrice;
     private String information;
-
+    private int penceInPrice;
 
     // Constructor: initialise name, email, gender with given values
-    public BeanBag(String id, String name, String manufacturer, short year, byte month, int priceInPence, String information) {
+    public BeanBag(String id, String name, String manufacturer, short year, byte month, String information) {
         this.id = id;
         this.name = name;
         this.manufacturer = manufacturer;
         this.year = year;
         this.month = month;
-        this.penceInPrice = priceInPence;
         this.information = information;
+        // priceInPence will be initialised with value zero so does not need to be declared here
     }
-
 
 
     // public getters for private instance
