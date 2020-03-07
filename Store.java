@@ -17,12 +17,22 @@ public class Store implements BeanBagStore {
             throws IllegalNumberOfBeanBagsAddedException, BeanBagMismatchException,
             IllegalIDException, InvalidMonthException {
         if (num < 0) throw new IllegalNumberOfBeanBagsAddedException ("Illegal Number of Beanbags");
+
+
+        else if (CheckID.validID("ffffff")) throw new IllegalIDException ("Invalid Hexadecimal Identifier");
+
+
         else {
             for (int i = 0; i < num; i++){
                 BeanBag o = new BeanBag(manufacturer, name, id, year, month, "");
                 obj.add(o);
             }
         }
+
+        // System.out.println(CheckID.validID("ffffffff"));
+
+
+
     }
 
 
