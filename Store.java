@@ -17,22 +17,23 @@ public class Store implements BeanBagStore {
                             String id, short year, byte month)
             throws IllegalNumberOfBeanBagsAddedException, BeanBagMismatchException,
             IllegalIDException, InvalidMonthException {
-        if (num < 0) throw new IllegalNumberOfBeanBagsAddedException ("Illegal Number of Beanbags");
 
-
-        else if (CheckID.validID(id)) ;
-
-
+        if (num <= 0) throw new IllegalNumberOfBeanBagsAddedException ("Number of beanbags cannot be less than zero");
+        else if (month < 0 || month > 12) {
+            throw new InvalidMonthException("Month must be between 1 and 12");
+        }
         else {
+            CheckID.validID(id);
             for (int i = 0; i < num; i++){
                 BeanBag o = new BeanBag(manufacturer, name, id, year, month, "");
                 obj.add(o);
             }
         }
-
-
-
-
+        BeanBag array = null;
+        for (int j = 0; j < obj.size(); j++)
+            array = (BeanBag) obj.get(j);
+            System.out.println(array);
+            System.out.println(array.getName());
     }
 
 
