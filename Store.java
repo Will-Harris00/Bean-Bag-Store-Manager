@@ -12,6 +12,7 @@ import java.io.IOException;
 
 public class Store implements BeanBagStore {
     private ObjectArrayList obj = new ObjectArrayList();
+
     public void addBeanBags(int num, String manufacturer, String name,
                             String id, short year, byte month)
             throws IllegalNumberOfBeanBagsAddedException, BeanBagMismatchException,
@@ -19,7 +20,7 @@ public class Store implements BeanBagStore {
         if (num < 0) throw new IllegalNumberOfBeanBagsAddedException ("Illegal Number of Beanbags");
 
 
-        else if (CheckID.validID("ffffff")) throw new IllegalIDException ("Invalid Hexadecimal Identifier");
+        else if (CheckID.validID(id)) ;
 
 
         else {
@@ -29,7 +30,6 @@ public class Store implements BeanBagStore {
             }
         }
 
-        // System.out.println(CheckID.validID("ffffffff"));
 
 
 
