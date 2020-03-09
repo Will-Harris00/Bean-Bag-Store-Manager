@@ -82,10 +82,4 @@ public class BeanBag {
     public void setPenceInPrice(int priceInPence) {
         this.penceInPrice = priceInPence;
     }
-
-    // Method: toString
-    public String toString() {
-        return "[id=" + id + ",name=" + name + ",manufacturer=" + manufacturer + ",year=" + year + ",month=" + month
-                + ",information=" + information + ",priceInPence=" + penceInPrice + "]";
-    }
 }
