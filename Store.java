@@ -13,27 +13,31 @@ import java.io.IOException;
 public class Store implements BeanBagStore {
     private ObjectArrayList obj = new ObjectArrayList();
 
+
     public void addBeanBags(int num, String manufacturer, String name,
                             String id, short year, byte month)
             throws IllegalNumberOfBeanBagsAddedException, BeanBagMismatchException,
             IllegalIDException, InvalidMonthException {
+        // addBeanBags(num, manufacturer, name, id, year, month, "");
 
         if (num <= 0) throw new IllegalNumberOfBeanBagsAddedException ("Number of beanbags cannot be less than zero");
-        else if (month < 0 || month > 12) {
-            throw new InvalidMonthException("Month must be between 1 and 12");
-        }
-        else {
-            CheckID.validID(id);
-            for (int i = 0; i < num; i++){
+
+        if (month < 0 | month > 12) throw new InvalidMonthException("Month must be between 1 and 12");
+
+        try {
+            CheckID.CheckID(id);
+            for (int i = 0; i < num; i++) {
                 BeanBag o = new BeanBag(manufacturer, name, id, year, month, "");
-                obj.add(o);
+                if (!Mismatch.Mismatch(o))
+                    obj.add(o);
+                else {
+                    throw new BeanBagMismatchException();
+                }
             }
         }
-        BeanBag array = null;
-        for (int j = 0; j < obj.size(); j++)
-            array = (BeanBag) obj.get(j);
-            System.out.println(array);
-            System.out.println(array.getName());
+        catch (IllegalIDException e) {
+            throw new IllegalIDException();
+        }
     }
 
 
@@ -41,11 +45,20 @@ public class Store implements BeanBagStore {
                             String id, short year, byte month, String information)
             throws IllegalNumberOfBeanBagsAddedException, BeanBagMismatchException,
             IllegalIDException, InvalidMonthException {
-        if (num < 0) throw new IllegalNumberOfBeanBagsAddedException ("Illegal Number of Beanbags");
+
+        if (num <= 0) throw new IllegalNumberOfBeanBagsAddedException ("Number of beanbags cannot be less than zero");
+
+        if (month < 0 | month > 12) throw new InvalidMonthException("Month must be between 1 and 12");
+
         else {
+            CheckID.CheckID(id);
             for (int i = 0; i < num; i++){
                 BeanBag o = new BeanBag(manufacturer, name, id, year, month, information);
-                obj.add(o);
+                if (Mismatch.Alternative(manufacturer, name, id, year, month, information))
+                    obj.add(o);
+                else {
+                    throw new BeanBagMismatchException();
+                }
             }
         }
     }
@@ -177,5 +190,20 @@ public class Store implements BeanBagStore {
             throws BeanBagIDNotRecognisedException, IllegalIDException {
 
 
+    }
+
+
+    // remember to delete this method at the end before compiling
+    public void viewObj(){
+        BeanBag array = null;
+        for (int j = 0; j < obj.size(); j++)
+            array = (BeanBag) obj.get(j);
+            System.out.println(array);
+        assert array != null;
+        System.out.println(array.getName());
+    }
+
+    public ObjectArrayList getObj() {
+        return obj;
     }
 }
