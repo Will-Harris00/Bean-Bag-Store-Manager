@@ -85,7 +85,41 @@ public class Store implements BeanBagStore {
     public void sellBeanBags(int num, String id)
             throws BeanBagNotInStockException, InsufficientStockException, IllegalNumberOfBeanBagsSoldException,
             PriceNotSetException, BeanBagIDNotRecognisedException, IllegalIDException {
-
+        if (num <= 0) throw new IllegalNumberOfBeanBagsSoldException("Cannot sell zero or fewer beanbags");
+        BeanBag item;
+        boolean recognised  = false;
+        try {
+            CheckID.validId(id);
+            int available = beanBagsInStock(id);
+            if (num > available)
+                throw new InsufficientStockException("Insufficient stock available for sale");
+            else if (available == 0) {
+                throw new BeanBagNotInStockException("None of these bean bags are available");
+            }
+            else {
+                for (int i = 0; i < num; i++) {
+                    for (int j = 0; j < stock.size(); j++) {
+                        item = (BeanBag) stock.get(j);
+                        if (item.getIdentifier().equals(id)) {
+                            if (item.getPenceInPrice() == 0) {
+                                throw new PriceNotSetException("No price set for this item");
+                            }
+                            else {
+                                stock.remove(item);
+                                recognised = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            // Throws an exception for unrecognised bean bags.
+            if (!recognised)
+                throw new BeanBagIDNotRecognisedException("Bean bag identifier '" + id + "' not recognised.");
+            // Throws an exception for bean bag IDs which aren't hexadecimal numbers.
+        } catch (NumberFormatException e) {
+            throw new IllegalIDException("Invalid Hexadecimal Identifier - Not a hexadecimal number");
+        }
     }
 
     public int reserveBeanBags(int num, String id)
