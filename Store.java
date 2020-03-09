@@ -55,7 +55,7 @@ public class Store implements BeanBagStore {
     public void setBeanBagPrice(String id, int priceInPence)
             throws InvalidPriceException, BeanBagIDNotRecognisedException, IllegalIDException {
         BeanBag item;
-        // Assumes bean bag is unrecongised until it finds the bean bag with the
+        // Assumes bean bag is unrecognised until it finds the bean bag with the
         // mentioned ID.
         boolean recognised = false;
 

@@ -53,8 +53,6 @@ public class BeanBag {
     }
 
 
-
-
     // public setters for private instance
     public void setManufacturer(String manufacturer) {
         this.manufacturer = manufacturer;
