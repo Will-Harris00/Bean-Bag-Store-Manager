@@ -13,7 +13,8 @@ public class BeanBag {
     private int penceInPrice;
 
     // Constructor for initialising bean bag objects.
-    public BeanBag(String manufacturer, String name, String id, short year, byte month, String information, int penceInPrice) {
+    public BeanBag(String manufacturer, String name, String id, short year, byte month, String information,
+            int penceInPrice) {
         this.manufacturer = manufacturer;
         this.name = name;
         this.id = id;
@@ -23,7 +24,6 @@ public class BeanBag {
         // Price initialised with value 0l doesn't need to be declared here.
         this.penceInPrice = penceInPrice;
     }
-
 
     // Public getters for private instances.
     public String getManufacturer() {
@@ -54,7 +54,6 @@ public class BeanBag {
         return penceInPrice;
     }
 
-
     // Public setters for private instances.
     public void setManufacturer(String manufacturer) {
         this.manufacturer = manufacturer;
@@ -84,10 +83,9 @@ public class BeanBag {
         this.penceInPrice = priceInPence;
     }
 
-
     // Method: toString
     public String toString() {
-        return "[id=" + id + ",name=" + name + ",manufacturer=" + manufacturer + ",year=" + year +
-                ",month=" + month + ",information=" + information + ",priceInPence=" + penceInPrice + "]";
+        return "[id=" + id + ",name=" + name + ",manufacturer=" + manufacturer + ",year=" + year + ",month=" + month
+                + ",information=" + information + ",priceInPence=" + penceInPrice + "]";
     }
 }
