@@ -104,19 +104,45 @@ public class Store implements BeanBagStore {
     }
 
     public int beanBagsInStock() {
-
-        return 0;
+        return stock.size();
     }
 
     public int reservedBeanBagsInStock() {
-
+        return reserved.size();
         return 0;
     }
 
     public int beanBagsInStock(String id) throws BeanBagIDNotRecognisedException, IllegalIDException {
-
-        return 0;
-    }
+        // Starts the count to 0.
+        int count = 0;
+        BeanBag item;
+        boolean found = false;
+        
+        // Checks the given ID, and counts the number of those bean bags in stock.
+        try {
+            CheckID.validId(id);
+            for (int j = 0; j < stock.size(); j++) {
+                item = (BeanBag) stock.get(j);
+                if (item.getIdentifier().equals(id)) {
+                    found = true;
+                    count += 1;
+                }
+            }
+        }
+        // Throws an exception if the ID isn't a hexadecimal number.
+        catch (NumberFormatException e) {
+            throw new IllegalIDException("Invalid Hexadecimal Identifier - Not a hexadecimal number");
+            }
+        finally {
+            if (found) {
+                return count;
+            }
+            // Throws an exception if the ID doesn't match.
+            else {
+                throw new BeanBagIDNotRecognisedException("Bean bag ID not recognised");
+            }
+        }
+        }
 
     public void saveStoreContents(String filename) throws IOException {
 
@@ -157,8 +183,36 @@ public class Store implements BeanBagStore {
     }
 
     public String getBeanBagDetails(String id) throws BeanBagIDNotRecognisedException, IllegalIDException {
+        BeanBag item;
+        boolean found = false;
+        
+        // Checks the given ID, and counts the number of those bean bags in stock.
+        try {
+            CheckID.validId(id);
+            for (int j = 0; j < stock.size(); j++) {
+                item = (BeanBag) stock.get(j);
+                if (item.getIdentifier().equals(id)) {
+                    found = true;
+                }
+            }
+        }
 
-        return "";
+        // Throws an exception if the ID isn't a hexadecimal number.
+        catch (NumberFormatException e) {
+            throw new IllegalIDException("Invalid Hexadecimal Identifier - Not a hexadecimal number");
+            }
+
+        if (found)  {
+            return "[id=" + item.getIdentifier() + ",name=" + item.getName() +
+            ",manufacturer=" + item.getManufacturer() + ",year=" +
+            item.getYear() + ",month=" + item.getMonth() + ",information=" +
+            item.getInformation() + ",priceInPence=" + item.getPenceInPrice() +
+            "]";
+        }
+        else {
+            throw new BeanBagIDNotRecognisedException("Bean bag ID not found.");
+        }
+
     }
 
     public void empty() {
