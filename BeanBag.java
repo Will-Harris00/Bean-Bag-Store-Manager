@@ -11,10 +11,10 @@ public class BeanBag {
     private int penceInPrice;
 
     // Constructor: initialise name, email, gender with given values
-    public BeanBag(String id, String name, String manufacturer, short year, byte month, String information) {
-        this.id = id;
-        this.name = name;
+    public BeanBag(String manufacturer, String name, String id, short year, byte month, String information) {
         this.manufacturer = manufacturer;
+        this.name = name;
+        this.id = id;
         this.year = year;
         this.month = month;
         this.information = information;
@@ -23,16 +23,16 @@ public class BeanBag {
 
 
     // public getters for private instance
-    public String getIdentifier() {
-        return id;
+    public String getManufacturer() {
+        return manufacturer;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getManufacturer() {
-        return manufacturer;
+    public String getIdentifier() {
+        return id;
     }
 
     public short getYear() {
@@ -43,27 +43,28 @@ public class BeanBag {
         return month;
     }
 
-    public int getPenceInPrice() {
-        return penceInPrice;
-    }
-
     public String getInformation() {
         return information;
     }
 
+    public int getPenceInPrice() {
+        return penceInPrice;
+    }
+
+
 
 
     // public setters for private instance
-    public void setIdentifier(String id) {
-        this.id = id;
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setManufacturer(String manufacturer) {
-        this.manufacturer = manufacturer;
+    public void setIdentifier(String id) {
+        this.id = id;
     }
 
     public void setYear(short year) {
@@ -74,13 +75,14 @@ public class BeanBag {
         this.month = month;
     }
 
+    public void setInformation(String information) {
+        this.information = information;
+    }
+
     public void setPenceInPrice(int priceInPence) {
         this.penceInPrice = priceInPence;
     }
 
-    public void setInformation(String information) {
-        this.information = information;
-    }
 
 
 
