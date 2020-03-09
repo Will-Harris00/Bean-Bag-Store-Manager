@@ -55,7 +55,11 @@ public class Store implements BeanBagStore {
     public void setBeanBagPrice(String id, int priceInPence)
             throws InvalidPriceException, BeanBagIDNotRecognisedException, IllegalIDException {
         BeanBag item;
+        // Assumes bean bag is unrecongised until it finds the bean bag with the
+        // mentioned ID.
         boolean recognised = false;
+
+        // Checks the given ID, and sets the price to that ID if valid.
         try {
             CheckID.validId(id);
             if (priceInPence < 0)
@@ -68,8 +72,11 @@ public class Store implements BeanBagStore {
                     recognised = true;
                 }
             }
+
+            // Throws an exception for unrecognised bean bags.
             if (!recognised)
                 throw new BeanBagIDNotRecognisedException("Bean bag identifier '" + id + "' not recognised.");
+            // Throws an exception for bean bag IDs which aren't hexadecimal numbers.
         } catch (NumberFormatException e) {
             throw new IllegalIDException("Invalid Hexadecimal Identifier - Not a hexadecimal number");
         }
