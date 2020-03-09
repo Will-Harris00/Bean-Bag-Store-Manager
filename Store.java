@@ -114,7 +114,7 @@ public class Store implements BeanBagStore {
     public int reserveBeanBags(int num, String id)
             throws BeanBagNotInStockException, InsufficientStockException, IllegalNumberOfBeanBagsReservedException,
             PriceNotSetException, BeanBagIDNotRecognisedException, IllegalIDException {
-        Checks.validSale(num, id, beanBagsInStock(id), true);
+        Checks.validReservation(num, id, beanBagsInStock(id));
         BeanBag item;
         boolean recognised = false;
         /*

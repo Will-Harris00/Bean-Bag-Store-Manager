@@ -68,7 +68,7 @@ public class Checks {
 
 
     // Exception handler for reservations.
-    public static void validSale(int num, String id, int available, boolean reservation) throws BeanBagNotInStockException,
+    public static void validReservation(int num, String id, int available) throws BeanBagNotInStockException,
             InsufficientStockException, IllegalNumberOfBeanBagsReservedException, IllegalIDException {
         if (num <= 0)
             throw new IllegalNumberOfBeanBagsReservedException("Cannot sell zero or fewer beanbags");
