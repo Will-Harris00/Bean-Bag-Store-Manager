@@ -38,18 +38,11 @@ public class Store implements BeanBagStore {
             throw new InvalidMonthException("Month must be between 1 and 12");
 
         // Checks that if IDs match, then attributes also match for added bean bags.
-        try {
-            CheckID.validId(id);
-            for (int i = 0; i < num; i++) {
-                BeanBag o = new BeanBag(manufacturer, name, id, year, month, information, 0);
-                Mismatch.existingId(o, stock);
-                stock.add(o);
-            }
-        }
-
-        // Throws an exception if the ID isn't a hexadecimal number.
-        catch (NumberFormatException e) {
-            throw new IllegalIDException("Invalid Hexadecimal Identifier - Not a hexadecimal number");
+        Checks.validId(id);
+        for (int i = 0; i < num; i++) {
+            BeanBag o = new BeanBag(manufacturer, name, id, year, month, information, 0);
+            Checks.existingMismatch(o, stock);
+            stock.add(o);
         }
     }
 
@@ -62,73 +55,98 @@ public class Store implements BeanBagStore {
         boolean recognised = false;
 
         // Checks the given ID, and sets the price to that ID if valid.
-        try {
-            CheckID.validId(id);
-            if (priceInPence < 0)
-                throw new InvalidPriceException("Price cannot be below zero pence.");
-            for (int j = 0; j < stock.size(); j++) {
-                item = (BeanBag) stock.get(j);
-                if (item.getIdentifier().equals(id)) {
-                    item.setPenceInPrice(priceInPence);
-                    System.out.println(toString(item));
-                    recognised = true;
-                }
+        Checks.validId(id);
+        if (priceInPence < 0)
+            throw new InvalidPriceException("Price cannot be below zero pence.");
+        for (int j = 0; j < stock.size(); j++) {
+            item = (BeanBag) stock.get(j);
+            if (item.getIdentifier().equals(id)) {
+                item.setPenceInPrice(priceInPence);
+                System.out.println(toString(item));
+                recognised = true;
             }
-
-            // Throws an exception for unrecognised bean bags.
-            if (!recognised)
-                throw new BeanBagIDNotRecognisedException("Bean bag identifier '" + id + "' not recognised.");
-            // Throws an exception for bean bag IDs which aren't hexadecimal numbers.
-        } catch (NumberFormatException e) {
-            throw new IllegalIDException("Invalid Hexadecimal Identifier - Not a hexadecimal number");
         }
+
+        // Throws an exception for unrecognised bean bags.
+        if (!recognised)
+            throw new BeanBagIDNotRecognisedException("Bean bag identifier '" + id + "' not recognised.");
     }
 
     // Sells a given quantity of a bean bag based on ID.
     public void sellBeanBags(int num, String id)
             throws BeanBagNotInStockException, InsufficientStockException, IllegalNumberOfBeanBagsSoldException,
             PriceNotSetException, BeanBagIDNotRecognisedException, IllegalIDException {
+        Checks.validSale(num, id, beanBagsInStock(id));
+        BeanBag item;
+        boolean recognised = false;
+        /*
         if (num <= 0)
             throw new IllegalNumberOfBeanBagsSoldException("Cannot sell zero or fewer beanbags");
         BeanBag item;
         boolean recognised = false;
-        try {
-            CheckID.validId(id);
-            int available = beanBagsInStock(id);
-            if (available == 0)
-                throw new BeanBagNotInStockException("None of these bean bags are available");
-            if (num > available)
-                throw new InsufficientStockException("Insufficient stock available for sale");
-            else {
-                for (int i = 0; i < num; i++) {
-                    for (int j = 0; j < stock.size(); j++) {
-                        item = (BeanBag) stock.get(j);
-                        if (item.getIdentifier().equals(id)) {
-                            if (item.getPenceInPrice() == 0) {
-                                throw new PriceNotSetException("No price set for this item");
-                            } else {
-                                stock.remove(item);
-                                recognised = true;
-                                break;
-                            }
-                        }
+        Checks.validId(id);
+        int available = beanBagsInStock(id);
+        if (available == 0)
+            throw new BeanBagNotInStockException("None of these bean bags are available for reservation");
+        if (num > available)
+            throw new InsufficientStockException("Insufficient stock available for reservation");
+         */
+        for (int i = 0; i < num; i++) {
+            for (int j = 0; j < stock.size(); j++) {
+                item = (BeanBag) stock.get(j);
+                if (item.getIdentifier().equals(id)) {
+                    if (item.getPenceInPrice() == 0) {
+                        throw new PriceNotSetException("No price set for this item");
                     }
+                    stock.remove(item);
+                    recognised = true;
+                    break;
                 }
             }
-            // Throws an exception for unrecognised bean bags.
-            if (!recognised)
-                throw new BeanBagIDNotRecognisedException("Bean bag identifier '" + id + "' not recognised.");
-            // Throws an exception for bean bag IDs which aren't hexadecimal numbers.
-        } catch (NumberFormatException e) {
-            throw new IllegalIDException("Invalid Hexadecimal Identifier - Not a hexadecimal number");
         }
+
+        // Throws an exception for unrecognised bean bags.
+        if (!recognised)
+            throw new BeanBagIDNotRecognisedException("Bean bag identifier '" + id + "' not recognised.");
     }
 
     // Reserves a given quantity of bean bags based on ID.
     public int reserveBeanBags(int num, String id)
             throws BeanBagNotInStockException, InsufficientStockException, IllegalNumberOfBeanBagsReservedException,
             PriceNotSetException, BeanBagIDNotRecognisedException, IllegalIDException {
+        Checks.validSale(num, id, beanBagsInStock(id), true);
+        BeanBag item;
+        boolean recognised = false;
+        /*
+        if (num <= 0)
+            throw new IllegalNumberOfBeanBagsReservedException("Cannot sell zero or fewer beanbags");
+        BeanBag item;
+        boolean recognised = false;
+        Checks.validId(id);
+        int available = beanBagsInStock(id);
+        if (available == 0)
+            throw new BeanBagNotInStockException("None of these bean bags are available for reservation");
+        if (num > available)
+            throw new InsufficientStockException("Insufficient stock available for reservation");
+         */
+        for (int i = 0; i < num; i++) {
+            for (int j = 0; j < stock.size(); j++) {
+                item = (BeanBag) stock.get(j);
+                if (item.getIdentifier().equals(id)) {
+                    if (item.getPenceInPrice() == 0) {
+                        throw new PriceNotSetException("No price set for this item");
+                    }
+                    reserved.add(item);
+                    stock.remove(item);
+                    recognised = true;
+                    break;
+                }
+            }
+        }
 
+        // Throws an exception for unrecognised bean bags.
+        if (!recognised)
+            throw new BeanBagIDNotRecognisedException("Bean bag identifier '" + id + "' not recognised.");
         return 0;
     }
 
@@ -155,28 +173,21 @@ public class Store implements BeanBagStore {
 
     // Returns the number of a type of bean bag in stock.
     public int beanBagsInStock(String id) throws BeanBagIDNotRecognisedException, IllegalIDException {
-        // Starts the count to 0.
+        // Starts the count at 0.
         int count = 0;
         BeanBag item;
-
         // Checks the given ID, and counts the number of those bean bags in stock.
-        try {
-            CheckID.validId(id);
-            if (stock.size() == 0) {
-                throw new BeanBagIDNotRecognisedException("Bean bag ID not found.");
-            }
-            for (int j = 0; j < stock.size(); j++) {
-                item = (BeanBag) stock.get(j);
-                if (item.getIdentifier().equals(id)) {
-                    count += 1;
-                }
-            }
-            return count;
+        Checks.validId(id);
+        if (stock.size() == 0) {
+            throw new BeanBagIDNotRecognisedException("Bean bag ID not found.");
         }
-        // Throws an exception if the ID isn't a hexadecimal number.
-        catch (NumberFormatException e) {
-            throw new IllegalIDException("Invalid Hexadecimal Identifier - Not a hexadecimal number");
+        for (int j = 0; j < stock.size(); j++) {
+            item = (BeanBag) stock.get(j);
+            if (item.getIdentifier().equals(id)) {
+                count += 1;
+            }
         }
+        return count;
     }
 
 
@@ -224,32 +235,25 @@ public class Store implements BeanBagStore {
         boolean found = false;
 
         // Checks the given ID, and counts the number of those bean bags in stock.
-        try {
-            CheckID.validId(id);
-            if (stock.size() == 0) {
-                throw new BeanBagIDNotRecognisedException("Bean bag ID not found.");
-            }
-            for (int j = 0; j < stock.size(); j++) {
-                item = (BeanBag) stock.get(j);
-                if (item.getIdentifier().equals(id)) {
-                    found = true;
-                    break;
-                }
-            }
-            if (found) {
-                return "[id=" + item.getIdentifier() + ",name=" + item.getName() +
-                        ",manufacturer=" + item.getManufacturer() + ",year=" +
-                        item.getYear() + ",month=" + item.getMonth() + ",information=" +
-                        item.getInformation() + ",priceInPence=" + item.getPenceInPrice() +
-                        "]";
-            }
+        Checks.validId(id);
+        if (stock.size() == 0) {
             throw new BeanBagIDNotRecognisedException("Bean bag ID not found.");
         }
-
-        // Throws an exception if the ID isn't a hexadecimal number.
-        catch (NumberFormatException e) {
-            throw new IllegalIDException("Invalid Hexadecimal Identifier - Not a hexadecimal number");
+        for (int j = 0; j < stock.size(); j++) {
+            item = (BeanBag) stock.get(j);
+            if (item.getIdentifier().equals(id)) {
+                found = true;
+                break;
+            }
         }
+        if (found) {
+            return "[id=" + item.getIdentifier() + ",name=" + item.getName() +
+                    ",manufacturer=" + item.getManufacturer() + ",year=" +
+                    item.getYear() + ",month=" + item.getMonth() + ",information=" +
+                    item.getInformation() + ",priceInPence=" + item.getPenceInPrice() +
+                    "]";
+        }
+        throw new BeanBagIDNotRecognisedException("Bean bag ID not found.");
     }
 
 
@@ -276,16 +280,27 @@ public class Store implements BeanBagStore {
                 "]";
     }
 
-    public void array() {
-        printArray(stock);
+    public void array(String obj) {
+        if (obj.toLowerCase().equals("stock") || obj.toLowerCase().equals("s")  ) {
+            printArray(stock);
+        }
+        else if (obj.toLowerCase().equals("reserved") || obj.toLowerCase().equals("r")  ) {
+            printArray(reserved);
+        }
+        else if (obj.toLowerCase().equals("available") || obj.toLowerCase().equals("a")  ) {
+            printArray(available);
+        }
     }
 
-    public String printArray(ObjectArrayList stock) {
+    public void printArray(ObjectArrayList type) {
         BeanBag item;
-        System.out.println(stock.size());
-        if (stock.size() != 0) {
-            for (int j = 0; j < stock.size(); j++) {
-                item = (BeanBag) stock.get(j);
+        System.out.println(type.size());
+        if (type.size() == 0) {
+            System.out.println("Empty");
+        }
+        else {
+            for (int j = 0; j < type.size(); j++) {
+                item = (BeanBag) type.get(j);
                 System.out.println("[id=" + item.getIdentifier() + ",name=" + item.getName() +
                         ",manufacturer=" + item.getManufacturer() + ",year=" +
                         item.getYear() + ",month=" + item.getMonth() + ",information=" +
@@ -293,6 +308,5 @@ public class Store implements BeanBagStore {
                         "]");
             }
         }
-        return "Empty";
     }
 }

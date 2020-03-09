@@ -21,7 +21,7 @@ public class BeanBag {
         this.year = year;
         this.month = month;
         this.information = information;
-        // Price initialised with value 0l doesn't need to be declared here.
+        // Price initialised with value 0 pence doesn't need to be declared here.
         this.penceInPrice = penceInPrice;
     }
 
