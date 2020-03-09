@@ -20,7 +20,7 @@ public class Store implements BeanBagStore {
                             String id, short year, byte month)
             throws IllegalNumberOfBeanBagsAddedException, BeanBagMismatchException,
             IllegalIDException, InvalidMonthException {
-        addBeanBags(num, manufacturer, name, id, year, month, "");
+        addBeanBags(num, manufacturer, name, id, year, month, "", 0);
     }
 
 
@@ -36,7 +36,7 @@ public class Store implements BeanBagStore {
         try {
             CheckID.validId(id);
             for (int i = 0; i < num; i++) {
-                BeanBag o = new BeanBag(manufacturer, name, id, year, month, information);
+                BeanBag o = new BeanBag(manufacturer, name, id, year, month, information, 0);
                 Mismatch.existingId(o, stock);
                 stock.add(o);
             }
