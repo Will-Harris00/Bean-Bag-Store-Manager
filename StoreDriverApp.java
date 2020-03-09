@@ -6,5 +6,6 @@ public class StoreDriverApp {
         driver.addBeanBags(2, "Argos", "Beanie", "0000ffff", (short) 2019, (byte) 11);
         driver.addBeanBags(1, "Argos", "Beanie", "0000AAAA", (short) 2019, (byte) 12, "Test");
         driver.addBeanBags(1, "Argos", "Beanie", "0000afff", (short) 2019, (byte) 11);
+        driver.addBeanBags(1, "Argos", "Beanie", "0000afff", (short) 2019, (byte) 11);
     }
 }
