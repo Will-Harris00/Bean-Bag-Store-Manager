@@ -26,7 +26,7 @@ public class Store implements BeanBagStore {
 
     // Adds a bean bag to stock.
     public void addBeanBags(int num, String manufacturer, String name, String id, short year, byte month,
-            String information) throws IllegalNumberOfBeanBagsAddedException, BeanBagMismatchException,
+                            String information) throws IllegalNumberOfBeanBagsAddedException, BeanBagMismatchException,
             IllegalIDException, InvalidMonthException {
 
         // Throws an exception if the user tries to add a negative number of bean bags.
@@ -70,7 +70,7 @@ public class Store implements BeanBagStore {
                 item = (BeanBag) stock.get(j);
                 if (item.getIdentifier().equals(id)) {
                     item.setPenceInPrice(priceInPence);
-                    System.out.println(item.toString());
+                    System.out.println(toString(item));
                     recognised = true;
                 }
             }
@@ -95,12 +95,11 @@ public class Store implements BeanBagStore {
         try {
             CheckID.validId(id);
             int available = beanBagsInStock(id);
-            System.out.println(available);
+            if (available == 0)
+                throw new BeanBagNotInStockException("None of these bean bags are available");
             if (num > available)
                 throw new InsufficientStockException("Insufficient stock available for sale");
-            else if (available == 0) {
-                throw new BeanBagNotInStockException("None of these bean bags are available");
-            } else {
+            else {
                 for (int i = 0; i < num; i++) {
                     for (int j = 0; j < stock.size(); j++) {
                         item = (BeanBag) stock.get(j);
@@ -237,7 +236,7 @@ public class Store implements BeanBagStore {
                     break;
                 }
             }
-            if (found)  {
+            if (found) {
                 return "[id=" + item.getIdentifier() + ",name=" + item.getName() +
                         ",manufacturer=" + item.getManufacturer() + ",year=" +
                         item.getYear() + ",month=" + item.getMonth() + ",information=" +
@@ -267,5 +266,33 @@ public class Store implements BeanBagStore {
     // Replaces the ID of a bean bag with another given ID.
     public void replace(String oldId, String replacementId) throws BeanBagIDNotRecognisedException, IllegalIDException {
 
+    }
+
+    public String toString(BeanBag item) {
+        return "[id=" + item.getIdentifier() + ",name=" + item.getName() +
+                ",manufacturer=" + item.getManufacturer() + ",year=" +
+                item.getYear() + ",month=" + item.getMonth() + ",information=" +
+                item.getInformation() + ",priceInPence=" + item.getPenceInPrice() +
+                "]";
+    }
+
+    public void array() {
+        printArray(stock);
+    }
+
+    public String printArray(ObjectArrayList stock) {
+        BeanBag item;
+        System.out.println(stock.size());
+        if (stock.size() != 0) {
+            for (int j = 0; j < stock.size(); j++) {
+                item = (BeanBag) stock.get(j);
+                System.out.println("[id=" + item.getIdentifier() + ",name=" + item.getName() +
+                        ",manufacturer=" + item.getManufacturer() + ",year=" +
+                        item.getYear() + ",month=" + item.getMonth() + ",information=" +
+                        item.getInformation() + ",priceInPence=" + item.getPenceInPrice() +
+                        "]");
+            }
+        }
+        return "Empty";
     }
 }
