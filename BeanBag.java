@@ -11,13 +11,14 @@ public class BeanBag {
     private int penceInPrice;
 
     // Constructor: initialise name, email, gender with given values
-    public BeanBag(String manufacturer, String name, String id, short year, byte month, String information) {
+    public BeanBag(String manufacturer, String name, String id, short year, byte month, String information, int penceInPrice) {
         this.manufacturer = manufacturer;
         this.name = name;
         this.id = id;
         this.year = year;
         this.month = month;
         this.information = information;
+        this.penceInPrice = penceInPrice;
         // priceInPence will be initialised with value zero so does not need to be declared here
     }
 
@@ -84,11 +85,9 @@ public class BeanBag {
     }
 
 
-
-
     // method: toString
     public String toString() {
         return "[id=" + id + ",name=" + name + ",manufacturer=" + manufacturer + ",year=" + year +
-                ",month=" + month +",priceInPence=" + penceInPrice + ",information=" + information +"]";
+                ",month=" + month + ",information=" + information + ",priceInPence=" + penceInPrice + "]";
     }
 }
