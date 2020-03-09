@@ -11,33 +11,16 @@ import java.io.IOException;
  */
 
 public class Store implements BeanBagStore {
-    private ObjectArrayList obj = new ObjectArrayList();
+    private ObjectArrayList stock = new ObjectArrayList();
+    private ObjectArrayList reserved = new ObjectArrayList();
+    private ObjectArrayList available = new ObjectArrayList();
 
 
     public void addBeanBags(int num, String manufacturer, String name,
                             String id, short year, byte month)
             throws IllegalNumberOfBeanBagsAddedException, BeanBagMismatchException,
             IllegalIDException, InvalidMonthException {
-        // addBeanBags(num, manufacturer, name, id, year, month, "");
-
-        if (num <= 0) throw new IllegalNumberOfBeanBagsAddedException ("Number of beanbags cannot be less than zero");
-
-        if (month < 0 | month > 12) throw new InvalidMonthException("Month must be between 1 and 12");
-
-        try {
-            CheckID.CheckID(id);
-            for (int i = 0; i < num; i++) {
-                BeanBag o = new BeanBag(manufacturer, name, id, year, month, "");
-                if (!Mismatch.Mismatch(o))
-                    obj.add(o);
-                else {
-                    throw new BeanBagMismatchException();
-                }
-            }
-        }
-        catch (IllegalIDException e) {
-            throw new IllegalIDException();
-        }
+        addBeanBags(num, manufacturer, name, id, year, month, "");
     }
 
 
@@ -50,16 +33,17 @@ public class Store implements BeanBagStore {
 
         if (month < 0 | month > 12) throw new InvalidMonthException("Month must be between 1 and 12");
 
-        else {
-            CheckID.CheckID(id);
-            for (int i = 0; i < num; i++){
+        try {
+            CheckId.validId(id);
+            for (int i = 0; i < num; i++) {
                 BeanBag o = new BeanBag(manufacturer, name, id, year, month, information);
-                if (Mismatch.Alternative(manufacturer, name, id, year, month, information))
-                    obj.add(o);
-                else {
-                    throw new BeanBagMismatchException();
-                }
+                Mismatch.existingId(o, stock);
+                stock.add(o);
             }
+        }
+
+        catch (NumberFormatException e) {
+            throw new IllegalIDException("Invalid Hexadecimal Identifier - Not a hexadecimal number");
         }
     }
 
@@ -190,20 +174,5 @@ public class Store implements BeanBagStore {
             throws BeanBagIDNotRecognisedException, IllegalIDException {
 
 
-    }
-
-
-    // remember to delete this method at the end before compiling
-    public void viewObj(){
-        BeanBag array = null;
-        for (int j = 0; j < obj.size(); j++)
-            array = (BeanBag) obj.get(j);
-            System.out.println(array);
-        assert array != null;
-        System.out.println(array.getName());
-    }
-
-    public ObjectArrayList getObj() {
-        return obj;
     }
 }
