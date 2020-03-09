@@ -36,12 +36,11 @@ public class Store implements BeanBagStore {
         try {
             CheckID.validId(id);
             for (int i = 0; i < num; i++) {
-                BeanBag o = new BeanBag(manufacturer, name, id, year, month, information);
+                BeanBag o = new BeanBag(manufacturer, name, id, year, month, information, 0);
                 Mismatch.existingId(o, stock);
                 stock.add(o);
             }
         }
-
         catch (NumberFormatException e) {
             throw new IllegalIDException("Invalid Hexadecimal Identifier - Not a hexadecimal number");
         }
@@ -50,8 +49,23 @@ public class Store implements BeanBagStore {
 
     public void setBeanBagPrice(String id, int priceInPence)
             throws InvalidPriceException, BeanBagIDNotRecognisedException, IllegalIDException {
-
-
+        BeanBag item;
+        boolean recognised = false;
+        try {
+            CheckID.validId(id);
+            if (priceInPence < 0) throw new InvalidPriceException("Price cannot be below zero pence.");
+            for (int j = 0; j < stock.size(); j++) {
+                item = (BeanBag) stock.get(j);
+                if (item.getIdentifier().equals(id)) {
+                    item.setPenceInPrice(priceInPence);
+                    System.out.println(item.toString());
+                    recognised = true;
+                }
+            }
+            if (!recognised) throw new BeanBagIDNotRecognisedException("Bean bag identifier '" + id + "' not recognised.");
+        } catch (NumberFormatException e) {
+            throw new IllegalIDException("Invalid Hexadecimal Identifier - Not a hexadecimal number");
+        }
     }
 
 
