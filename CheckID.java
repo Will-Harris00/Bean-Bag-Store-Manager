@@ -1,6 +1,6 @@
 package beanbags;
 
-public class CheckId {
+public class CheckID {
     public static void validId(String id) throws IllegalIDException {
         if (id.length() == 8) {
             // long decimal = Long.parseLong(id, 16);

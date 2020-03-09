@@ -34,7 +34,7 @@ public class Store implements BeanBagStore {
         if (month < 0 | month > 12) throw new InvalidMonthException("Month must be between 1 and 12");
 
         try {
-            CheckId.validId(id);
+            CheckID.validId(id);
             for (int i = 0; i < num; i++) {
                 BeanBag o = new BeanBag(manufacturer, name, id, year, month, information);
                 Mismatch.existingId(o, stock);
