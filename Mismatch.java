@@ -9,7 +9,6 @@ public class Mismatch {
         for (int j = 0; j < stock.size(); j++) {
             item = (BeanBag) stock.get(j);
             System.out.println(item);
-            assert item != null;
             if (item.getIdentifier().equals(o.getIdentifier())) {
                 // Checks whether names of the bean bags match.
                 if (!item.getName().equals(o.getName())) {
