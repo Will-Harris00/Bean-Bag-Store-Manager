@@ -1,7 +1,9 @@
+// Enables access and changing of all attributes of bean bag objects.
+
 package beanbags;
 
 public class BeanBag {
-    // private instance variables
+    // Private instance variables.
     private String manufacturer;
     private String name;
     private String id;
@@ -10,7 +12,7 @@ public class BeanBag {
     private String information;
     private int penceInPrice;
 
-    // Constructor: initialise name, email, gender with given values
+    // Constructor for initialising bean bag objects.
     public BeanBag(String manufacturer, String name, String id, short year, byte month, String information, int penceInPrice) {
         this.manufacturer = manufacturer;
         this.name = name;
@@ -18,12 +20,12 @@ public class BeanBag {
         this.year = year;
         this.month = month;
         this.information = information;
+        // Price initialised with value 0l doesn't need to be declared here.
         this.penceInPrice = penceInPrice;
-        // priceInPence will be initialised with value zero so does not need to be declared here
     }
 
 
-    // public getters for private instance
+    // Public getters for private instances.
     public String getManufacturer() {
         return manufacturer;
     }
@@ -53,7 +55,7 @@ public class BeanBag {
     }
 
 
-    // public setters for private instance
+    // Public setters for private instances.
     public void setManufacturer(String manufacturer) {
         this.manufacturer = manufacturer;
     }
@@ -83,7 +85,7 @@ public class BeanBag {
     }
 
 
-    // method: toString
+    // Method: toString
     public String toString() {
         return "[id=" + id + ",name=" + name + ",manufacturer=" + manufacturer + ",year=" + year +
                 ",month=" + month + ",information=" + information + ",priceInPence=" + penceInPrice + "]";
