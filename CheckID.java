@@ -1,6 +1,4 @@
-/*
-Exception handler for the ID of a new bean bag to see if it has a valid format.
-*/
+//Exception handler for the ID of a new bean bag to see if it has a valid format.
 
 package beanbags;
 
