@@ -20,7 +20,7 @@ public class Store implements BeanBagStore {
                             String id, short year, byte month)
             throws IllegalNumberOfBeanBagsAddedException, BeanBagMismatchException,
             IllegalIDException, InvalidMonthException {
-        addBeanBags(num, manufacturer, name, id, year, month, "", 0);
+        addBeanBags(num, manufacturer, name, id, year, month, "");
     }
 
 
@@ -50,8 +50,23 @@ public class Store implements BeanBagStore {
 
     public void setBeanBagPrice(String id, int priceInPence)
             throws InvalidPriceException, BeanBagIDNotRecognisedException, IllegalIDException {
-
-
+        BeanBag item;
+        boolean recognised = false;
+        try {
+            CheckID.validId(id);
+            if (priceInPence < 0) throw new InvalidPriceException("Price cannot be below zero pence.");
+            for (int j = 0; j < stock.size(); j++) {
+                item = (BeanBag) stock.get(j);
+                if (item.getIdentifier().equals(id)) {
+                    item.setPenceInPrice(priceInPence);
+                    System.out.println(item.toString());
+                    recognised = true;
+                }
+            }
+            if (!recognised) throw new BeanBagIDNotRecognisedException("Bean bag identifier '" + id + "' not recognised.");
+        } catch (NumberFormatException e) {
+            throw new IllegalIDException("Invalid Hexadecimal Identifier - Not a hexadecimal number");
+        }
     }
 
 
