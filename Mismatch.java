@@ -7,7 +7,6 @@ public class Mismatch {
         for (int j = 0; j < stock.size(); j++) {
             item = (BeanBag) stock.get(j);
             System.out.println(item);
-            assert item != null;
             if (item.getIdentifier().equals(o.getIdentifier())) {
                 if (!item.getName().equals(o.getName())) {
                     throw new BeanBagMismatchException("Beanbag Mismatch - Names do not match");
