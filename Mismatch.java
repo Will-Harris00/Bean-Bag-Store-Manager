@@ -3,7 +3,7 @@ package beanbags;
 public class Mismatch {
     public static void existingId(BeanBag o, ObjectArrayList stock) throws BeanBagMismatchException {
         System.out.println(o);
-        BeanBag item = null;
+        BeanBag item;
         for (int j = 0; j < stock.size(); j++) {
             item = (BeanBag) stock.get(j);
             System.out.println(item);
