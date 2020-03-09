@@ -12,5 +12,9 @@ public class StoreDriverApp {
         driver.addBeanBags(1, "Argos", "Beanie", "0000afff", (short) 2019, (byte) 11);
         driver.setBeanBagPrice("0000afff", 9999);
         System.out.println(driver.beanBagsInStock());
+        System.out.println(driver.getBeanBagDetails("0000afff"));
+        // System.out.println(driver.getBeanBagDetails("0000abff"));
+        // System.out.println(driver.getBeanBagDetails("0000afhf"));
+        driver.sellBeanBags(1, "0000ffff");
     }
 }
