@@ -68,7 +68,8 @@ public class StoreDriverApp {
         driver.replace("0000bbbb","0000efef");
         driver.array("r");
 
-
+        driver.sellBeanBags(1);
+        driver.array("r");
 
     }
 }
