@@ -172,13 +172,15 @@ public class Store implements BeanBagStore {
         Reservation held;
         boolean recognised = false;
 
-        // Iterates over the stock and removes bean bags from the reserved list one by one
+        // Iterates over the stock and removes bean bags from the reserved list one by
+        // one
         // (according to quantity sold).
         for (int j = 0; j < reserved.size(); j++) {
             held = (Reservation) reserved.get(j);
-            // Searches for matching reservation numbers to find which bean bags to remove from reserved list.
+            // Searches for matching reservation numbers to find which bean bags to remove
+            // from reserved list.
             if (held.getReference() == reservationNumber) {
-                sold.add(held);
+                sold.add(held.getAttributes());
                 reserved.remove(held);
                 recognised = true;
                 break;
@@ -233,13 +235,26 @@ public class Store implements BeanBagStore {
     }
 
     public int getNumberOfSoldBeanBags() {
-
-        return 0;
+        return sold.size();
     }
 
     public int getNumberOfSoldBeanBags(String id) throws BeanBagIDNotRecognisedException, IllegalIDException {
+        // Starts the count at 0.
+        int count = 0;
+        BeanBag item;
 
-        return 0;
+        // Checks the given ID, and counts the number of those bean bags in stock.
+        Checks.validId(id);
+        if (sold.size() == 0) {
+            throw new BeanBagIDNotRecognisedException("Bean bag ID not sold yet.");
+        }
+        for (int j = 0; j < sold.size(); j++) {
+            item = (BeanBag) sold.get(j);
+            if (item.getIdentifier().equalsIgnoreCase(id)) {
+                count += 1;
+            }
+        }
+        return count;
     }
 
     public int getTotalPriceOfSoldBeanBags() {
