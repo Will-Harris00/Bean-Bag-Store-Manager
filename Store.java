@@ -286,17 +286,22 @@ public class Store implements BeanBagStore {
 
     // Replaces the ID of a bean bag with another given ID.
     public void replace(String oldId, String replacementId) throws BeanBagIDNotRecognisedException, IllegalIDException {
+        // Checks that the inputted IDs are valid.
         Checks.validId(oldId);
         Checks.validId(replacementId);
         boolean found = false;
+
+        // Replaces the object IDs in each of these lists.
         ObjectArrayList[] objects = {stock, reserved, available, sold};
         BeanBag item;
         Reservation held;
         int i;
         ObjectArrayList obj;
+        // Iterates over the lists one by one.
         for (i = 0; i < objects.length; i++) {
-            // accessing each element of array
+            // Accesses each element of array.
             obj = objects[i];
+            // Updates the IDs in the stock list.
             if (obj == stock) {
                 for (int j = 0; j < obj.size(); j++) {
                     item = (BeanBag) obj.get(j);
@@ -306,6 +311,7 @@ public class Store implements BeanBagStore {
                     }
                 }
             }
+            // Updates the IDs in the reserved list.
             else if(obj == reserved) {
                 for (int j = 0; j < obj.size(); j++) {
                     held = (Reservation) obj.get(j);
@@ -317,6 +323,7 @@ public class Store implements BeanBagStore {
                 }
             }
         }
+        // Throws an exception if the old ID hasn't been found.
         if (!found) throw new BeanBagIDNotRecognisedException("Bean bag ID not found.");
     }
 
@@ -343,6 +350,7 @@ public class Store implements BeanBagStore {
         }
     }
 
+    // Iterates through the given list (stock/reserved/available/sold) and prints the bean bags in that list.
     public void printArray(@NotNull ObjectArrayList obj, String type) {
         BeanBag item;
         Reservation held;
