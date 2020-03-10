@@ -35,7 +35,10 @@ public class StoreDriverApp {
         driver.array("r");
         driver.reserveBeanBags(1, "0000bbbb");
         driver.array("r");
+        System.out.println("Reservation reference number: " + (driver.reserveBeanBags(1, "0000bbbb")));
+        System.out.println("Reservation reference number: " + (driver.reserveBeanBags(1, "0000bbbb")));
 
+        // System.out.println("Reservation reference number: " + (driver.reserveBeanBags(1, "0000bbbb")));
         // driver.reserveBeanBags(3, "0000afff");
         // driver.array("r");
     }

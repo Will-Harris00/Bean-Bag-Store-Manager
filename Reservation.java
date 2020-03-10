@@ -10,8 +10,6 @@ public class Reservation {
         this.item = item;
         // elected to use negative hex values as reservation numbers to make them easily distinguishable from beanbag id
         this.reference = size+1;
-        System.out.println(reference);
-        System.out.println(item);
     }
 
     // public getters and setters for private instance
