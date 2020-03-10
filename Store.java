@@ -83,22 +83,19 @@ public class Store implements BeanBagStore {
         Checks.validSale(num, id, beanBagsInStock(id));
         BeanBag item;
         boolean recognised = false;
-        /*
-         * if (num <= 0) throw new
-         * IllegalNumberOfBeanBagsSoldException("Cannot sell zero or fewer beanbags");
-         * BeanBag item; boolean recognised = false; Checks.validId(id); int available =
-         * beanBagsInStock(id); if (available == 0) throw new
-         * BeanBagNotInStockException("None of these bean bags are available for reservation"
-         * ); if (num > available) throw new
-         * InsufficientStockException("Insufficient stock available for reservation");
-         */
+
+        // Iterates over the stock and removes bean bags from the stock list one by one
+        // (according to quantity sold).
         for (int i = 0; i < num; i++) {
             for (int j = 0; j < stock.size(); j++) {
                 item = (BeanBag) stock.get(j);
+                // Searches for matching IDs to find which bean bags to remove from stock list.
                 if (item.getIdentifier().equalsIgnoreCase(id)) {
+                    // Throws an exception if no price has been set for the bean bag.
                     if (item.getPenceInPrice() == 0) {
                         throw new PriceNotSetException("No price set for this item");
                     }
+                    sold.add(item);
                     stock.remove(item);
                     recognised = true;
                     break;
@@ -170,9 +167,27 @@ public class Store implements BeanBagStore {
                     "Reservation reference '" + reservationNumber + "' not recognised.");
     }
 
-    // Sells a number of beans bags according to a reservation.
+    // Sells a number of beans bags according to a reservation number.
     public void sellBeanBags(int reservationNumber) throws ReservationNumberNotRecognisedException {
+        Reservation held;
+        boolean recognised = false;
 
+        // Iterates over the stock and removes bean bags from the reserved list one by one
+        // (according to quantity sold).
+        for (int j = 0; j < reserved.size(); j++) {
+            held = (Reservation) reserved.get(j);
+            // Searches for matching reservation numbers to find which bean bags to remove from reserved list.
+            if (held.getReference() == reservationNumber) {
+                sold.add(held);
+                reserved.remove(held);
+                recognised = true;
+                break;
+            }
+        }
+
+        // Throws an exception for unrecognised reservations.
+        if (!recognised)
+            throw new ReservationNumberNotRecognisedException("This reservation number is invalid.");
     }
 
     // Returns the total number of bean bags in stock.
@@ -292,7 +307,7 @@ public class Store implements BeanBagStore {
         boolean found = false;
 
         // Replaces the object IDs in each of these lists.
-        ObjectArrayList[] objects = {stock, reserved, available, sold};
+        ObjectArrayList[] objects = { stock, reserved, available, sold };
         BeanBag item;
         Reservation held;
         int i;
@@ -312,7 +327,7 @@ public class Store implements BeanBagStore {
                 }
             }
             // Updates the IDs in the reserved list.
-            else if(obj == reserved) {
+            else if (obj == reserved) {
                 for (int j = 0; j < obj.size(); j++) {
                     held = (Reservation) obj.get(j);
                     item = held.getAttributes();
@@ -324,7 +339,8 @@ public class Store implements BeanBagStore {
             }
         }
         // Throws an exception if the old ID hasn't been found.
-        if (!found) throw new BeanBagIDNotRecognisedException("Bean bag ID not found.");
+        if (!found)
+            throw new BeanBagIDNotRecognisedException("Bean bag ID not found.");
     }
 
     public String toString(BeanBag item) {
@@ -350,8 +366,9 @@ public class Store implements BeanBagStore {
         }
     }
 
-    // Iterates through the given list (stock/reserved/available/sold) and prints the bean bags in that list.
-    public void printArray(@NotNull ObjectArrayList obj, String type) {
+    // Iterates through the given list (stock/reserved/available/sold) and prints
+    // the bean bags in that list.
+    public void printArray(ObjectArrayList obj, String type) {
         BeanBag item;
         Reservation held;
         System.out.println(obj.size());
