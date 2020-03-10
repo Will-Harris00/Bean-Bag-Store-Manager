@@ -1,7 +1,8 @@
+// Class for storing the stock of bean bags.
 package beanbags;
 
 public class Stock {
-    // private variable initialized
+    // Private variables initialized.
     private String manufacturer;
     private String name;
     private double price;
@@ -9,7 +10,8 @@ public class Stock {
     private int month;
     private String description;
 
-    // Constructor: initialise manufacturer, name, price, quantity, year and moth of manufacturer, as well as the price
+    // Constructor: initialise manufacturer, name, price, quantity, year and moth of
+    // manufacturer, as well as the price.
     public Stock(String manufacturer, String name, double price, int year, int month) {
         this.name = manufacturer;
         this.name = name;
@@ -18,10 +20,13 @@ public class Stock {
         this.month = month;
     }
 
-    // Constructor: initialise manufacturer, name, price, quantity, year and moth of manufacturer, as well as the price,
-    // this method differs slightly from the above as in also includes reference to the free text component
-    // when the constructor method is invoked the program will select the correct version of the method based on the
-    // number of variable that are passed to the method with the description included this would be six variables.
+    // Constructor: initialise manufacturer, name, price, quantity, year and moth of
+    // manufacturer, as well as the price.
+    // This method differs slightly from the above as in also includes reference to
+    // the free text component.
+    // When the constructor method is invoked, the program will select the correct
+    // version of the method based on the number of variables that are passed to the
+    // method.
     public Stock(String manufacturer, String name, double price, int year, int month, String description) {
         this.name = manufacturer;
         this.name = name;
@@ -31,7 +36,7 @@ public class Stock {
         this.description = description;
     }
 
-    // public getters and setters for private instance
+    // Public getters for private instances.
     public String getName() {
         return name;
     }
