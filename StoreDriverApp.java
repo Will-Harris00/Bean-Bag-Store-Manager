@@ -72,6 +72,7 @@ public class StoreDriverApp {
         driver.array("r");
 
         System.out.println(driver.getNumberOfSoldBeanBags("0000ffff"));
+        driver.array("ss");
         
     }
 }

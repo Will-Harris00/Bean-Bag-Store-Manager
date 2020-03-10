@@ -258,18 +258,42 @@ public class Store implements BeanBagStore {
     }
 
     public int getTotalPriceOfSoldBeanBags() {
-
-        return 0;
+        BeanBag item;
+        int count = 0;
+        for (int j = 0; j < sold.size(); j++) {
+            item = (BeanBag) sold.get(j);
+            count += item.getPenceInPrice();
+        }
+        return count;
     }
 
     public int getTotalPriceOfSoldBeanBags(String id) throws BeanBagIDNotRecognisedException, IllegalIDException {
+        Checks.validId(id);
+        BeanBag item;
+        boolean recognised = false;
+        int count = 0;
+        for (int j = 0; j < sold.size(); j++) {
+            item = (BeanBag) sold.get(j);
+            if (item.getIdentifier().equalsIgnoreCase(id)) {
+                count += item.getPenceInPrice();
+                recognised = true;
+                break;
+            }
+        }
 
-        return 0;
+        // Throws an exception for unrecognised bean bags.
+        if (!recognised)
+            throw new BeanBagIDNotRecognisedException("Bean bag identifier '" + id + "' not recognised.");
+        return count;
     }
 
     public int getTotalPriceOfReservedBeanBags() {
-
-        return 0;
+        int count = 0;
+        for (int j = 0; j < reserved.size(); j++) {
+            Reservation held = (Reservation) reserved.get(j);
+            count += held.getAttributes().getPenceInPrice();
+        }
+        return count;
     }
 
     // Gets the details of a particular bean bag based on ID.
@@ -331,6 +355,8 @@ public class Store implements BeanBagStore {
         for (i = 0; i < objects.length; i++) {
             // Accesses each element of array.
             obj = objects[i];
+
+
             // Updates the IDs in the stock list.
             if (obj == stock) {
                 for (int j = 0; j < obj.size(); j++) {
@@ -352,6 +378,8 @@ public class Store implements BeanBagStore {
                     }
                 }
             }
+
+
         }
         // Throws an exception if the old ID hasn't been found.
         if (!found)
@@ -368,15 +396,19 @@ public class Store implements BeanBagStore {
         switch (type.toLowerCase()) {
             case "stock":
             case "s":
-                printArray(stock, type);
+                printArray(stock, "stock");
                 break;
             case "reserved":
             case "r":
-                printArray(reserved, type);
+                printArray(reserved, "reserved");
                 break;
             case "available":
             case "a":
-                printArray(available, type);
+                printArray(available, "available");
+                break;
+            case "sold":
+            case "ss":
+                printArray(sold, "sold");
                 break;
         }
     }
@@ -390,7 +422,7 @@ public class Store implements BeanBagStore {
         if (obj.size() == 0) {
             System.out.println("Empty");
         } else {
-            if (type.toLowerCase().equalsIgnoreCase("stock")) {
+            if (type.toLowerCase().equals("stock") || type.toLowerCase().equals("available") || type.toLowerCase().equals("sold") ) {
                 for (int j = 0; j < obj.size(); j++) {
                     item = (BeanBag) obj.get(j);
                     System.out.println("[id=" + item.getIdentifier() + ",name=" + item.getName() + ",manufacturer="
@@ -398,7 +430,7 @@ public class Store implements BeanBagStore {
                             + ",information=" + item.getInformation() + ",priceInPence=" + item.getPenceInPrice()
                             + "]");
                 }
-            } else if (type.toLowerCase().equalsIgnoreCase("reserved")) {
+            } else if (type.toLowerCase().equals("reserved")) {
                 for (int j = 0; j < obj.size(); j++) {
                     held = (Reservation) obj.get(j);
                     item = held.getAttributes();
