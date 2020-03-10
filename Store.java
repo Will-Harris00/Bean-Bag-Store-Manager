@@ -1,5 +1,7 @@
 package beanbags;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.IOException;
 
 /**
@@ -284,7 +286,38 @@ public class Store implements BeanBagStore {
 
     // Replaces the ID of a bean bag with another given ID.
     public void replace(String oldId, String replacementId) throws BeanBagIDNotRecognisedException, IllegalIDException {
-
+        Checks.validId(oldId);
+        Checks.validId(replacementId);
+        boolean found = false;
+        ObjectArrayList[] objects = {stock, reserved, available, sold};
+        BeanBag item;
+        Reservation held;
+        int i;
+        ObjectArrayList obj;
+        for (i = 0; i < objects.length; i++) {
+            // accessing each element of array
+            obj = objects[i];
+            if (obj == stock) {
+                for (int j = 0; j < obj.size(); j++) {
+                    item = (BeanBag) obj.get(j);
+                    if (item.getIdentifier().equalsIgnoreCase(oldId)) {
+                        item.setIdentifier(replacementId);
+                        found = true;
+                    }
+                }
+            }
+            else if(obj == reserved) {
+                for (int j = 0; j < obj.size(); j++) {
+                    held = (Reservation) obj.get(j);
+                    item = held.getAttributes();
+                    if (item.getIdentifier().equalsIgnoreCase(oldId)) {
+                        item.setIdentifier(replacementId);
+                        found = true;
+                    }
+                }
+            }
+        }
+        if (!found) throw new BeanBagIDNotRecognisedException("Bean bag ID not found.");
     }
 
     public String toString(BeanBag item) {
@@ -310,7 +343,7 @@ public class Store implements BeanBagStore {
         }
     }
 
-    public void printArray(ObjectArrayList obj, String type) {
+    public void printArray(@NotNull ObjectArrayList obj, String type) {
         BeanBag item;
         Reservation held;
         System.out.println(obj.size());

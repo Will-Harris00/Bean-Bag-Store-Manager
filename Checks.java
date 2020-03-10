@@ -29,13 +29,13 @@ public class Checks {
         BeanBag bb;
         for (int j = 0; j < stock.size(); j++) {
             bb = (BeanBag) stock.get(j);
-            if (item.getIdentifier().equals(bb.getIdentifier())) {
+            if (item.getIdentifier().equalsIgnoreCase(bb.getIdentifier())) {
                 // Checks whether names of the bean bags match.
-                if (!item.getName().equals(bb.getName())) {
+                if (!item.getName().equalsIgnoreCase(bb.getName())) {
                     throw new BeanBagMismatchException("Beanbag Mismatch - Names do not match");
                 }
                 // Checks if the manufacturers of the bean bags match.
-                if (!item.getManufacturer().equals(bb.getManufacturer())) {
+                if (!item.getManufacturer().equalsIgnoreCase(bb.getManufacturer())) {
                     throw new BeanBagMismatchException("Beanbag Mismatch - Manufacturers do not match");
                 }
                 // Checks if the years of manufacture match.
@@ -47,7 +47,7 @@ public class Checks {
                     throw new BeanBagMismatchException("Beanbag Mismatch - Month of manufacture does not match");
                 }
                 // Checks if the additional information on the bean bags match.
-                if (!item.getInformation().equals(bb.getInformation())) {
+                if (!item.getInformation().equalsIgnoreCase(bb.getInformation())) {
                     throw new BeanBagMismatchException("Beanbag Mismatch - Information does not match");
                 }
             }
