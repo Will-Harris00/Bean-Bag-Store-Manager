@@ -136,7 +136,7 @@ public class Store implements BeanBagStore {
                     if (item.getPenceInPrice() == 0) {
                         throw new PriceNotSetException("No price set for this item");
                     }
-                    Reservations r = new Reservations(item, reserved.size());
+                    Reservation r = new Reservation(item, reserved.size());
                     reserved.add(r);
                     stock.remove(item);
                     recognised = true;
@@ -296,7 +296,7 @@ public class Store implements BeanBagStore {
 
     public void printArray(ObjectArrayList type, String obj) {
         BeanBag item;
-        Reservations held;
+        Reservation held;
         System.out.println(type.size());
         if (type.size() == 0) {
             System.out.println("Empty");
@@ -314,7 +314,7 @@ public class Store implements BeanBagStore {
             }
             else if (obj.toLowerCase().equals("reserved") || obj.toLowerCase().equals("r")  ) {
                 for (int j = 0; j < type.size(); j++) {
-                    held = (Reservations) type.get(j);
+                    held = (Reservation) type.get(j);
                     item = held.getAttributes();
                     System.out.println("[id=" + item.getIdentifier() + ",name=" + item.getName() +
                             ",manufacturer=" + item.getManufacturer() + ",year=" +
