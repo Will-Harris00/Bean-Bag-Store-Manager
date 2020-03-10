@@ -24,29 +24,29 @@ public class Checks {
 
 
     // Exception handler for bean bags which have the same ID but different attributes.
-    public static void existingMismatch(BeanBag o, ObjectArrayList stock) throws BeanBagMismatchException {
-        BeanBag item;
+    public static void existingMismatch(BeanBag item, ObjectArrayList stock) throws BeanBagMismatchException {
+        BeanBag bb;
         for (int j = 0; j < stock.size(); j++) {
-            item = (BeanBag) stock.get(j);
-            if (item.getIdentifier().equals(o.getIdentifier())) {
+            bb = (BeanBag) stock.get(j);
+            if (item.getIdentifier().equals(bb.getIdentifier())) {
                 // Checks whether names of the bean bags match.
-                if (!item.getName().equals(o.getName())) {
+                if (!item.getName().equals(bb.getName())) {
                     throw new BeanBagMismatchException("Beanbag Mismatch - Names do not match");
                 }
                 // Checks if the manufacturers of the bean bags match.
-                if (!item.getManufacturer().equals(o.getManufacturer())) {
+                if (!item.getManufacturer().equals(bb.getManufacturer())) {
                     throw new BeanBagMismatchException("Beanbag Mismatch - Manufacturers do not match");
                 }
                 // Checks if the years of manufacture match.
-                if (!(item.getYear() == o.getYear())) {
+                if (!(item.getYear() == bb.getYear())) {
                     throw new BeanBagMismatchException("Beanbag Mismatch - Year of manufacture does not match");
                 }
                 // Checks if the months of manufacture match.
-                if (!(item.getMonth() == o.getMonth())) {
+                if (!(item.getMonth() == bb.getMonth())) {
                     throw new BeanBagMismatchException("Beanbag Mismatch - Month of manufacture does not match");
                 }
                 // Checks if the additional information on the bean bags match.
-                if (!item.getInformation().equals(o.getInformation())) {
+                if (!item.getInformation().equals(bb.getInformation())) {
                     throw new BeanBagMismatchException("Beanbag Mismatch - Information does not match");
                 }
             }

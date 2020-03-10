@@ -40,9 +40,9 @@ public class Store implements BeanBagStore {
         // Checks that if IDs match, then attributes also match for added bean bags.
         Checks.validId(id);
         for (int i = 0; i < num; i++) {
-            BeanBag o = new BeanBag(manufacturer, name, id, year, month, information, 0);
-            Checks.existingMismatch(o, stock);
-            stock.add(o);
+            BeanBag item = new BeanBag(manufacturer, name, id, year, month, information, 0);
+            Checks.existingMismatch(item, stock);
+            stock.add(item);
         }
     }
 
@@ -136,7 +136,8 @@ public class Store implements BeanBagStore {
                     if (item.getPenceInPrice() == 0) {
                         throw new PriceNotSetException("No price set for this item");
                     }
-                    reserved.add(item);
+                    Reservations r = new Reservations(item, reserved.size());
+                    reserved.add(r);
                     stock.remove(item);
                     recognised = true;
                     break;
@@ -152,6 +153,7 @@ public class Store implements BeanBagStore {
 
     // Cancels a reservation of bean bags based on reservation number.
     public void unreserveBeanBags(int reservationNumber) throws ReservationNumberNotRecognisedException {
+
 
     }
 
@@ -282,31 +284,46 @@ public class Store implements BeanBagStore {
 
     public void array(String obj) {
         if (obj.toLowerCase().equals("stock") || obj.toLowerCase().equals("s")  ) {
-            printArray(stock);
+            printArray(stock, obj);
         }
         else if (obj.toLowerCase().equals("reserved") || obj.toLowerCase().equals("r")  ) {
-            printArray(reserved);
+            printArray(reserved, obj);
         }
         else if (obj.toLowerCase().equals("available") || obj.toLowerCase().equals("a")  ) {
-            printArray(available);
+            printArray(available, obj);
         }
     }
 
-    public void printArray(ObjectArrayList type) {
+    public void printArray(ObjectArrayList type, String obj) {
         BeanBag item;
+        Reservations held;
         System.out.println(type.size());
         if (type.size() == 0) {
             System.out.println("Empty");
         }
         else {
-            for (int j = 0; j < type.size(); j++) {
-                item = (BeanBag) type.get(j);
-                System.out.println("[id=" + item.getIdentifier() + ",name=" + item.getName() +
-                        ",manufacturer=" + item.getManufacturer() + ",year=" +
-                        item.getYear() + ",month=" + item.getMonth() + ",information=" +
-                        item.getInformation() + ",priceInPence=" + item.getPenceInPrice() +
-                        "]");
+            if (obj.toLowerCase().equals("stock") || obj.toLowerCase().equals("s")  ) {
+                for (int j = 0; j < type.size(); j++) {
+                    item = (BeanBag) type.get(j);
+                    System.out.println("[id=" + item.getIdentifier() + ",name=" + item.getName() +
+                            ",manufacturer=" + item.getManufacturer() + ",year=" +
+                            item.getYear() + ",month=" + item.getMonth() + ",information=" +
+                            item.getInformation() + ",priceInPence=" + item.getPenceInPrice() +
+                            "]");
+                }
             }
+            else if (obj.toLowerCase().equals("reserved") || obj.toLowerCase().equals("r")  ) {
+                for (int j = 0; j < type.size(); j++) {
+                    held = (Reservations) type.get(j);
+                    item = held.getAttributes();
+                    System.out.println("[id=" + item.getIdentifier() + ",name=" + item.getName() +
+                            ",manufacturer=" + item.getManufacturer() + ",year=" +
+                            item.getYear() + ",month=" + item.getMonth() + ",information=" +
+                            item.getInformation() + ",priceInPence=" + item.getPenceInPrice() +
+                            ",reference=" + held.getReference() + "]");
+                }
+            }
+
         }
     }
 }

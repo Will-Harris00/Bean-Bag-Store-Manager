@@ -19,6 +19,7 @@ public class StoreDriverApp {
         driver.setBeanBagPrice("0000bbbb", 6666);
 
         driver.array("s");
+
         // System.out.println(driver.beanBagsInStock());
         // System.out.println(driver.getBeanBagDetails("0000afff"));
         // System.out.println(driver.getBeanBagDetails("0000abff"));
@@ -28,11 +29,13 @@ public class StoreDriverApp {
         // driver.sellBeanBags(3, "0000ffff");
         // driver.sellBeanBags(4, "0000feff");
         // driver.sellBeanBags(0, "0000ffff");
+
         driver.sellBeanBags(1, "0000ffff");
         driver.array("s");
         driver.array("r");
         driver.reserveBeanBags(1, "0000bbbb");
         driver.array("r");
+
         // driver.reserveBeanBags(3, "0000afff");
         // driver.array("r");
     }
