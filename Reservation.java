@@ -3,13 +3,13 @@ package beanbags;
 public class Reservation {
     private BeanBag item;
     // private variable initialized
-    private String reference;
+    private int reference;
 
     // Constructor: initialise identifier, reservation status, original price, customer reference, and customer name
     public Reservation(BeanBag item, int size) {
         this.item = item;
         // elected to use negative hex values as reservation numbers to make them easily distinguishable from beanbag id
-        this.reference = Long.toHexString(-(size+1));
+        this.reference = size+1;
         System.out.println(reference);
         System.out.println(item);
     }
@@ -21,13 +21,13 @@ public class Reservation {
         return item;
     }
 
-    public String getReference() {
+    public int getReference() {
         return reference;
     }
 
 
     // Public setters for private instances.
-    public void setReference(String manufacturer) {
+    public void setReference(int reference) {
         this.reference = reference;
     }
 
