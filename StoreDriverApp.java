@@ -6,7 +6,7 @@ public class StoreDriverApp {
     public static void main(String[] args) throws IllegalIDException, BeanBagMismatchException, InvalidMonthException,
             IllegalNumberOfBeanBagsAddedException, InvalidPriceException, BeanBagIDNotRecognisedException,
             PriceNotSetException, BeanBagNotInStockException, InsufficientStockException,
-            IllegalNumberOfBeanBagsSoldException, IllegalNumberOfBeanBagsReservedException {
+            IllegalNumberOfBeanBagsSoldException, IllegalNumberOfBeanBagsReservedException, ReservationNumberNotRecognisedException {
         Store driver = new Store();
         // Tests the various methods in the backend code.
         driver.addBeanBags(2, "Argos", "Beanie", "0000ffff", (short) 2019, (byte) 11);
@@ -37,9 +37,21 @@ public class StoreDriverApp {
         driver.array("r");
         System.out.println("Reservation reference number: " + (driver.reserveBeanBags(1, "0000bbbb")));
         System.out.println("Reservation reference number: " + (driver.reserveBeanBags(1, "0000bbbb")));
-
         // System.out.println("Reservation reference number: " + (driver.reserveBeanBags(1, "0000bbbb")));
         // driver.reserveBeanBags(3, "0000afff");
         // driver.array("r");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+
+        driver.unreserveBeanBags(2);
+        driver.array("s");
+        System.out.println("");
+        driver.array("r");
+        System.out.println("");
+        driver.array("s");
+        System.out.println("");
+        // driver.unreserveBeanBags(5);
+
     }
 }

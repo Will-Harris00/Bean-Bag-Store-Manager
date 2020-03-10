@@ -170,7 +170,7 @@ public class Store implements BeanBagStore {
 
         // Throws an exception for unrecognised bean bags.
         if (!recognised)
-            throw new ReservationNumberNotRecognisedException("Reservation reference '" + reserved.size() + "' not recognised.");
+            throw new ReservationNumberNotRecognisedException("Reservation reference '" + reservationNumber + "' not recognised.");
     }
 
 
