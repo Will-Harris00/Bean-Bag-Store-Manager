@@ -61,7 +61,7 @@ public class Store implements BeanBagStore {
             throw new InvalidPriceException("Price cannot be below zero pence.");
         for (int j = 0; j < stock.size(); j++) {
             item = (BeanBag) stock.get(j);
-            if (item.getIdentifier().equals(id)) {
+            if (item.getIdentifier().equalsIgnoreCase(id)) {
                 item.setPenceInPrice(priceInPence);
                 System.out.println(toString(item));
                 recognised = true;
@@ -93,7 +93,7 @@ public class Store implements BeanBagStore {
         for (int i = 0; i < num; i++) {
             for (int j = 0; j < stock.size(); j++) {
                 item = (BeanBag) stock.get(j);
-                if (item.getIdentifier().equals(id)) {
+                if (item.getIdentifier().equalsIgnoreCase(id)) {
                     if (item.getPenceInPrice() == 0) {
                         throw new PriceNotSetException("No price set for this item");
                     }
@@ -127,7 +127,7 @@ public class Store implements BeanBagStore {
         for (int i = 0; i < num; i++) {
             for (int j = 0; j < stock.size(); j++) {
                 BeanBag item = (BeanBag) stock.get(j);
-                if (item.getIdentifier().equals(id)) {
+                if (item.getIdentifier().equalsIgnoreCase(id)) {
                     if (item.getPenceInPrice() == 0) {
                         throw new PriceNotSetException("No price set for this item");
                     }
@@ -195,7 +195,7 @@ public class Store implements BeanBagStore {
         }
         for (int j = 0; j < stock.size(); j++) {
             item = (BeanBag) stock.get(j);
-            if (item.getIdentifier().equals(id)) {
+            if (item.getIdentifier().equalsIgnoreCase(id)) {
                 count += 1;
             }
         }
@@ -252,7 +252,7 @@ public class Store implements BeanBagStore {
         }
         for (int j = 0; j < stock.size(); j++) {
             item = (BeanBag) stock.get(j);
-            if (item.getIdentifier().equals(id)) {
+            if (item.getIdentifier().equalsIgnoreCase(id)) {
                 found = true;
                 break;
             }
@@ -317,7 +317,7 @@ public class Store implements BeanBagStore {
         if (obj.size() == 0) {
             System.out.println("Empty");
         } else {
-            if (type.toLowerCase().equals("stock") || type.toLowerCase().equals("s")) {
+            if (type.toLowerCase().equalsIgnoreCase("stock")) {
                 for (int j = 0; j < obj.size(); j++) {
                     item = (BeanBag) obj.get(j);
                     System.out.println("[id=" + item.getIdentifier() + ",name=" + item.getName() + ",manufacturer="
@@ -325,7 +325,7 @@ public class Store implements BeanBagStore {
                             + ",information=" + item.getInformation() + ",priceInPence=" + item.getPenceInPrice()
                             + "]");
                 }
-            } else if (type.toLowerCase().equals("reserved") || type.toLowerCase().equals("r")) {
+            } else if (type.toLowerCase().equalsIgnoreCase("reserved")) {
                 for (int j = 0; j < obj.size(); j++) {
                     held = (Reservation) obj.get(j);
                     item = held.getAttributes();
