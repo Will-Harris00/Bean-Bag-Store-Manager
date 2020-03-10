@@ -15,6 +15,7 @@ public class Store implements BeanBagStore {
     private ObjectArrayList stock = new ObjectArrayList();
     private ObjectArrayList reserved = new ObjectArrayList();
     private ObjectArrayList available = new ObjectArrayList();
+    private ObjectArrayList sold = new ObjectArrayList();
 
     // If no information parameter mentioned, adds a bean bag with no
     // additional information.
@@ -288,7 +289,8 @@ public class Store implements BeanBagStore {
 
     // Empties the stock of its contents.
     public void empty() {
-
+        stock = null;
+        stock = new ObjectArrayList();
     }
 
 

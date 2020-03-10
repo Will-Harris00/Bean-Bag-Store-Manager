@@ -40,18 +40,24 @@ public class StoreDriverApp {
         // System.out.println("Reservation reference number: " + (driver.reserveBeanBags(1, "0000bbbb")));
         // driver.reserveBeanBags(3, "0000afff");
         // driver.array("r");
-        System.out.println("");
-        System.out.println("");
-        System.out.println("");
+        System.out.println("\n\n");
 
         driver.unreserveBeanBags(2);
         driver.array("s");
-        System.out.println("");
+        System.out.println("\n\n");
         driver.array("r");
-        System.out.println("");
+        System.out.println("\n\n");
         driver.array("s");
-        System.out.println("");
+        System.out.println("\n\n");
         // driver.unreserveBeanBags(5);
+
+
+        System.out.println("\n\n");
+        driver.array("s");
+        driver.empty();
+        System.out.println("\n\n");
+        driver.addBeanBags(1, "Argos", "Beanie", "0000bbbb", (short) 2019, (byte) 11);
+        driver.array("s");
 
     }
 }
