@@ -15,7 +15,6 @@ public class Reservation {
     }
 
     // Public getters for private instances.
-
     public BeanBag getAttributes() {
         return item;
     }
