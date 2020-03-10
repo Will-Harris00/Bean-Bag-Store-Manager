@@ -269,11 +269,17 @@ public class Store implements BeanBagStore {
     public void empty() {
         stock = null;
         stock = new ObjectArrayList();
+        reserved = null;
+        reserved = new ObjectArrayList();
+        available = null;
+        available = new ObjectArrayList();
+        resetSaleAndCostTracking();
     }
 
     // Resets the tracking of sales and costs.
     public void resetSaleAndCostTracking() {
-
+        sold = null;
+        sold = new ObjectArrayList();
     }
 
     // Replaces the ID of a bean bag with another given ID.
