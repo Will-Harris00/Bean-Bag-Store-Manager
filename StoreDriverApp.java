@@ -114,6 +114,8 @@ public class StoreDriverApp {
         driver.addBeanBags(1, "Argos", "Beanie", "0000bbbb", (short) 2019, (byte) 11);
         driver.addBeanBags(3, "Argos", "Beanie", "0000CCCC", (short) 2019, (byte) 11);
         driver.addBeanBags(5, "Argos", "Beanie", "0000ABAB", (short) 2019, (byte) 11);
+        driver.array("a");
+        driver.array("r");
 
         // driver.addBeanBags(3, "Argo", "Beanie", "0000eeee", (short) 2019, (byte) 11);
         System.out.println(driver.getNumberOfDifferentBeanBagsInStock());

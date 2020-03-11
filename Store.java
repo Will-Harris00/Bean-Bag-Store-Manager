@@ -253,7 +253,6 @@ public class Store implements BeanBagStore {
 
     // Gets the number of unique bean bags (different types) in the stock list.
     public int getNumberOfDifferentBeanBagsInStock() {
-        // including reserved
         ObjectArrayList uniqueId = new ObjectArrayList();
 
         // Replaces the object IDs in each of these lists.
@@ -266,28 +265,23 @@ public class Store implements BeanBagStore {
         for (i = 0; i < objects.length; i++) {
             // Accesses each element of array.
             obj = objects[i];
-
             // Updates the IDs in the available stock, reserved and sold list.
             for (int j = 0; j < obj.size(); j++) {
-
                 if (obj == reserved) {
                     held = (Reservation) obj.get(j);
                     item = held.getAttributes();
                 } else {
                     item = (BeanBag) obj.get(j);
                 }
-
-                for (int k = 0; k < (reserved.size()+available.size()); k++) {
-                    String unique = (String) uniqueId.get(k);
-                    System.out.println(unique);
-                    System.out.println(item.getIdentifier());
-                    System.out.println("break");
-                    if (!(item.getIdentifier().equalsIgnoreCase(unique))) {
-                        uniqueId.add(item.getIdentifier());
-                        break;
-                    }
+                uniqueId.add(item.getIdentifier());
+            }
+        }
+        for (int m = 0; m < uniqueId.size(); m++) {
+            for (int n = 0; n < uniqueId.size(); n++) {
+                // Access each element of array and compare it to every other element in the array to remove duplicates.
+                if (uniqueId.get(m).equals(uniqueId.get(n))) {
+                    uniqueId.remove(n);
                 }
-                break;
             }
         }
         return uniqueId.size();
