@@ -27,7 +27,7 @@ public class Store implements BeanBagStore {
         addBeanBags(num, manufacturer, name, id, year, month, "");
     }
 
-    // Adds a bean bag to stock.
+    // Adds a bean bag to stock list.
     public void addBeanBags(int num, String manufacturer, String name, String id, short year, byte month,
             String information) throws IllegalNumberOfBeanBagsAddedException, BeanBagMismatchException,
             IllegalIDException, InvalidMonthException {
@@ -41,7 +41,7 @@ public class Store implements BeanBagStore {
             throw new InvalidMonthException("Month must be between 1 and 12");
 
         // Checks that if IDs match, then attributes also match for added bean bags.
-        Checks.validId(id);
+        Checks.validID(id);
         for (int i = 0; i < num; i++) {
             BeanBag item = new BeanBag(manufacturer, name, id, year, month, information, 0);
             Checks.existingMismatch(item, stock);
@@ -49,7 +49,7 @@ public class Store implements BeanBagStore {
         }
     }
 
-    // Sets the price of a bean bag in stock.
+    // Sets the price of a bean bag in the stock list.
     public void setBeanBagPrice(String id, int priceInPence)
             throws InvalidPriceException, BeanBagIDNotRecognisedException, IllegalIDException {
         BeanBag item;
@@ -58,7 +58,7 @@ public class Store implements BeanBagStore {
         boolean recognised = false;
 
         // Checks the given ID, and sets the price to that ID if valid.
-        Checks.validId(id);
+        Checks.validID(id);
         if (priceInPence < 0)
             throw new InvalidPriceException("Price cannot be below zero pence.");
         for (int j = 0; j < stock.size(); j++) {
@@ -85,7 +85,7 @@ public class Store implements BeanBagStore {
         boolean recognised = false;
 
         // Iterates over the stock and removes bean bags from the stock list one by one
-        // (according to quantity sold).
+        // (according to quantity sold) and into the sold list.
         for (int i = 0; i < num; i++) {
             for (int j = 0; j < stock.size(); j++) {
                 item = (BeanBag) stock.get(j);
@@ -117,12 +117,15 @@ public class Store implements BeanBagStore {
         /*
          * if (num <= 0) throw new
          * IllegalNumberOfBeanBagsReservedException("Cannot sell zero or fewer beanbags"
-         * ); BeanBag item; boolean recognised = false; Checks.validId(id); int
+         * ); BeanBag item; boolean recognised = false; Checks.validID(id); int
          * available = beanBagsInStock(id); if (available == 0) throw new
          * BeanBagNotInStockException("None of these bean bags are available for reservation"
          * ); if (num > available) throw new
          * InsufficientStockException("Insufficient stock available for reservation");
          */
+
+        // Iterates over the stock and removes bean bags from the stock list one by one
+        // (according to quantity sold) and into the reserved list.
         for (int i = 0; i < num; i++) {
             for (int j = 0; j < stock.size(); j++) {
                 BeanBag item = (BeanBag) stock.get(j);
@@ -208,7 +211,7 @@ public class Store implements BeanBagStore {
         int count = 0;
         BeanBag item;
         // Checks the given ID, and counts the number of those bean bags in stock.
-        Checks.validId(id);
+        Checks.validID(id);
         if (stock.size() == 0) {
             throw new BeanBagIDNotRecognisedException("Bean bag ID not found.");
         }
@@ -221,33 +224,43 @@ public class Store implements BeanBagStore {
         return count;
     }
 
+    // Permanently saves the store contents so it can be used in other programs.
     public void saveStoreContents(String filename) throws IOException {
 
     }
 
+    // Loads the store contents from a previously saved store.
     public void loadStoreContents(String filename) throws IOException, ClassNotFoundException {
 
     }
 
+    // Gets the number of unique bean bags (different types) in the stock list.
     public int getNumberOfDifferentBeanBagsInStock() {
 
         return 0;
     }
 
+    // Gets the total number of sold bean bags using the sold list.
     public int getNumberOfSoldBeanBags() {
         return sold.size();
     }
 
+    // Gets the total number of sold beans bags of a particular type (using ID)
+    // using the sold list.
     public int getNumberOfSoldBeanBags(String id) throws BeanBagIDNotRecognisedException, IllegalIDException {
         // Starts the count at 0.
         int count = 0;
         BeanBag item;
 
-        // Checks the given ID, and counts the number of those bean bags in stock.
-        Checks.validId(id);
+        Checks.validID(id);
+
+        // Throws an exception if the ID wasn't found to have been sold yet.
         if (sold.size() == 0) {
             throw new BeanBagIDNotRecognisedException("Bean bag ID not sold yet.");
         }
+
+        // Iterates over the sold list to find how many bean bags of a particular type
+        // (using ID) have been sold.
         for (int j = 0; j < sold.size(); j++) {
             item = (BeanBag) sold.get(j);
             if (item.getIdentifier().equalsIgnoreCase(id)) {
@@ -257,6 +270,7 @@ public class Store implements BeanBagStore {
         return count;
     }
 
+    // Gets the total price of sold bean bags using the sold list.
     public int getTotalPriceOfSoldBeanBags() {
         BeanBag item;
         int count = 0;
@@ -267,11 +281,16 @@ public class Store implements BeanBagStore {
         return count;
     }
 
+    // Gets the total price of sold bean bags of a particular type (using ID) using
+    // the sold list.
     public int getTotalPriceOfSoldBeanBags(String id) throws BeanBagIDNotRecognisedException, IllegalIDException {
-        Checks.validId(id);
         BeanBag item;
         boolean recognised = false;
         int count = 0;
+
+        Checks.validID(id);
+
+        // Iterates over the sold list and counts bean bags which have a matching ID.
         for (int j = 0; j < sold.size(); j++) {
             item = (BeanBag) sold.get(j);
             if (item.getIdentifier().equalsIgnoreCase(id)) {
@@ -287,6 +306,9 @@ public class Store implements BeanBagStore {
         return count;
     }
 
+    // Gets the total price of reserved bean bags of a particular type (using ID)
+    // using
+    // the reserved list.
     public int getTotalPriceOfReservedBeanBags() {
         int count = 0;
         for (int j = 0; j < reserved.size(); j++) {
@@ -301,24 +323,29 @@ public class Store implements BeanBagStore {
         BeanBag item = null;
         boolean found = false;
 
-        // Checks the given ID, and counts the number of those bean bags in stock.
-        Checks.validId(id);
+        Checks.validID(id);
+
+        // Throws an exception if there is no bean bag with the given ID.
         if (stock.size() == 0) {
             throw new BeanBagIDNotRecognisedException("Bean bag ID not found.");
         }
+
+        // Iterates over the stock list to check for a bean bag with a matching ID.
         for (int j = 0; j < stock.size(); j++) {
             item = (BeanBag) stock.get(j);
+            // Breaks out of the loop if a matching bean bag was found (other matching bean
+            // bags should have the same details).
             if (item.getIdentifier().equalsIgnoreCase(id)) {
                 found = true;
                 break;
             }
         }
+        // Returns the details of the first matching bean bag in the list.
         if (found) {
             return "[id=" + item.getIdentifier() + ",name=" + item.getName() + ",manufacturer=" + item.getManufacturer()
                     + ",year=" + item.getYear() + ",month=" + item.getMonth() + ",information=" + item.getInformation()
                     + ",priceInPence=" + item.getPenceInPrice() + "]";
         }
-        throw new BeanBagIDNotRecognisedException("Bean bag ID not found.");
     }
 
     // Empties the stock of its contents.
@@ -340,10 +367,11 @@ public class Store implements BeanBagStore {
 
     // Replaces the ID of a bean bag with another given ID.
     public void replace(String oldId, String replacementId) throws BeanBagIDNotRecognisedException, IllegalIDException {
-        // Checks that the inputted IDs are valid.
-        Checks.validId(oldId);
-        Checks.validId(replacementId);
         boolean found = false;
+
+        // Checks that both of the inputted IDs are valid.
+        Checks.validID(oldId);
+        Checks.validID(replacementId);
 
         // Replaces the object IDs in each of these lists.
         ObjectArrayList[] objects = { stock, reserved, available, sold };
@@ -355,7 +383,6 @@ public class Store implements BeanBagStore {
         for (i = 0; i < objects.length; i++) {
             // Accesses each element of array.
             obj = objects[i];
-
 
             // Updates the IDs in the stock list.
             if (obj == stock) {
@@ -378,7 +405,6 @@ public class Store implements BeanBagStore {
                     }
                 }
             }
-
 
         }
         // Throws an exception if the old ID hasn't been found.
@@ -422,7 +448,8 @@ public class Store implements BeanBagStore {
         if (obj.size() == 0) {
             System.out.println("Empty");
         } else {
-            if (type.toLowerCase().equals("stock") || type.toLowerCase().equals("available") || type.toLowerCase().equals("sold") ) {
+            if (type.toLowerCase().equals("stock") || type.toLowerCase().equals("available")
+                    || type.toLowerCase().equals("sold")) {
                 for (int j = 0; j < obj.size(); j++) {
                     item = (BeanBag) obj.get(j);
                     System.out.println("[id=" + item.getIdentifier() + ",name=" + item.getName() + ",manufacturer="
