@@ -111,8 +111,12 @@ public class StoreDriverApp {
         System.out.println(driver.beanBagsInStock("0000eeee"));
         System.out.println(driver.reserveBeanBags(1,"0000ABAB"));
         driver.unreserveBeanBags(0);
+        driver.addBeanBags(1, "Argos", "Beanie", "0000bbbb", (short) 2019, (byte) 11);
+        driver.addBeanBags(3, "Argos", "Beanie", "0000CCCC", (short) 2019, (byte) 11);
+        driver.addBeanBags(5, "Argos", "Beanie", "0000ABAB", (short) 2019, (byte) 11);
 
         // driver.addBeanBags(3, "Argo", "Beanie", "0000eeee", (short) 2019, (byte) 11);
+        System.out.println(driver.getNumberOfDifferentBeanBagsInStock());
 
 
     }
