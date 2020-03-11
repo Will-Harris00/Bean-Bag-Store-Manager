@@ -32,7 +32,7 @@ public class Store implements BeanBagStore {
 
         // Throws an exception if the user tries to add a negative number of bean bags.
         if (num <= 0)
-            throw new IllegalNumberOfBeanBagsAddedException("The number of bean bags '" + num + "' cannot be less than zero");
+            throw new IllegalNumberOfBeanBagsAddedException("The number of bean bags '" + num + "' added cannot be less than zero");
         // Throws an exception if the user tries to add a month of manufacture which
         // doesn't exist.
         if (month < 0 | month > 12)
@@ -133,7 +133,6 @@ public class Store implements BeanBagStore {
                     }
 
                     for (int k = 0; k < reserved.size(); k++) {
-                        System.out.println("hello");
                         Reservation held = (Reservation) reserved.get(k);
                         if (reservationNumber != held.getReservation()) {
                             break;
@@ -146,7 +145,6 @@ public class Store implements BeanBagStore {
                     Reservation r = new Reservation(item, reservationNumber);
                     reserved.add(r);
                     stock.remove(item);
-                    recognised = true;
                     break;
                     }
                 }
