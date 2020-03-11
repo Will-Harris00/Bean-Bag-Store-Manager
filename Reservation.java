@@ -22,9 +22,4 @@ public class Reservation {
     public int getReservation() {
         return reference;
     }
-
-    // Public setters for private instances.
-    public void setReference(int reference) {
-        this.reference = reference;
-    }
 }
