@@ -5,7 +5,7 @@ package beanbags;
 public class Checks {
     // Exception handler for the ID of a new bean bag to see if it has a valid
     // format.
-    public static void validId(String id) throws IllegalIDException {
+    public static void validID(String id) throws IllegalIDException {
         if (id.length() == 8) {
             try {
                 int decimal = Long.valueOf(id, 16).intValue();
@@ -61,7 +61,7 @@ public class Checks {
         // bean bags.
         if (num <= 0)
             throw new IllegalNumberOfBeanBagsSoldException("Cannot sell zero or fewer beanbags");
-        Checks.validId(id);
+        Checks.validID(id);
         // Throws an exception if there are no bean bags available for sale.
         if (available == 0)
             throw new BeanBagNotInStockException("None of these bean bags are available for sale");
@@ -78,7 +78,7 @@ public class Checks {
         // bean bags.
         if (num <= 0)
             throw new IllegalNumberOfBeanBagsReservedException("Cannot sell zero or fewer beanbags");
-        Checks.validId(id);
+        Checks.validID(id);
         // Throws an exception if there are no bean bags available for reservation.
         if (available == 0)
             throw new BeanBagNotInStockException("None of these bean bags are available for reservation");
