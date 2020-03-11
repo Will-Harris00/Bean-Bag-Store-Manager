@@ -117,7 +117,7 @@ public class StoreDriverApp {
         driver.addBeanBags(5, "Argos", "Beanie", "0000ABAB", (short) 2019, (byte) 11);
         driver.setBeanBagPrice("0000CCCC", 5252);
         driver.addBeanBags(1, "Argos", "Beanie", "0000CCCC", (short) 2019, (byte) 11);
-        driver.addBeanBags(1, "Argos", "Beanie", "0000ABCD", (short) 2019, (byte) 11);
+        driver.addBeanBags(1, "Argos", "Beanie", "0000ABCD", (short) 209, (byte) 11);
         driver.array("a");
         driver.array("r");
         driver.reserveBeanBags(1, "0000ABAB");
