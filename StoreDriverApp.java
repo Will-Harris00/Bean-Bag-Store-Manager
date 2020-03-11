@@ -63,6 +63,7 @@ public class StoreDriverApp {
         driver.setBeanBagPrice("0000bbbb", 5555);
         driver.setBeanBagPrice("0000cccc", 7777);
         driver.setBeanBagPrice("0000ABAB", 1212);
+        // driver.addBeanBags(5, "Argos", "Beanie", "0000ABAB", (short) 2019, (byte) 11);
         driver.reserveBeanBags(1, "0000bbbb");
         driver.reserveBeanBags(1, "0000cccc");
         driver.reserveBeanBags(1, "0000cccc");
@@ -81,7 +82,7 @@ public class StoreDriverApp {
         System.out.println(driver.getTotalPriceOfReservedBeanBags());
         driver.array("r");
         driver.array("s");
-        System.out.println("Number of 0000efef sold: "+ driver.getNumberOfSoldBeanBags("0000efef"));
+        System.out.println("Number of 0000efef sold: " + driver.getNumberOfSoldBeanBags("0000efef"));
 
         System.out.println(driver.getTotalPriceOfSoldBeanBags());
         System.out.println(driver.getTotalPriceOfSoldBeanBags("0000efef"));
@@ -116,10 +117,22 @@ public class StoreDriverApp {
         driver.addBeanBags(5, "Argos", "Beanie", "0000ABAB", (short) 2019, (byte) 11);
         driver.array("a");
         driver.array("r");
-
+        driver.reserveBeanBags(1, "0000ABAB");
         // driver.addBeanBags(3, "Argo", "Beanie", "0000eeee", (short) 2019, (byte) 11);
         System.out.println(driver.getNumberOfDifferentBeanBagsInStock());
-
+        driver.array("s");
+        System.out.println(driver.getTotalPriceOfSoldBeanBags());
+        System.out.println(driver.getTotalPriceOfSoldBeanBags("0000ABAB"));
+        System.out.println(driver.getNumberOfSoldBeanBags());
+        System.out.println(driver.getNumberOfSoldBeanBags("0000ABAB"));
+        driver.setBeanBagPrice("0000ABAB", 1);
+        driver.sellBeanBags(2, "0000ABAB");
+        System.out.println(driver.getTotalPriceOfSoldBeanBags());
+        System.out.println(driver.getTotalPriceOfSoldBeanBags("0000ABAB"));
+        System.out.println(driver.getNumberOfSoldBeanBags());
+        System.out.println(driver.getNumberOfSoldBeanBags("0000ABAB"));
+        driver.array("a");
+        driver.array("s");
 
     }
 }

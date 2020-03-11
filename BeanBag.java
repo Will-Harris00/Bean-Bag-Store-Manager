@@ -10,19 +10,18 @@ public class BeanBag {
     private short year;
     private byte month;
     private String information;
-    private int penceInPrice;
+    private int priceInPence;
 
     // Constructor for initialising bean bag objects.
     public BeanBag(String manufacturer, String name, String id, short year, byte month, String information,
-            int penceInPrice) {
+            int priceInPence) {
         this.manufacturer = manufacturer;
         this.name = name;
         this.id = id;
         this.year = year;
         this.month = month;
         this.information = information;
-        // Price initialised with value 0.0 pence doesn't need to be declared here.
-        this.penceInPrice = penceInPrice;
+        this.priceInPence = priceInPence;
     }
 
     // Public getters for private instances.
@@ -50,8 +49,8 @@ public class BeanBag {
         return information;
     }
 
-    public int getPenceInPrice() {
-        return penceInPrice;
+    public int getPriceInPence() {
+        return priceInPence;
     }
 
     // Public setters for private instances.
@@ -79,7 +78,7 @@ public class BeanBag {
         this.information = information;
     }
 
-    public void setPenceInPrice(int priceInPence) {
-        this.penceInPrice = priceInPence;
+    public void setPriceInPence(int priceInPence) {
+        this.priceInPence = priceInPence;
     }
 }

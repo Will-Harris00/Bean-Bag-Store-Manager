@@ -44,6 +44,7 @@ public class Store implements BeanBagStore {
             BeanBag newBeanBag = new BeanBag(manufacturer, name, id, year, month, information, 0);
             Checks.existingMismatch(newBeanBag, available, reserved, sold);
             available.add(newBeanBag);
+            // System.out.println(toString(newBeanBag));
         }
     }
 
@@ -62,7 +63,7 @@ public class Store implements BeanBagStore {
         for (int j = 0; j < available.size(); j++) {
             item = (BeanBag) available.get(j);
             if (item.getIdentifier().equalsIgnoreCase(id)) {
-                item.setPenceInPrice(priceInPence);
+                item.setPriceInPence(priceInPence);
                 recognised = true;
             }
         }
@@ -90,7 +91,7 @@ public class Store implements BeanBagStore {
                 // Searches for matching IDs to find which bean bags to remove from stock list.
                 if (item.getIdentifier().equalsIgnoreCase(id)) {
                     // Throws an exception if no price has been set for the bean bag.
-                    if (item.getPenceInPrice() == 0) {
+                    if (item.getPriceInPence() == 0) {
                         throw new PriceNotSetException("No price has been set for this item '" + id + "'");
                     }
                     sold.add(item);
@@ -119,7 +120,7 @@ public class Store implements BeanBagStore {
                 if (item.getIdentifier().equalsIgnoreCase(id)) {
                     recognised = true;
                     // Throws an exception if no price set for this item.
-                    if (item.getPenceInPrice() == 0) {
+                    if (item.getPriceInPence() == 0) {
                         throw new PriceNotSetException("No price has been set for this item '" + id + "'");
                     }
 
@@ -277,9 +278,15 @@ public class Store implements BeanBagStore {
             }
         }
         for (int m = 0; m < uniqueId.size(); m++) {
+            System.out.println(uniqueId.get(m));
+        }
+        System.out.println("\n\n");
+        for (int m = 0; m < uniqueId.size(); m++) {
+
             for (int n = 0; n < uniqueId.size(); n++) {
-                // Access each element of array and compare it to every other element in the array to remove duplicates.
-                if (uniqueId.get(m).equals(uniqueId.get(n))) {
+                // Accesses each element of array and compare it to all other element in the array to remove duplicates.
+                System.out.println(uniqueId.get(m) + "  " + uniqueId.get(n));
+                if (uniqueId.get(m).equals(uniqueId.get(n)) & m != n) {
                     uniqueId.remove(n);
                 }
             }
@@ -323,7 +330,7 @@ public class Store implements BeanBagStore {
         int count = 0;
         for (int j = 0; j < sold.size(); j++) {
             item = (BeanBag) sold.get(j);
-            count += item.getPenceInPrice();
+            count += item.getPriceInPence();
         }
         return count;
     }
@@ -342,7 +349,7 @@ public class Store implements BeanBagStore {
         for (int j = 0; j < sold.size(); j++) {
             item = (BeanBag) sold.get(j);
             if (item.getIdentifier().equalsIgnoreCase(id)) {
-                count += item.getPenceInPrice();
+                count += item.getPriceInPence();
                 recognised = true;
             }
         }
@@ -359,7 +366,7 @@ public class Store implements BeanBagStore {
         int count = 0;
         for (int j = 0; j < reserved.size(); j++) {
             Reservation held = (Reservation) reserved.get(j);
-            count += held.getAttributes().getPenceInPrice();
+            count += held.getAttributes().getPriceInPence();
         }
         return count;
     }
@@ -458,13 +465,12 @@ public class Store implements BeanBagStore {
             throw new BeanBagIDNotRecognisedException("This bean bag ID '" + oldId + "'could not be found.");
     }
 
-    /*
+    // additional method to get all details relating to a specific beanbag
     public String toString(BeanBag item) {
         return "[id=" + item.getIdentifier() + ",name=" + item.getName() + ",manufacturer=" + item.getManufacturer()
                 + ",year=" + item.getYear() + ",month=" + item.getMonth() + ",information=" + item.getInformation()
-                + ",priceInPence=" + item.getPenceInPrice() + "]";
+                + ",priceInPence=" + item.getPriceInPence() + "]";
     }
-     */
 
     public void array(String type) {
         switch (type.toLowerCase()) {
@@ -499,7 +505,7 @@ public class Store implements BeanBagStore {
                     item = (BeanBag) obj.get(j);
                     System.out.println("[id=" + item.getIdentifier() + ",name=" + item.getName() + ",manufacturer="
                             + item.getManufacturer() + ",year=" + item.getYear() + ",month=" + item.getMonth()
-                            + ",information=" + item.getInformation() + ",priceInPence=" + item.getPenceInPrice()
+                            + ",information=" + item.getInformation() + ",priceInPence=" + item.getPriceInPence()
                             + "]");
                 }
             } else if (type.equals("reserved")) {
@@ -508,7 +514,7 @@ public class Store implements BeanBagStore {
                     item = held.getAttributes();
                     System.out.println("[id=" + item.getIdentifier() + ",name=" + item.getName() + ",manufacturer="
                             + item.getManufacturer() + ",year=" + item.getYear() + ",month=" + item.getMonth()
-                            + ",information=" + item.getInformation() + ",priceInPence=" + item.getPenceInPrice()
+                            + ",information=" + item.getInformation() + ",priceInPence=" + item.getPriceInPence()
                             + ",reservationNumber=" + held.getReservation() + "]");
                 }
             }

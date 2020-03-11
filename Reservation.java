@@ -22,4 +22,13 @@ public class Reservation {
     public int getReservation() {
         return reference;
     }
+
+    // Public setters for private instances.
+    public void setAttributes(BeanBag item) {
+        this.item = item;
+    }
+
+    public void setReservation(int reference) {
+        this.reference = reference;
+    }
 }
