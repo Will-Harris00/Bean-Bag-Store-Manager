@@ -31,8 +31,7 @@ public class Store implements BeanBagStore {
 
         // Throws an exception if the user tries to add a negative number of bean bags.
         if (num <= 0)
-            throw new IllegalNumberOfBeanBagsAddedException("The number of bean bags '"
-                    + num + "' added cannot be less than zero");
+            throw new IllegalNumberOfBeanBagsAddedException("The number of bean bags '" + num + "' added cannot be less than zero");
         // Throws an exception if the user tries to add a month of manufacture which
         // doesn't exist.
         if (month < 0 | month > 12)
@@ -41,9 +40,9 @@ public class Store implements BeanBagStore {
         // Checks that if IDs match, then attributes also match for added bean bags.
         Checks.validID(id);
         for (int i = 0; i < num; i++) {
-            BeanBag newbb = new BeanBag(manufacturer, name, id, year, month, information, 0);
-            Checks.existingMismatch(newbb, available, reserved, sold);
-            available.add(newbb);
+            BeanBag item = new BeanBag(manufacturer, name, id, year, month, information, 0);
+            Checks.existingMismatch(item, available, reserved, sold);
+            available.add(item);
         }
     }
 
