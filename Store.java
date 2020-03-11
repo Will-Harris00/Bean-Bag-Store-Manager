@@ -429,7 +429,7 @@ public class Store implements BeanBagStore {
                 }
             }
         }
-        // Throws an exception if the old ID hasn't been found.
+        // Throws an exception if the old ID doesn't match any ID in stock or previously in stock.
         if (!found)
             throw new BeanBagIDNotRecognisedException("This bean bag ID '" + oldId + "'could not be found.");
     }
