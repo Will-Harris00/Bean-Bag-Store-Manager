@@ -41,7 +41,7 @@ public class Store implements BeanBagStore {
         Checks.validID(id);
         for (int i = 0; i < num; i++) {
             BeanBag item = new BeanBag(manufacturer, name, id, year, month, information, 0);
-            Checks.existingMismatch(item, available);
+            Checks.existingMismatch(item, available, reserved, sold);
             available.add(item);
         }
     }
