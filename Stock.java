@@ -20,7 +20,7 @@ public class Stock {
         this.month = month;
     }
 
-    // Constructor: initialise manufacturer, name, price, quantity, year and moth of
+    // Constructor: initialise manufacturer, name, price, quantity, year and month of
     // manufacturer, as well as the price.
     // This method differs slightly from the above as in also includes reference to
     // the free text component.
