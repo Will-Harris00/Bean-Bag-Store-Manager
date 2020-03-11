@@ -347,8 +347,8 @@ public class Store implements BeanBagStore {
             throw new BeanBagIDNotRecognisedException("This bean bag ID '" + id + "'could not be found.");
         }
 
-
-        // Iterates over the available stock list and increments the count for each bean bag with a matching ID.
+        // Iterates over the available stock list and increments the count for each bean
+        // bag with a matching ID.
         for (int j = 0; j < available.size(); j++) {
             item = (BeanBag) available.get(j);
             // Breaks out of the loop if a matching bean bag was found (other matching bean
@@ -361,7 +361,8 @@ public class Store implements BeanBagStore {
         if (recognised) {
             return item.getInformation();
         }
-        // Iterates over the reserved stock list and increments the count for each bean bag with a matching ID.
+        // Iterates over the reserved stock list and increments the count for each bean
+        // bag with a matching ID.
         for (int j = 0; j < reserved.size(); j++) {
             item = (BeanBag) reserved.get(j);
             // Breaks out of the loop if a matching bean bag was found (other matching bean
@@ -418,8 +419,7 @@ public class Store implements BeanBagStore {
                 if (obj == reserved) {
                     held = (Reservation) obj.get(j);
                     item = held.getAttributes();
-                }
-                else {
+                } else {
                     item = (BeanBag) obj.get(j);
                 }
                 if (item.getIdentifier().equalsIgnoreCase(oldId)) {
@@ -428,7 +428,8 @@ public class Store implements BeanBagStore {
                 }
             }
         }
-        // Throws an exception if the old ID doesn't match any ID in stock or previously in stock.
+        // Throws an exception if the old ID doesn't match any ID in stock or previously
+        // in stock.
         if (!recognised)
             throw new BeanBagIDNotRecognisedException("This bean bag ID '" + oldId + "'could not be found.");
     }
@@ -468,7 +469,7 @@ public class Store implements BeanBagStore {
             System.out.println("The '" + type + "' object is empty.");
         } else {
             System.out.println("The '" + type + "' object contains '" + obj.size() + "' items:");
-            if (type.toLowerCase().equals("available") || type.toLowerCase().equals("sold") ) {
+            if (type.equalsIgnoreCase("available") || type.equalsIgnoreCase("sold")) {
                 for (int j = 0; j < obj.size(); j++) {
                     item = (BeanBag) obj.get(j);
                     System.out.println("[id=" + item.getIdentifier() + ",name=" + item.getName() + ",manufacturer="
@@ -476,7 +477,7 @@ public class Store implements BeanBagStore {
                             + ",information=" + item.getInformation() + ",priceInPence=" + item.getPenceInPrice()
                             + "]");
                 }
-            } else if (type.toLowerCase().equals("reserved")) {
+            } else if (type.equalsIgnoreCase("reserved")) {
                 for (int j = 0; j < obj.size(); j++) {
                     held = (Reservation) obj.get(j);
                     item = held.getAttributes();
