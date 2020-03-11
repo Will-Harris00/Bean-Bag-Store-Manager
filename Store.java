@@ -406,6 +406,7 @@ public class Store implements BeanBagStore {
         Reservation held;
         int i;
         ObjectArrayList obj;
+
         // Iterates over the lists one by one.
         for (i = 0; i < objects.length; i++) {
             // Accesses each element of array.
@@ -413,7 +414,6 @@ public class Store implements BeanBagStore {
 
             // Updates the IDs in the available stock, reserved and sold list.
             for (int j = 0; j < obj.size(); j++) {
-
                 if (obj == reserved) {
                     held = (Reservation) obj.get(j);
                     item = held.getAttributes();
