@@ -63,7 +63,6 @@ public class Store implements BeanBagStore {
             item = (BeanBag) available.get(j);
             if (item.getIdentifier().equalsIgnoreCase(id)) {
                 item.setPenceInPrice(priceInPence);
-                System.out.println(toString(item));
                 recognised = true;
             }
         }
@@ -254,6 +253,9 @@ public class Store implements BeanBagStore {
 
     // Gets the number of unique bean bags (different types) in the stock list.
     public int getNumberOfDifferentBeanBagsInStock() {
+        // including reserved
+        String[] uniqueId;
+
 
         return 0;
     }
@@ -269,13 +271,9 @@ public class Store implements BeanBagStore {
         // Starts the count at 0.
         int count = 0;
         BeanBag item;
+        boolean recognised = false;
 
         Checks.validId(id);
-
-        // Throws an exception if the ID wasn't found to have been sold yet.
-        if (sold.size() == 0) {
-            throw new BeanBagIDNotRecognisedException("This bean bag ID '" + id + "' has no recorded sales.");
-        }
 
         // Iterates over the sold list to find how many bean bags of a particular type
         // (using ID) have been sold.
@@ -283,8 +281,12 @@ public class Store implements BeanBagStore {
             item = (BeanBag) sold.get(j);
             if (item.getIdentifier().equalsIgnoreCase(id)) {
                 count += 1;
+                recognised = true;
             }
         }
+        // Throws an exception for unrecognised bean bags.
+        if (!recognised)
+            throw new BeanBagIDNotRecognisedException("This bean bag ID '" + id + "'could not be found.");
         return count;
     }
 
@@ -342,11 +344,6 @@ public class Store implements BeanBagStore {
 
         Checks.validId(id);
 
-        // Throws an exception if no bean bag with the matching ID was found.
-        if (available.size() == 0 & reserved.size() == 0) {
-            throw new BeanBagIDNotRecognisedException("This bean bag ID '" + id + "'could not be found.");
-        }
-
         // Iterates over the available stock list and increments the count for each bean
         // bag with a matching ID.
         for (int j = 0; j < available.size(); j++) {
@@ -373,10 +370,10 @@ public class Store implements BeanBagStore {
             }
         }
         // Returns the free text component of the first matching bean bag in the list.
-        if (recognised) {
-            return item.getInformation();
+        if (!recognised) {
+            throw new BeanBagIDNotRecognisedException("This bean bag ID '" + id + "'could not be found.");
         }
-        throw new BeanBagIDNotRecognisedException("This bean bag ID '" + id + "'could not be found.");
+        return item.getInformation();
     }
 
     // Empties the stock of its contents.
@@ -434,12 +431,13 @@ public class Store implements BeanBagStore {
             throw new BeanBagIDNotRecognisedException("This bean bag ID '" + oldId + "'could not be found.");
     }
 
+    /*
     public String toString(BeanBag item) {
-
         return "[id=" + item.getIdentifier() + ",name=" + item.getName() + ",manufacturer=" + item.getManufacturer()
                 + ",year=" + item.getYear() + ",month=" + item.getMonth() + ",information=" + item.getInformation()
                 + ",priceInPence=" + item.getPenceInPrice() + "]";
     }
+     */
 
     public void array(String type) {
         switch (type.toLowerCase()) {
@@ -469,7 +467,7 @@ public class Store implements BeanBagStore {
             System.out.println("The '" + type + "' object is empty.");
         } else {
             System.out.println("The '" + type + "' object contains '" + obj.size() + "' items:");
-            if (type.equalsIgnoreCase("available") || type.equalsIgnoreCase("sold")) {
+            if (type.equals("available") || type.equals("sold")) {
                 for (int j = 0; j < obj.size(); j++) {
                     item = (BeanBag) obj.get(j);
                     System.out.println("[id=" + item.getIdentifier() + ",name=" + item.getName() + ",manufacturer="
@@ -477,7 +475,7 @@ public class Store implements BeanBagStore {
                             + ",information=" + item.getInformation() + ",priceInPence=" + item.getPenceInPrice()
                             + "]");
                 }
-            } else if (type.equalsIgnoreCase("reserved")) {
+            } else if (type.equals("reserved")) {
                 for (int j = 0; j < obj.size(); j++) {
                     held = (Reservation) obj.get(j);
                     item = held.getAttributes();
