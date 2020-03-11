@@ -25,7 +25,7 @@ public class Checks {
 
     // Exception handler for bean bags which have the same ID but different
     // attributes.
-    public static void existingMismatch(BeanBag newbb, ObjectArrayList available, ObjectArrayList reserved,
+    public static void existingMismatch(BeanBag newBeanBag, ObjectArrayList available, ObjectArrayList reserved,
                                         ObjectArrayList sold) throws BeanBagMismatchException {
         // Checks the object IDs in each of these lists to ensure no mismatch occurs.
         ObjectArrayList[] objects = { available, reserved, sold };
@@ -47,31 +47,31 @@ public class Checks {
                 } else {
                     item = (BeanBag) obj.get(j);
                 }
-                if (newbb.getIdentifier().equalsIgnoreCase(item.getIdentifier())) {
+                if (newBeanBag.getIdentifier().equalsIgnoreCase(item.getIdentifier())) {
                     // Checks whether names of the bean bags match.
-                    if (!newbb.getName().equalsIgnoreCase(item.getName())) {
+                    if (!newBeanBag.getName().equalsIgnoreCase(item.getName())) {
                         throw new BeanBagMismatchException("The bean bags '" + item.getIdentifier() + "' and '" +
-                                newbb.getIdentifier() + "' do not have the same name.");
+                                newBeanBag.getIdentifier() + "' do not have the same name.");
                     }
                     // Checks if the manufacturers of the bean bags match.
-                    if (!newbb.getManufacturer().equalsIgnoreCase(item.getManufacturer())) {
+                    if (!newBeanBag.getManufacturer().equalsIgnoreCase(item.getManufacturer())) {
                         throw new BeanBagMismatchException("The bean bags '" + item.getIdentifier() + "' and '" +
-                                newbb.getIdentifier() + "' do not come from the same manufacturer.");
+                                newBeanBag.getIdentifier() + "' do not come from the same manufacturer.");
                     }
                     // Checks if the years of manufacture match.
-                    if (!(newbb.getYear() == item.getYear())) {
+                    if (!(newBeanBag.getYear() == item.getYear())) {
                         throw new BeanBagMismatchException("The bean bags '" + item.getIdentifier() + "' and '" +
-                                newbb.getIdentifier() + "' do not have the same year of production.");
+                                newBeanBag.getIdentifier() + "' do not have the same year of production.");
                     }
                     // Checks if the months of manufacture match.
-                    if (!(newbb.getMonth() == item.getMonth())) {
+                    if (!(newBeanBag.getMonth() == item.getMonth())) {
                         throw new BeanBagMismatchException("The bean bags '" + item.getIdentifier() + "' and '" +
-                                newbb.getIdentifier() + "' do not have the same month of production.");
+                                newBeanBag.getIdentifier() + "' do not have the same month of production.");
                     }
                     // Checks if the additional information on the bean bags match.
-                    if (!newbb.getInformation().equalsIgnoreCase(item.getInformation())) {
+                    if (!newBeanBag.getInformation().equalsIgnoreCase(item.getInformation())) {
                         throw new BeanBagMismatchException("The bean bags '" + item.getIdentifier() + "' and '" +
-                                newbb.getIdentifier() + "' do not have the same information associated with them.");
+                                newBeanBag.getIdentifier() + "' do not have the same information associated with them.");
                     }
                 }
             }

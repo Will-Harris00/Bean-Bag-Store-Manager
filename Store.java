@@ -40,9 +40,9 @@ public class Store implements BeanBagStore {
         // Checks that if IDs match, then attributes also match for added bean bags.
         Checks.validId(id);
         for (int i = 0; i < num; i++) {
-            BeanBag item = new BeanBag(manufacturer, name, id, year, month, information, 0);
-            Checks.existingMismatch(item, available, reserved, sold);
-            available.add(item);
+            BeanBag newBeanBag = new BeanBag(manufacturer, name, id, year, month, information, 0);
+            Checks.existingMismatch(newBeanBag, available, reserved, sold);
+            available.add(newBeanBag);
         }
     }
 
@@ -210,17 +210,14 @@ public class Store implements BeanBagStore {
         BeanBag item;
         Reservation held;
         Checks.validId(id);
-
-        // Throws an exception if no bean bag with the matching ID was found.
-        if (available.size() == 0 & reserved.size() == 0) {
-            throw new BeanBagIDNotRecognisedException("This bean bag ID '" + id + "'could not be found.");
-        }
+        boolean recognised = false;
 
         // Iterates over the available stock list and increments the count for each bean bag with a matching ID.
         for (int j = 0; j < available.size(); j++) {
             item = (BeanBag) available.get(j);
             if (item.getIdentifier().equalsIgnoreCase(id)) {
                 count += 1;
+                recognised = true;
             }
         }
 
@@ -231,8 +228,14 @@ public class Store implements BeanBagStore {
             item = held.getAttributes();
             if (item.getIdentifier().equalsIgnoreCase(id)) {
                 count += 1;
+                recognised = true;
             }
         }
+        // Throws an exception if no bean bag with the matching ID was found.
+        if (!recognised) {
+            throw new BeanBagIDNotRecognisedException("This bean bag ID '" + id + "'could not be found.");
+        }
+        // Returns the free text component of the first matching bean bag in the list.
         return count;
     }
 
@@ -315,7 +318,6 @@ public class Store implements BeanBagStore {
             if (item.getIdentifier().equalsIgnoreCase(id)) {
                 count += item.getPenceInPrice();
                 recognised = true;
-                break;
             }
         }
 
