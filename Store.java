@@ -341,7 +341,7 @@ public class Store implements BeanBagStore {
     // Gets the details of a particular bean bag based on ID.
     public String getBeanBagDetails(String id) throws BeanBagIDNotRecognisedException, IllegalIDException {
         BeanBag item = null;
-        boolean found = false;
+        boolean recognised = false;
 
         Checks.validId(id);
 
@@ -357,11 +357,11 @@ public class Store implements BeanBagStore {
             // Breaks out of the loop if a matching bean bag was found (other matching bean
             // bags should have the same details).
             if (item.getIdentifier().equalsIgnoreCase(id)) {
-                found = true;
+                recognised = true;
                 break;
             }
         }
-        if (found) {
+        if (recognised) {
             return item.getInformation();
         }
         // Iterates over the reserved stock list and increments the count for each bean bag with a matching ID.
@@ -370,12 +370,12 @@ public class Store implements BeanBagStore {
             // Breaks out of the loop if a matching bean bag was found (other matching bean
             // bags should have the same details).
             if (item.getIdentifier().equalsIgnoreCase(id)) {
-                found = true;
+                recognised = true;
                 break;
             }
         }
         // Returns the free text component of the first matching bean bag in the list.
-        if (found) {
+        if (recognised) {
             return item.getInformation();
         }
         throw new BeanBagIDNotRecognisedException("This bean bag ID '" + id + "'could not be found.");
