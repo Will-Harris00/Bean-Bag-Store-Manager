@@ -83,8 +83,7 @@ public class Store implements BeanBagStore {
         boolean recognised = false;
 
         // Iterates over the available stock and removes bean bags from the available
-        // stock list one by one
-        // (according to quantity sold).
+        // stock list one by one (according to quantity sold).
         for (int i = 0; i < num; i++) {
             for (int j = 0; j < available.size(); j++) {
                 item = (BeanBag) available.get(j);
