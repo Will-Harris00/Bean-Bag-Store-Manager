@@ -86,6 +86,7 @@ public class Checks {
         if (num <= 0)
             throw new IllegalNumberOfBeanBagsSoldException("The number of bean bags '" + num +
                     "' sold cannot be less than zero");
+        // Throws an exception if the ID is not in the correct format.
         Checks.validID(id);
         // Throws an exception if there are no bean bags available for sale.
         if (available == 0)
