@@ -279,14 +279,8 @@ public class Store implements BeanBagStore {
             }
         }
         for (int m = 0; m < uniqueId.size(); m++) {
-            System.out.println(uniqueId.get(m));
-        }
-        System.out.println("\n\n");
-        for (int m = 0; m < uniqueId.size(); m++) {
-
             for (int n = 0; n < uniqueId.size(); n++) {
                 // Accesses each element of array and compare it to all other element in the array to remove duplicates.
-                System.out.println(uniqueId.get(m) + "  " + uniqueId.get(n));
                 if (uniqueId.get(m).equals(uniqueId.get(n)) & m != n) {
                     uniqueId.remove(n);
                 }
@@ -512,7 +506,8 @@ public class Store implements BeanBagStore {
         // If the object size is empty, let the user know.
         if (obj.size() == 0) {
             System.out.println("The '" + type + "' object is empty.");
-        } else {
+        }
+        else {
             System.out.println("The '" + type + "' object contains '" + obj.size() + "' items:");
             if (type.equals("available") || type.equals("sold")) {
                 for (int j = 0; j < obj.size(); j++) {
