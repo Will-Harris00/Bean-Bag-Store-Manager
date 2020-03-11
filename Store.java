@@ -40,8 +40,9 @@ public class Store implements BeanBagStore {
 
         // Checks that if IDs match, then attributes also match for added bean bags.
         Checks.validId(id);
+        int existingPrice = getExistingPrice(id);
         for (int i = 0; i < num; i++) {
-            BeanBag newBeanBag = new BeanBag(manufacturer, name, id, year, month, information, 0);
+            BeanBag newBeanBag = new BeanBag(manufacturer, name, id, year, month, information, existingPrice);
             Checks.existingMismatch(newBeanBag, available, reserved, sold);
             available.add(newBeanBag);
             // System.out.println(toString(newBeanBag));
@@ -463,6 +464,21 @@ public class Store implements BeanBagStore {
         // in stock.
         if (!recognised)
             throw new BeanBagIDNotRecognisedException("This bean bag ID '" + oldId + "'could not be found.");
+    }
+
+    public int getExistingPrice(String id) {
+        // determines if a beanbag with matching id is available and get its price to use for any additional beanbags
+        BeanBag item;
+
+        // Iterates over the available stock list and increments the count for each bean
+        // bag with a matching ID.
+        for (int j = 0; j < available.size(); j++) {
+            item = (BeanBag) available.get(j);
+            if (item.getIdentifier().equalsIgnoreCase(id)) {
+                return item.getPriceInPence();
+            }
+        }
+        return 0;
     }
 
     // additional method to get all details relating to a specific beanbag
