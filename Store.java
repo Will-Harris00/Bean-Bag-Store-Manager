@@ -395,7 +395,7 @@ public class Store implements BeanBagStore {
 
     // Replaces the ID of a bean bag with another given ID.
     public void replace(String oldId, String replacementId) throws BeanBagIDNotRecognisedException, IllegalIDException {
-        boolean found = false;
+        boolean recognised = false;
 
         // Checks that both of the inputted IDs are valid.
         Checks.validId(oldId);
@@ -419,19 +419,17 @@ public class Store implements BeanBagStore {
                     held = (Reservation) obj.get(j);
                     item = held.getAttributes();
                 }
-                e
+                else {
                     item = (BeanBag) obj.get(j);
                 }
                 if (item.getIdentifier().equalsIgnoreCase(oldId)) {
                     item.setIdentifier(replacementId);
-                    found = true;
+                    recognised = true;
                 }
             }
         }
         // Throws an exception if the old ID doesn't match any ID in stock or previously in stock.
-        if (!found)
-        // 
-        // 
+        if (!recognised)
             throw new BeanBagIDNotRecognisedException("This bean bag ID '" + oldId + "'could not be found.");
     }
 
