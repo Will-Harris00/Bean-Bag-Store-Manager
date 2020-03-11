@@ -7,11 +7,11 @@ public class Reservation {
     private int reference;
 
     // Constructor: initialise reservation list.
-    public Reservation(BeanBag item, int size) {
+    public Reservation(BeanBag item, int reference) {
         this.item = item;
         // Uses negative hex values as reservation numbers to make them easily
         // distinguishable from bean bag ID.
-        this.reference = size + 1;
+        this.reference = reference;
     }
 
     // Public getters for private instances.
@@ -19,7 +19,7 @@ public class Reservation {
         return item;
     }
 
-    public int getReference() {
+    public int getReservation() {
         return reference;
     }
 
