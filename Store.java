@@ -38,7 +38,7 @@ public class Store implements BeanBagStore {
             throw new InvalidMonthException("The month of manufacturer '" + month + "' must be between 1 and 12");
 
         // Checks that if IDs match, then attributes also match for added bean bags.
-        Checks.validID(id);
+        Checks.validId(id);
         for (int i = 0; i < num; i++) {
             BeanBag item = new BeanBag(manufacturer, name, id, year, month, information, 0);
             Checks.existingMismatch(item, available, reserved, sold);
@@ -54,7 +54,7 @@ public class Store implements BeanBagStore {
         boolean recognised = false;
 
         // Checks the given ID, and sets the price to that ID if valid.
-        Checks.validID(id);
+        Checks.validId(id);
         if (priceInPence < 0)
             throw new InvalidPriceException("The price '" + priceInPence + "' cannot be below zero pence.");
         for (int j = 0; j < available.size(); j++) {
@@ -209,7 +209,7 @@ public class Store implements BeanBagStore {
         int count = 0;
         BeanBag item;
         Reservation held;
-        Checks.validID(id);
+        Checks.validId(id);
 
         // Throws an exception if no bean bag with the matching ID was found.
         if (available.size() == 0 & reserved.size() == 0) {
@@ -270,7 +270,7 @@ public class Store implements BeanBagStore {
         int count = 0;
         BeanBag item;
 
-        Checks.validID(id);
+        Checks.validId(id);
 
         // Throws an exception if the ID wasn't found to have been sold yet.
         if (sold.size() == 0) {
@@ -302,12 +302,12 @@ public class Store implements BeanBagStore {
     // Gets the total price of sold bean bags of a particular type (using ID) using
     // the sold list.
     public int getTotalPriceOfSoldBeanBags(String id) throws BeanBagIDNotRecognisedException, IllegalIDException {
-        Checks.validID(id);
+        Checks.validId(id);
         BeanBag item;
         boolean recognised = false;
         int count = 0;
 
-        Checks.validID(id);
+        Checks.validId(id);
 
         // Iterates over the sold list and counts bean bags which have a matching ID.
         for (int j = 0; j < sold.size(); j++) {
@@ -341,7 +341,7 @@ public class Store implements BeanBagStore {
         BeanBag item = null;
         boolean found = false;
 
-        Checks.validID(id);
+        Checks.validId(id);
 
         // Throws an exception if no bean bag with the matching ID was found.
         if (available.size() == 0 & reserved.size() == 0) {
@@ -399,8 +399,8 @@ public class Store implements BeanBagStore {
         boolean found = false;
 
         // Checks that both of the inputted IDs are valid.
-        Checks.validID(oldId);
-        Checks.validID(replacementId);
+        Checks.validId(oldId);
+        Checks.validId(replacementId);
 
         // Replaces the object IDs in each of these lists.
         ObjectArrayList[] objects = { available, reserved, sold };
