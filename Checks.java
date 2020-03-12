@@ -11,22 +11,25 @@ public class Checks {
                 int decimal = Long.valueOf(id, 16).intValue();
                 if (decimal < 0) {
                     // Throws an exception for bean bag IDs which aren't positive hexadecimals.
-                    throw new IllegalIDException("Invalid hexadecimal identifier, '" + id + "'  is not a positive number");
+                    throw new IllegalIDException(
+                            "Invalid hexadecimal identifier, '" + id + "'  is not a positive number");
                 }
             } catch (NumberFormatException e) {
                 // Throws an exception for bean bag IDs which aren't hexadecimal numbers.
-                throw new IllegalIDException("Invalid hexadecimal identifier, '" + id + "'  is not a hexadecimal number");
+                throw new IllegalIDException(
+                        "Invalid hexadecimal identifier, '" + id + "'  is not a hexadecimal number");
             }
         } else {
             // Throws an exception for IDs which don't have a length of 8.
-            throw new IllegalIDException("Invalid hexadecimal identifier, '" + id + "'  is not eight characters in length");
+            throw new IllegalIDException(
+                    "Invalid hexadecimal identifier, '" + id + "'  is not eight characters in length");
         }
     }
 
     // Exception handler for bean bags which have the same ID but different
     // attributes.
     public static void existingMismatch(BeanBag newBeanBag, ObjectArrayList available, ObjectArrayList reserved,
-                                        ObjectArrayList sold) throws BeanBagMismatchException {
+            ObjectArrayList sold) throws BeanBagMismatchException {
         // Checks the object IDs in each of these lists to ensure no mismatch occurs.
         ObjectArrayList[] objects = { available, reserved, sold };
         BeanBag item;
@@ -55,27 +58,27 @@ public class Checks {
                     }
                     // Checks if the manufacturers of the bean bags match.
                     if (!newBeanBag.getManufacturer().equalsIgnoreCase(item.getManufacturer())) {
-                        throw new BeanBagMismatchException("The bean bags do not come from the same manufacturer '" +
-                                item.getManufacturer() + "' does not match '" + newBeanBag.getManufacturer() + "' for '"
-                                + item.getIdentifier() + "'");
+                        throw new BeanBagMismatchException("The bean bags do not come from the same manufacturer '"
+                                + item.getManufacturer() + "' does not match '" + newBeanBag.getManufacturer()
+                                + "' for '" + item.getIdentifier() + "'");
                     }
                     // Checks if the years of manufacture match.
                     if (!(newBeanBag.getYear() == item.getYear())) {
-                        throw new BeanBagMismatchException("The bean bags do not have the same year of production '" +
-                                item.getYear() + "' does not match '" + newBeanBag.getYear() + "' for '"
+                        throw new BeanBagMismatchException("The bean bags do not have the same year of production '"
+                                + item.getYear() + "' does not match '" + newBeanBag.getYear() + "' for '"
                                 + item.getIdentifier() + "'");
                     }
                     // Checks if the months of manufacture match.
                     if (!(newBeanBag.getMonth() == item.getMonth())) {
-                        throw new BeanBagMismatchException("The bean bags do not have the same month of production '" +
-                                item.getMonth() + "' does not match '" + newBeanBag.getMonth() + "' for '"
+                        throw new BeanBagMismatchException("The bean bags do not have the same month of production '"
+                                + item.getMonth() + "' does not match '" + newBeanBag.getMonth() + "' for '"
                                 + item.getIdentifier() + "'");
                     }
                     // Checks if the additional information on the bean bags match.
                     if (!newBeanBag.getInformation().equalsIgnoreCase(item.getInformation())) {
-                        throw new BeanBagMismatchException("The bean bags do not have the same information " +
-                                "associated with them '" + item.getInformation() + "' does not match '" +
-                                newBeanBag.getInformation() + "' for '" + item.getIdentifier() + "'");
+                        throw new BeanBagMismatchException("The bean bags do not have the same information "
+                                + "associated with them '" + item.getInformation() + "' does not match '"
+                                + newBeanBag.getInformation() + "' for '" + item.getIdentifier() + "'");
                     }
                 }
             }
@@ -88,8 +91,8 @@ public class Checks {
         // Throws an exception if the user attempts to sell a non-positive number of
         // bean bags.
         if (num <= 0)
-            throw new IllegalNumberOfBeanBagsSoldException("The number of bean bags '" + num +
-                    "' sold cannot be less than zero");
+            throw new IllegalNumberOfBeanBagsSoldException(
+                    "The number of bean bags '" + num + "' sold cannot be less than zero");
         // Throws an exception if the ID is not in the correct format.
         Checks.validId(id);
         // Throws an exception if there are no bean bags available for sale.
@@ -107,8 +110,8 @@ public class Checks {
         // Throws an exception if the user attempts to reserve a non-positive number of
         // bean bags.
         if (num <= 0)
-            throw new IllegalNumberOfBeanBagsReservedException("The number of bean bags '" + num +
-                    "' reserved cannot be less than zero");
+            throw new IllegalNumberOfBeanBagsReservedException(
+                    "The number of bean bags '" + num + "' reserved cannot be less than zero");
         Checks.validId(id);
         // Throws an exception if there are no bean bags available for reservation.
         if (available == 0)
@@ -116,7 +119,7 @@ public class Checks {
         // Throws an exception if there aren't enough bean bags available for
         // reservation.
         if (num > available)
-            throw new InsufficientStockException(
-                    "Insufficient stock available for reservation; only '" + available + "' of '" + id + "' are in stock.");
+            throw new InsufficientStockException("Insufficient stock available for reservation; only '" + available
+                    + "' of '" + id + "' are in stock.");
     }
 }
