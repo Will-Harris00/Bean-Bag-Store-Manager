@@ -531,23 +531,23 @@ public class Store implements BeanBagStore {
 
     // Sells a number of beans bags according to a reservation number.
     public void sellBeanBags(int reservationNumber) throws ReservationNumberNotRecognisedException {
+        // Checks whether the price of a reserved bean bag was reduced whilst waiting
+        // for final sale and offers the customer the lowest price.
+        lowestPrice(manageReservations(reservationNumber).getAttributes().getIdentifier(), reservationNumber);
+
         // Iterates over the reserved items for a bean bag with a matching reservation
         // number and adds it back to the stock list, removing it from the reserved
         // list.
-
-        // checks whether the price of a reserved bean bag was reduced whilst waiting for final sale and
-        // offer customer the lower of the two price.
-        lowestPrice(manageReservations(reservationNumber).getAttributes().getIdentifier(), reservationNumber);
-
         sold.add(manageReservations(reservationNumber).getAttributes());
         reserved.remove(manageReservations(reservationNumber));
     }
 
+    // Enables the customer of a reserved bean bag to pay the lower of the two
+    // prices upon sale.
     public void lowestPrice(String id, int reservationNumber) throws ReservationNumberNotRecognisedException {
         int reservationPrice = manageReservations(reservationNumber).getAttributes().getPriceInPence();
-        // enables the customer of a reserved bean bag to pay the lower of the two prices upon sale.
         if (getExistingPrice(id) < reservationPrice & getExistingPrice(id) != 0)
-                reservationPrice = getExistingPrice(id);
+            reservationPrice = getExistingPrice(id);
         manageReservations(reservationNumber).getAttributes().setPriceInPence(reservationPrice);
     }
 
@@ -587,8 +587,8 @@ public class Store implements BeanBagStore {
         // list.
         int existingPrice = getExistingPrice(manageReservations(reservationNumber).getAttributes().getIdentifier());
 
-        // check if any available bean bags have matching identifiers to item being unreserved, get their existing price
-        // and updates the price of the bean bag being removed from reserved before adding it back to available store.
+        // Updates bean bags to have the same price as the current price when moving
+        // them back to the available bean bags list.
         if (existingPrice != 0) {
             manageReservations(reservationNumber).getAttributes().setPriceInPence(existingPrice);
         }
