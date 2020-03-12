@@ -248,16 +248,22 @@ public class Store implements BeanBagStore {
                 } else {
                     item = (BeanBag) obj.get(j);
                 }
-                uniqueId.add(item.getIdentifier());
-            }
-        }
 
-        // Accesses each element of array and compares it to all other elements in the
-        // array to remove duplicates.
-        for (int m = 0; m < uniqueId.size(); m++) {
-            for (int n = 0; n < uniqueId.size(); n++) {
-                if (uniqueId.get(m).equals(uniqueId.get(n)) & m != n) {
-                    uniqueId.remove(n);
+                String beanBagID = item.getIdentifier();
+                Boolean inList = false;
+
+                // Iterates over the list of unique IDs and checks against duplicates.
+                for (int i = 0; i < uniqueId.size(); i++) {
+                    String id = (String) uniqueId.get(i);
+                    if (id == beanBagID) {
+                        inList = true;
+                        break;
+                    }
+                }
+
+                // Adds bean bag ID to list of unique IDs if no duplicates found.
+                if (!inList) {
+                    uniqueId.add(beanBagID);
                 }
             }
         }
