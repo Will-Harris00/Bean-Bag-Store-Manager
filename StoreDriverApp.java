@@ -11,7 +11,8 @@ public class StoreDriverApp {
             IllegalNumberOfBeanBagsSoldException, IllegalNumberOfBeanBagsReservedException, ReservationNumberNotRecognisedException, IOException, ClassNotFoundException {
         Store driver = new Store();
         // Tests the various methods in the backend code.
-        // driver.loadStoreContents("BeanBagStore.ser");
+        driver.empty();
+        driver.loadStoreContents("BeanBagStore.ser");
         driver.array("a");
         driver.array("r");
         driver.array("s");

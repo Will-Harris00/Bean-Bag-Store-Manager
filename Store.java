@@ -274,22 +274,18 @@ public class Store implements BeanBagStore {
             out.writeObject(reserved);
             out.writeObject(sold);
             System.out.printf("Saved in %s%n", filename);
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
 
     // Loads the store contents from a previously saved store.
     public void loadStoreContents(String filename) throws IOException, ClassNotFoundException {
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(filename))) {
-            Object obj = in.readObject();
-            if (obj instanceof ObjectArrayList) {
-                available = (ObjectArrayList) obj;
-            }
-            if (obj instanceof ObjectArrayList) {
-                reserved = (ObjectArrayList) obj;
-            }
-            if (obj instanceof ObjectArrayList) {
-                sold = (ObjectArrayList) obj;
-            }
+            // Accesses each element of array.
+            available = (ObjectArrayList) in.readObject();
+            reserved = (ObjectArrayList) in.readObject();
+            sold = (ObjectArrayList) in.readObject();
         }
     }
 
@@ -300,13 +296,12 @@ public class Store implements BeanBagStore {
         // Replaces the object IDs in each of these lists.
         ObjectArrayList[] objects = { available, reserved };
         BeanBag item;
-        int i;
         ObjectArrayList obj;
 
         // Iterates over the lists one by one.
-        for (i = 0; i < objects.length; i++) {
+        for (ObjectArrayList object : objects) {
             // Accesses each element of array.
-            obj = objects[i];
+            obj = object;
             // Updates the IDs in the available stock, reserved and sold list.
             for (int j = 0; j < obj.size(); j++) {
                 if (obj == reserved) {
