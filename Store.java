@@ -174,16 +174,31 @@ public class Store implements BeanBagStore {
 
     // Cancels a reservation of bean bags based on reservation number.
     public void unreserveBeanBags(int reservationNumber) throws ReservationNumberNotRecognisedException {
-        boolean recognised = false;
-
         // Iterates over the reserved items for a bean bag with a matching reservation
         // number and adds it back to the stock list, removing it from the reserved
         // list.
+        available.add(manageReservations(reservationNumber).getAttributes());
+        reserved.remove(manageReservations(reservationNumber));
+
+    }
+
+    // Sells a number of beans bags according to a reservation number.
+    public void sellBeanBags(int reservationNumber) throws ReservationNumberNotRecognisedException {
+        // Iterates over the reserved items for a bean bag with a matching reservation
+        // number and adds it back to the stock list, removing it from the reserved
+        // list.
+        sold.add(manageReservations(reservationNumber).getAttributes());
+        reserved.remove(manageReservations(reservationNumber));
+    }
+
+    // Responsible for the selling and cancellation of reservations in the reserved bean bag stock.
+    public Reservation manageReservations(int reservationNumber) throws ReservationNumberNotRecognisedException {
+        boolean recognised = false;
+        Reservation held = null;
+        // iterates over reservations stock to find matching reservation number.
         for (int j = 0; j < reserved.size(); j++) {
-            Reservation held = (Reservation) reserved.get(j);
+            held = (Reservation) reserved.get(j);
             if (held.getReservation() == reservationNumber) {
-                available.add(held.getAttributes());
-                reserved.remove(held);
                 recognised = true;
                 break;
             }
@@ -193,30 +208,7 @@ public class Store implements BeanBagStore {
         if (!recognised)
             throw new ReservationNumberNotRecognisedException(
                     "This reservation number '" + reservationNumber + "' is not recognised.");
-    }
-
-    // Sells a number of beans bags according to a reservation number.
-    public void sellBeanBags(int reservationNumber) throws ReservationNumberNotRecognisedException {
-        boolean recognised = false;
-
-        // Iterates over the stock and removes bean bags from the reserved list one by
-        // one (according to quantity sold).
-        for (int j = 0; j < reserved.size(); j++) {
-            Reservation held = (Reservation) reserved.get(j);
-            // Searches for matching reservation numbers to find which bean bags to remove
-            // from reserved list.
-            if (held.getReservation() == reservationNumber) {
-                sold.add(held.getAttributes());
-                reserved.remove(held);
-                recognised = true;
-                break;
-            }
-        }
-
-        // Throws an exception for unrecognised reservations.
-        if (!recognised)
-            throw new ReservationNumberNotRecognisedException(
-                    "This reservation number '" + reservationNumber + "' is not recognised.");
+        return held;
     }
 
     // Returns the total number of bean bags in stock.
@@ -274,8 +266,6 @@ public class Store implements BeanBagStore {
             out.writeObject(reserved);
             out.writeObject(sold);
             System.out.printf("Saved in %s%n", filename);
-        } catch (IOException ex) {
-            ex.printStackTrace();
         }
     }
 
