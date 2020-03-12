@@ -38,12 +38,12 @@ public class Store implements BeanBagStore {
         // Throws an exception if the user tries to add a negative number of bean bags.
         if (num <= 0)
             throw new IllegalNumberOfBeanBagsAddedException(
-                    "The number of bean bags '" + num + "' added cannot be less than zero");
+                    "The number of bean bags '" + num + "' added must be positive.");
 
         // Throws an exception if the user tries to add a month of manufacture which
         // doesn't exist.
         if (month < 0 | month > 12)
-            throw new InvalidMonthException("The month of manufacturer '" + month + "' must be between 1 and 12");
+            throw new InvalidMonthException("The month of manufacturer '" + month + "' must be between 1 and 12.");
 
         // Checks if IDs and attributes both match for added bean bags.
         Checks.validId(id);
@@ -151,7 +151,7 @@ public class Store implements BeanBagStore {
         }
         // Throws an exception if no bean bag with the matching ID was found.
         if (!recognised) {
-            throw new BeanBagIDNotRecognisedException("This bean bag ID '" + id + "'could not be found.");
+            throw new BeanBagIDNotRecognisedException("This bean bag ID '" + id + "' could not be found.");
         }
 
         // Returns the free text component of the first matching bean bag in the list.
@@ -205,7 +205,7 @@ public class Store implements BeanBagStore {
         }
         // Returns the free text component of the first matching bean bag in the list.
         if (!recognised) {
-            throw new BeanBagIDNotRecognisedException("This bean bag ID '" + id + "'could not be found.");
+            throw new BeanBagIDNotRecognisedException("This bean bag ID '" + id + "' could not be found.");
         }
         return item.getInformation();
     }
@@ -320,7 +320,7 @@ public class Store implements BeanBagStore {
 
         // Throws an exception for unrecognised bean bags.
         if (!recognised)
-            throw new BeanBagIDNotRecognisedException("This bean bag ID '" + id + "'could not be found.");
+            throw new BeanBagIDNotRecognisedException("This bean bag ID '" + id + "' could not be found.");
         return count;
     }
 
@@ -393,7 +393,7 @@ public class Store implements BeanBagStore {
         // Throws an exception if the old ID doesn't match any ID in stock or previously
         // in stock.
         if (!recognised)
-            throw new BeanBagIDNotRecognisedException("This bean bag ID '" + oldId + "'could not be found.");
+            throw new BeanBagIDNotRecognisedException("This bean bag ID '" + oldId + "' could not be found.");
     }
 
     // Reserves a given quantity of bean bags based on ID.
@@ -443,7 +443,7 @@ public class Store implements BeanBagStore {
 
         // Throws an exception for unrecognised bean bags.
         if (!recognised)
-            throw new BeanBagIDNotRecognisedException("This bean bag ID '" + id + "'could not be found.");
+            throw new BeanBagIDNotRecognisedException("This bean bag ID '" + id + "' could not be found.");
 
         return reservationNumber;
     }
@@ -501,7 +501,7 @@ public class Store implements BeanBagStore {
 
         // Throws an exception for unrecognised bean bags.
         if (!recognised)
-            throw new BeanBagIDNotRecognisedException("This bean bag ID '" + id + "'could not be found.");
+            throw new BeanBagIDNotRecognisedException("This bean bag ID '" + id + "' could not be found.");
     }
 
     // Sells a number of beans bags according to a reservation number.
@@ -539,7 +539,7 @@ public class Store implements BeanBagStore {
 
         // Throws an exception for unrecognised bean bags.
         if (!recognised)
-            throw new BeanBagIDNotRecognisedException("This bean bag ID '" + id + "'could not be found.");
+            throw new BeanBagIDNotRecognisedException("This bean bag ID '" + id + "' could not be found.");
     }
 
     // Additional test method to get all details relating to a specific beanbag.
