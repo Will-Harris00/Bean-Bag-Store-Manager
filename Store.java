@@ -56,6 +56,9 @@ public class Store implements BeanBagStore {
             Checks.existingMismatch(newBeanBag, available, reserved, sold);
             available.add(newBeanBag);
         }
+
+        // Throws an AssertionError if the information value is null.
+        assert (information != null) : "The bean bag incorrectly has information set to null.";
     }
 
     // Test method for printing the bean bags in a given list.
@@ -168,6 +171,11 @@ public class Store implements BeanBagStore {
         reserved = null;
         reserved = new ObjectArrayList();
         resetSaleAndCostTracking();
+
+        // Throws an AssertionError if the bean bag list wasn't emptied correctly.
+        assert (available.size() == 0) : "Available list was not emptied correctly.";
+        // Throws an AssertionError if the reserved list wasn't emptied correctly.
+        assert (reserved.size() == 0) : "Reservation list was not emptied correctly.";
     }
 
     // Gets the details of a particular bean bag based on ID.
@@ -471,6 +479,9 @@ public class Store implements BeanBagStore {
         // list, which enables more efficient use of memory.
         sold = null;
         sold = new ObjectArrayList();
+
+        // Throws an AssertionError if the sales haven't been reset correctly.
+        assert (this.getNumberOfSoldBeanBags() == 0) : "Sales have not been reset correctly.";
     }
 
     // Permanently saves the store contents so it can be used in other programs.
