@@ -122,7 +122,8 @@ public class Store implements BeanBagStore {
         return countBeanBags(new ObjectArrayList[] { available, reserved }, id);
     }
 
-    // Counts the number of matching IDs for any objects which are in given list(s).
+    // Counts the number of matching IDs for any objects which are in the given
+    // list(s).
     public int countBeanBags(ObjectArrayList[] objects, String id)
             throws BeanBagIDNotRecognisedException, IllegalIDException {
         // Starts the count at 0.
