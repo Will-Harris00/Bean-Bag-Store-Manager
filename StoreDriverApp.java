@@ -148,5 +148,7 @@ public class StoreDriverApp {
         driver.array("a");
         driver.array("r");
         driver.array("s");
+        System.out.println(driver.getNumberOfSoldBeanBags("0000ABAB"));
+        System.out.println(driver.beanBagsInStock("0000ABAB"));
     }
 }
