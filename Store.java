@@ -252,12 +252,12 @@ public class Store implements BeanBagStore {
                 }
 
                 String beanBagID = item.getIdentifier();
-                Boolean inList = false;
+                boolean inList = false;
 
                 // Iterates over the list of unique IDs and checks against duplicates.
                 for (int i = 0; i < uniqueId.size(); i++) {
                     String id = (String) uniqueId.get(i);
-                    if (id == beanBagID) {
+                    if (id.equalsIgnoreCase(beanBagID)) {
                         inList = true;
                         break;
                     }
