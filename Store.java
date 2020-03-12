@@ -510,8 +510,8 @@ public class Store implements BeanBagStore {
         return 0;
     }
 
-    // Additional method to get all details relating to a specific beanbag. This
-    // uses objects instead of identifiers.
+    // Additional test method to get all details relating to a specific beanbag.
+    // This uses objects instead of identifiers.
     public String toString(BeanBag item) {
         return "[id=" + item.getIdentifier() + ",name=" + item.getName() + ",manufacturer=" + item.getManufacturer()
                 + ",year=" + item.getYear() + ",month=" + item.getMonth() + ",information=" + item.getInformation()
