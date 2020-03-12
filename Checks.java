@@ -8,8 +8,7 @@ public class Checks {
     public static void validId(String id) throws IllegalIDException {
         if (id.length() == 8) {
             try {
-                int decimal = Long.valueOf(id, 16).intValue();
-                if (decimal < 0) {
+                if ((int) Long.parseLong(id, 16) < 0) {
                     // Throws an exception for bean bag IDs which aren't positive hexadecimals.
                     throw new IllegalIDException(
                             "Invalid hexadecimal identifier, '" + id + "'  is not a positive number");

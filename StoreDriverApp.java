@@ -66,7 +66,7 @@ public class StoreDriverApp {
         System.out.println("The store has been emptied\n\n");
         driver.addBeanBags(1, "Argos", "Beanie", "0000bbbb", (short) 2019, (byte) 11);
         driver.addBeanBags(3, "Argos", "Beanie", "0000CCCC", (short) 2019, (byte) 11);
-        driver.addBeanBags(5, "Argos", "Beanie", "0000ABAB", (short) 2019, (byte) 11);
+        driver.addBeanBags(5, "Argos", "Beanie", "0000ABAB", (short) 2019, (byte) 11, "Hello world");
         driver.setBeanBagPrice("0000bbbb", 5555);
         driver.setBeanBagPrice("0000cccc", 7777);
         driver.setBeanBagPrice("0000ABAB", 1212);
@@ -120,17 +120,17 @@ public class StoreDriverApp {
         System.out.println(driver.reserveBeanBags(1,"0000ABAB"));
         driver.unreserveBeanBags(0);
         driver.addBeanBags(1, "Argos", "Beanie", "0000bbbb", (short) 2019, (byte) 11);
+        driver.addBeanBags(1, "Argos", "Beanie", "FFFFFFFF", (short) 2019, (byte) 11);
         driver.addBeanBags(3, "Argos", "Beanie", "0000CCCC", (short) 2019, (byte) 11);
-        driver.addBeanBags(5, "Argos", "Beanie", "0000ABAB", (short) 2019, (byte) 11);
+        driver.addBeanBags(5, "Argos", "Beanie", "0000ABAB", (short) 2019, (byte) 11, "Hello world");
         driver.setBeanBagPrice("0000CCCC", 5252);
         driver.addBeanBags(1, "Argos", "Beanie", "0000CCCC", (short) 2019, (byte) 11);
         driver.addBeanBags(1, "Argos", "Beanie", "0000ABCD", (short) 209, (byte) 11);
-        driver.array("a");
-        driver.array("r");
         driver.reserveBeanBags(1, "0000ABAB");
         // driver.addBeanBags(3, "Argo", "Beanie", "0000eeee", (short) 2019, (byte) 11);
-        System.out.println(driver.getNumberOfDifferentBeanBagsInStock());
-        driver.array("s");
+        driver.array("a");
+        driver.array("r");
+        System.out.println("Unique: " + driver.getNumberOfDifferentBeanBagsInStock());
         System.out.println(driver.getTotalPriceOfSoldBeanBags());
         System.out.println(driver.getTotalPriceOfSoldBeanBags("0000ABAB"));
         System.out.println(driver.getNumberOfSoldBeanBags());
@@ -150,5 +150,10 @@ public class StoreDriverApp {
         driver.array("s");
         System.out.println(driver.getNumberOfSoldBeanBags("0000ABAB"));
         System.out.println(driver.beanBagsInStock("0000ABAB"));
+        System.out.println(driver.getBeanBagDetails("0000ABAB"));
+        System.out.println("hi\n\n");
+        driver.array("a");
+        driver.array("r");
+        System.out.println("Unique: " + driver.getNumberOfDifferentBeanBagsInStock());
     }
 }
