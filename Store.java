@@ -22,8 +22,8 @@ public class Store implements BeanBagStore {
     private ObjectArrayList reserved = new ObjectArrayList();
     private ObjectArrayList sold = new ObjectArrayList();
 
-    // If no information parameter mentioned, adds a bean bag with no
-    // additional information (empty string).
+    // If no information parameter mentioned, adds a bean bag with no additional
+    // information (empty string).
     public void addBeanBags(int num, String manufacturer, String name, String id, short year, byte month)
             throws IllegalNumberOfBeanBagsAddedException, BeanBagMismatchException, IllegalIDException,
             InvalidMonthException {
@@ -117,15 +117,19 @@ public class Store implements BeanBagStore {
 
     // Returns the number of a type of bean bag in stock.
     public int beanBagsInStock(String id) throws BeanBagIDNotRecognisedException, IllegalIDException {
-        // Returns the number of bean bags with that specific id currently reserved
+        // Returns the number of bean bags with a matching ID which are either reserved
+        // or available.
         return countBeanBags(new ObjectArrayList[] { available, reserved }, id);
     }
 
-    public int countBeanBags(ObjectArrayList[] objects, String id) throws BeanBagIDNotRecognisedException, IllegalIDException {
+    // Counts the number of matching IDs for any objects which are in given list(s).
+    public int countBeanBags(ObjectArrayList[] objects, String id)
+            throws BeanBagIDNotRecognisedException, IllegalIDException {
         // Starts the count at 0.
-        Checks.validId(id);
         int count = 0;
         boolean recognised = false;
+
+        Checks.validId(id);
 
         // Accesses each element of array.
         for (ObjectArrayList object : objects) {
@@ -268,7 +272,7 @@ public class Store implements BeanBagStore {
     // Gets the total number of sold beans bags of a particular type (using ID)
     // using the sold list.
     public int getNumberOfSoldBeanBags(String id) throws BeanBagIDNotRecognisedException, IllegalIDException {
-        // Returns the number of bean bags with that specific id that have been sold previously.
+        // Returns the number of bean bags with a matching ID which have been sold.
         return countBeanBags(new ObjectArrayList[] { sold }, id);
     }
 
