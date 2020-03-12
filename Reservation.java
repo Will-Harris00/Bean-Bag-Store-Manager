@@ -1,7 +1,9 @@
 // A class to manage the list of reservations.
 package beanbags;
 
-public class Reservation {
+import java.io.Serializable;
+
+public class Reservation implements Serializable {
     private BeanBag item;
     // Initialising private variable for reservation number.
     private int reference;

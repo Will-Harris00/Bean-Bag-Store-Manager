@@ -2,7 +2,9 @@
 
 package beanbags;
 
-public class BeanBag {
+import java.io.Serializable;
+
+public class BeanBag implements Serializable {
     // Private instance variables.
     private String manufacturer;
     private String name;

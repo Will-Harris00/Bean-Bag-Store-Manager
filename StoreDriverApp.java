@@ -2,13 +2,19 @@
 
 package beanbags;
 
+import java.io.IOException;
+
 public class StoreDriverApp {
     public static void main(String[] args) throws IllegalIDException, BeanBagMismatchException, InvalidMonthException,
             IllegalNumberOfBeanBagsAddedException, InvalidPriceException, BeanBagIDNotRecognisedException,
             PriceNotSetException, BeanBagNotInStockException, InsufficientStockException,
-            IllegalNumberOfBeanBagsSoldException, IllegalNumberOfBeanBagsReservedException, ReservationNumberNotRecognisedException {
+            IllegalNumberOfBeanBagsSoldException, IllegalNumberOfBeanBagsReservedException, ReservationNumberNotRecognisedException, IOException, ClassNotFoundException {
         Store driver = new Store();
         // Tests the various methods in the backend code.
+        // driver.loadStoreContents("BeanBagStore.ser");
+        driver.array("a");
+        driver.array("r");
+        driver.array("s");
         driver.addBeanBags(2, "Argos", "Beanie", "0000ffff", (short) 2019, (byte) 11);
         driver.addBeanBags(1, "Argos", "Beanie", "0000AAAA", (short) 2019, (byte) 12, "Test");
         driver.addBeanBags(1, "Argos", "Beanie", "0000afff", (short) 2019, (byte) 11);
@@ -137,5 +143,9 @@ public class StoreDriverApp {
         driver.array("a");
         driver.array("s");
 
+        driver.saveStoreContents("BeanBagStore.ser");
+        driver.array("a");
+        driver.array("r");
+        driver.array("s");
     }
 }
