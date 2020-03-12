@@ -161,6 +161,8 @@ public class Store implements BeanBagStore {
 
     // Empties the stock of its contents.
     public void empty() {
+        // Sets lists to be null for garbage collection before creating a new empty
+        // list, which enables more efficient use of memory.
         available = null;
         available = new ObjectArrayList();
         reserved = null;
@@ -292,6 +294,7 @@ public class Store implements BeanBagStore {
             Reservation held = (Reservation) reserved.get(j);
             count += held.getAttributes().getPriceInPence();
         }
+
         return count;
     }
 
@@ -346,7 +349,8 @@ public class Store implements BeanBagStore {
     public Reservation manageReservations(int reservationNumber) throws ReservationNumberNotRecognisedException {
         boolean recognised = false;
         Reservation held = null;
-        // iterates over reservations stock to find matching reservation number.
+
+        // Iterates over reservations stock to find matching reservation number.
         for (int j = 0; j < reserved.size(); j++) {
             held = (Reservation) reserved.get(j);
             if (held.getReservation() == reservationNumber) {
@@ -359,6 +363,7 @@ public class Store implements BeanBagStore {
         if (!recognised)
             throw new ReservationNumberNotRecognisedException(
                     "This reservation number '" + reservationNumber + "' is not recognised.");
+
         return held;
     }
 
@@ -462,6 +467,8 @@ public class Store implements BeanBagStore {
 
     // Resets the tracking of sales and costs.
     public void resetSaleAndCostTracking() {
+        // Sets sold list to be null for garbage collection before creating a new empty
+        // list, which enables more efficient use of memory.
         sold = null;
         sold = new ObjectArrayList();
     }
@@ -547,14 +554,6 @@ public class Store implements BeanBagStore {
         // Throws an exception for unrecognised bean bags.
         if (!recognised)
             throw new BeanBagIDNotRecognisedException("This bean bag ID '" + id + "' could not be found.");
-    }
-
-    // Additional test method to get all details relating to a specific beanbag.
-    // This uses objects instead of identifiers.
-    public String toString(BeanBag item) {
-        return "[id=" + item.getIdentifier() + ",name=" + item.getName() + ",manufacturer=" + item.getManufacturer()
-                + ",year=" + item.getYear() + ",month=" + item.getMonth() + ",information=" + item.getInformation()
-                + ",priceInPence=" + item.getPriceInPence() + "]";
     }
 
     // Cancels a reservation of bean bags based on reservation number.
