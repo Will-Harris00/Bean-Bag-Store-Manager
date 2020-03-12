@@ -93,5 +93,18 @@ public class Driver {
         driver.unreserveBeanBags(2);
         driver.array("a");
         driver.array("r");
+
+        driver.empty();
+        driver.addBeanBags(3, "Man", "Apple", "0000dfdf", (short) 2001, (byte) 2);
+        driver.setBeanBagPrice("0000dfdf", 6565);
+        driver.reserveBeanBags(1, "0000dfdf");
+        driver.setBeanBagPrice("0000dfdf", 1111);
+        driver.array("r");
+        driver.sellBeanBags(2, "0000dfdf");
+        driver.sellBeanBags(0);
+        driver.array("s");
+        driver.array("a");
+        driver.array("r");
+
     }
 }

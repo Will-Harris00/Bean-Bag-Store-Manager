@@ -1,3 +1,4 @@
+package beanbags;
 import beanbags.*;
 import beanbags.BadStore;
 import beanbags.BeanBagStore;
@@ -22,3 +23,4 @@ public class JarProcessTestApp {
                            + " beanbags in stock.");
 	}
 }
+

@@ -534,8 +534,21 @@ public class Store implements BeanBagStore {
         // Iterates over the reserved items for a bean bag with a matching reservation
         // number and adds it back to the stock list, removing it from the reserved
         // list.
+
+        // checks whether the price of a reserved bean bag was reduced whilst waiting for final sale and
+        // offer customer the lower of the two price.
+        lowestPrice(manageReservations(reservationNumber).getAttributes().getIdentifier(), reservationNumber);
+
         sold.add(manageReservations(reservationNumber).getAttributes());
         reserved.remove(manageReservations(reservationNumber));
+    }
+
+    public void lowestPrice(String id, int reservationNumber) throws ReservationNumberNotRecognisedException {
+        int reservationPrice = manageReservations(reservationNumber).getAttributes().getPriceInPence();
+        // enables the customer of a reserved bean bag to pay the lower of the two prices upon sale.
+        if (getExistingPrice(id) < reservationPrice & getExistingPrice(id) != 0)
+                reservationPrice = getExistingPrice(id);
+        manageReservations(reservationNumber).getAttributes().setPriceInPence(reservationPrice);
     }
 
     // Sets the price of a bean bag in stock.
@@ -572,8 +585,14 @@ public class Store implements BeanBagStore {
         // Iterates over the reserved items for a bean bag with a matching reservation
         // number and adds it back to the stock list, removing it from the reserved
         // list.
+        int existingPrice = getExistingPrice(manageReservations(reservationNumber).getAttributes().getIdentifier());
+
+        // check if any available bean bags have matching identifiers to item being unreserved, get their existing price
+        // and updates the price of the bean bag being removed from reserved before adding it back to available store.
+        if (existingPrice != 0) {
+            manageReservations(reservationNumber).getAttributes().setPriceInPence(existingPrice);
+        }
         available.add(manageReservations(reservationNumber).getAttributes());
         reserved.remove(manageReservations(reservationNumber));
-
     }
 }
