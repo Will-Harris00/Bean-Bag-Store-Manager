@@ -1,8 +1,18 @@
-// Enables access and changing of all attributes of bean bag objects.
-
 package beanbags;
 
 import java.io.Serializable;
+
+/**
+ * BeanBag class which implements Serializable. Creates a new instance of a bean
+ * bag object and changes/returns their respective attributes using
+ * setter/getter methods.
+ *
+ * @author 680033128
+ * @author 690065435
+ * @version 1.1
+ *
+ *
+ */
 
 public class BeanBag implements Serializable {
     // Private instance variables.

@@ -1,6 +1,16 @@
-// Class containing exception handlers.
-
 package beanbags;
+
+/**
+ * Checks class which is called by some Store class methods. Contains exception
+ * handler methods to disrupt the program flow when an unplanned event occurs,
+ * such as invalid user inputs.
+ * 
+ * @author 680033128
+ * @author 690065435
+ * @version 1.1
+ *
+ *
+ */
 
 public class Checks {
     /**

@@ -1,7 +1,18 @@
-// A class to manage the list of reservations.
 package beanbags;
 
 import java.io.Serializable;
+
+/**
+ * Reservation class which implements Serializable. Creates a new instance of a
+ * reserved bean bag object and changes/returns the bean bag or reservation
+ * number.
+ *
+ * @author 680033128
+ * @author 690065435
+ * @version 1.1
+ *
+ *
+ */
 
 public class Reservation implements Serializable {
     private BeanBag item;
@@ -44,8 +55,8 @@ public class Reservation implements Serializable {
     }
 
     /**
-     * Public setter method for editing the attributes of a bean bag. Method included for
-     * future development.
+     * Public setter method for editing the attributes of a bean bag. Method
+     * included for future development.
      *
      * @param item This replaces the existing BeanBag object related to a
      *             reservation number.
