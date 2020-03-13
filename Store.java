@@ -71,7 +71,10 @@ public class Store implements BeanBagStore {
         assert (information != null) : "The bean bag incorrectly has information set to null.";
     }
 
-    // Test method for printing the bean bags in a given list.
+    /** Test method for printing the bean bags in a given list.
+
+    * @param type               Categorises the object as available, reserved, or sold.
+    */
     public void array(String type) {
         switch (type.toLowerCase()) {
             case "available":
@@ -628,7 +631,7 @@ public class Store implements BeanBagStore {
             // bag with a matching ID.
             for (int j = 0; j < object.size(); j++) {
                 if (object == reserved) {
-                    // checks whether the price of a reserved bean bag was reduced whilst
+                    // Checks whether the price of a reserved bean bag was reduced whilst
                     // waiting for final sale and offer them the lower of the two prices.
                     Reservation held = (Reservation) object.get(j);
                     BeanBag item = held.getAttributes();
