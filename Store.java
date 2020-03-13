@@ -72,7 +72,7 @@ public class Store implements BeanBagStore {
     }
 
     /**
-     * Test method for printing the bean bags in a given list.
+     * Method prints the bean bags in a given list.
      * 
      * @param type String which categorises the object as available, reserved, or
      *             sold.
@@ -95,8 +95,8 @@ public class Store implements BeanBagStore {
     }
 
     /**
-     * Iterates through the given list (available/reserved/sold) and prints the bean
-     * bags in that list.
+     * Method iterates through the given list (available/reserved/sold) and prints
+     * the bean bags in that list.
      * 
      * @param obj  List of bean bags from the category specified.
      * @param type Category of object (available, reserved, or sold).
@@ -149,8 +149,8 @@ public class Store implements BeanBagStore {
     }
 
     /**
-     * Counts the number of matching IDs for any objects which are in the given
-     * list(s).
+     * Method counts the number of matching IDs for any objects which are in the
+     * given list(s).
      * 
      * @param objects Array containing the individual objs (the lists of categorised
      *                bean bags).
@@ -257,7 +257,7 @@ public class Store implements BeanBagStore {
     }
 
     /**
-     * Gets the price of a given item based on its ID.
+     * Method returns the price of a given item based on its ID.
      * 
      * @param id ID of bean bags.
      * @return Price of the given bean bag.
@@ -414,12 +414,15 @@ public class Store implements BeanBagStore {
     }
 
     /**
-     * Responsible for the selling and cancellation of reservations in the reserved
+     * Method manages the selling and cancellation of reservations in the reserved
      * bean bag stock.
      * 
      * @param reservationNumber Identifier for each reservation in the list of
      *                          reserved bean bags.
      * @return Attributes of a given reserved bean bag.
+     * @throws ReservationNumberNotRecognisedException If the reservation number
+     *                                                 does not match a current
+     *                                                 reservation in the system.
      */
     public Reservation manageReservations(int reservationNumber) throws ReservationNumberNotRecognisedException {
         boolean recognised = false;
