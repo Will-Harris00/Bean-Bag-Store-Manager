@@ -71,10 +71,11 @@ public class Store implements BeanBagStore {
         assert (information != null) : "The bean bag incorrectly has information set to null.";
     }
 
-    /** Test method for printing the bean bags in a given list.
-
-    * @param type               Categorises the object as available, reserved, or sold.
-    */
+    /**
+     * Test method for printing the bean bags in a given list.
+     * 
+     * @param type Categorises the object as available, reserved, or sold.
+     */
     public void array(String type) {
         switch (type.toLowerCase()) {
             case "available":
