@@ -16,16 +16,16 @@ public class BeanBag implements Serializable {
 
 
     /**
-     * Constructor for initialising bean bag objects.
-     * Bean bag objects contain the following attributes.
+     * Constructor for initialising bean bag objects. Bean bag objects contain the
+     * following attributes.
      *
-     * @param manufacturer the maker of the beanbag.
-     * @param name         the given name of the beanbag.
-     * @param id           a unique identifier for identical beanbags.
-     * @param year         the year of manufacturer.
-     * @param month        the month of manufacturer.
-     * @param information  optional free text component containing further details.
-     * @param priceInPence price in pence.
+     * @param manufacturer Maker of the beanbag.
+     * @param name         Given name of the beanbag.
+     * @param id           Unique identifier for identical beanbags.
+     * @param year         Year of manufacturer.
+     * @param month        Month of manufacturer.
+     * @param information  Optional free text component containing further details.
+     * @param priceInPence Price in pence.
      *
      */
     public BeanBag(String manufacturer, String name, String id, short year, byte month, String information,
@@ -42,7 +42,7 @@ public class BeanBag implements Serializable {
     /**
      * Public getter method for unique identifiers.
      *
-     * @return returns the identifier associated with a particular beanbag.
+     * @return Returns the identifier associated with a particular beanbag.
      *
      */
     public String getIdentifier() {
@@ -52,7 +52,7 @@ public class BeanBag implements Serializable {
     /**
      * Public getter method for bean bag manufacturer.
      *
-     * @return returns the manufacturer of a bean bag.
+     * @return Returns the manufacturer of a bean bag.
      *
      */
     public String getManufacturer() {
@@ -62,7 +62,7 @@ public class BeanBag implements Serializable {
     /**
      * Public getter method for optional information.
      *
-     * @return returns the free text component of a bean bag.
+     * @return Returns the free text component of a bean bag.
      *
      */
     public String getInformation() {
@@ -72,7 +72,7 @@ public class BeanBag implements Serializable {
     /**
      * Public getter method for month of production.
      *
-     * @return returns the production month of a bean bag.
+     * @return Returns the production month of a bean bag.
      *
      */
     public byte getMonth() {
@@ -82,7 +82,7 @@ public class BeanBag implements Serializable {
     /**
      * Public getter method for retrieving the name.
      *
-     * @return returns the name of a bean bag.
+     * @return Returns the name of a bean bag.
      *
      */
     public String getName() {
@@ -92,7 +92,7 @@ public class BeanBag implements Serializable {
     /**
      * Public getter method for the cost of a bean bag in pence.
      *
-     * @return returns the price in pence of a bean bag.
+     * @return Returns the price in pence of a bean bag.
      *
      */
     public int getPriceInPence() {
@@ -102,7 +102,7 @@ public class BeanBag implements Serializable {
     /**
      * Public getter method for year of production.
      *
-     * @return returns the production year of a bean bag.
+     * @return Returns the production year of a bean bag.
      *
      */
     public short getYear() {
@@ -122,7 +122,8 @@ public class BeanBag implements Serializable {
     /**
      * Public setter method for optional information. Method included for future development.
      *
-     * @param information updates the identifier associated with a particular beanbag.
+     * @param information Updates the identifier associated with a particular
+     *                    beanbag.
      *
      */
     public void setInformation(String information) {
@@ -132,7 +133,7 @@ public class BeanBag implements Serializable {
     /**
      * Public setter method for maker of the beanbag. Method included for future development.
      *
-     * @param manufacturer updates the maker of the bean bag.
+     * @param manufacturer Updates the maker of the bean bag.
      *
      */
     public void setManufacturer(String manufacturer) {
@@ -142,7 +143,7 @@ public class BeanBag implements Serializable {
     /**
      * Public setter method for month of production. Method included for future development.
      *
-     * @param month updates the month of production.
+     * @param month Updates the month of production.
      *
      */
     public void setMonth(byte month) {
@@ -152,7 +153,7 @@ public class BeanBag implements Serializable {
     /**
      * Public setter method for name of bean bag. Method included for future development.
      *
-     * @param name updates the name.
+     * @param name Updates the name.
      *
      */
     public void setName(String name) {
@@ -162,7 +163,7 @@ public class BeanBag implements Serializable {
     /**
      * Public setter method for editing the price of a bean bag.
      *
-     * @param priceInPence changes the price of an item.
+     * @param priceInPence Changes the price of an item.
      *
      */
     public void setPriceInPence(int priceInPence) {
@@ -172,7 +173,7 @@ public class BeanBag implements Serializable {
     /**
      * Public setter method for year of production. Method included for future development.
      *
-     * @param year updates the month of production.
+     * @param year Updates the month of production.
      *
      */
     public void setYear(short year) {

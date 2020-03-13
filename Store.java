@@ -42,7 +42,6 @@ public class Store implements BeanBagStore {
     public void addBeanBags(int num, String manufacturer, String name, String id, short year, byte month,
             String information) throws IllegalNumberOfBeanBagsAddedException, BeanBagMismatchException,
             IllegalIDException, InvalidMonthException {
-
         // Throws an exception if the user tries to add a negative number of bean bags.
         if (num <= 0) {
             throw new IllegalNumberOfBeanBagsAddedException(
@@ -72,12 +71,13 @@ public class Store implements BeanBagStore {
     }
 
     /**
-     * Method prints the bean bags in a given list.
+     * Method for testing which prints the bean bags in a given list.
      * 
      * @param type String which categorises the object as available, reserved, or
      *             sold.
      */
     public void array(String type) {
+        // Prints a list of bean bags depending on the category provided.
         switch (type.toLowerCase()) {
             case "available":
             case "a":
@@ -95,8 +95,8 @@ public class Store implements BeanBagStore {
     }
 
     /**
-     * Method iterates through the given list (available/reserved/sold) and prints
-     * the bean bags in that list.
+     * Method for testing which iterates through the given list
+     * (available/reserved/sold) and prints the bean bags in that list.
      * 
      * @param obj  List of bean bags from the category specified.
      * @param type Category of object (available, reserved, or sold).
