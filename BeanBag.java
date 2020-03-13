@@ -14,7 +14,6 @@ public class BeanBag implements Serializable {
     private String information;
     private int priceInPence;
 
-
     /**
      * Constructor for initialising bean bag objects. Bean bag objects contain the
      * following attributes.
@@ -120,7 +119,8 @@ public class BeanBag implements Serializable {
     }
 
     /**
-     * Public setter method for optional information. Method included for future development.
+     * Public setter method for optional information. Method included for future
+     * development.
      *
      * @param information Updates the identifier associated with a particular
      *                    beanbag.
@@ -131,7 +131,8 @@ public class BeanBag implements Serializable {
     }
 
     /**
-     * Public setter method for maker of the beanbag. Method included for future development.
+     * Public setter method for maker of the beanbag. Method included for future
+     * development.
      *
      * @param manufacturer Updates the maker of the bean bag.
      *
@@ -141,7 +142,8 @@ public class BeanBag implements Serializable {
     }
 
     /**
-     * Public setter method for month of production. Method included for future development.
+     * Public setter method for month of production. Method included for future
+     * development.
      *
      * @param month Updates the month of production.
      *
@@ -151,7 +153,8 @@ public class BeanBag implements Serializable {
     }
 
     /**
-     * Public setter method for name of bean bag. Method included for future development.
+     * Public setter method for name of bean bag. Method included for future
+     * development.
      *
      * @param name Updates the name.
      *
@@ -171,7 +174,8 @@ public class BeanBag implements Serializable {
     }
 
     /**
-     * Public setter method for year of production. Method included for future development.
+     * Public setter method for year of production. Method included for future
+     * development.
      *
      * @param year Updates the month of production.
      *
