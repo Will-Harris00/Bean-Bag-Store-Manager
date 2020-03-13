@@ -74,7 +74,8 @@ public class Store implements BeanBagStore {
     /**
      * Test method for printing the bean bags in a given list.
      * 
-     * @param type Categorises the object as available, reserved, or sold.
+     * @param type String which categorises the object as available, reserved, or
+     *             sold.
      */
     public void array(String type) {
         switch (type.toLowerCase()) {
@@ -93,8 +94,13 @@ public class Store implements BeanBagStore {
         }
     }
 
-    // Iterates through the given list (stock/reserved/available/sold) and prints
-    // the bean bags in that list.
+    /**
+     * Iterates through the given list (available/reserved/sold) and prints the bean
+     * bags in that list.
+     * 
+     * @param obj  List of bean bags from the category specified.
+     * @param type Category of object (available, reserved, or sold).
+     */
     public void arrayPrint(ObjectArrayList obj, String type) {
         BeanBag item;
         Reservation held;
@@ -142,8 +148,15 @@ public class Store implements BeanBagStore {
         return countBeanBags(new ObjectArrayList[] { available, reserved }, id);
     }
 
-    // Counts the number of matching IDs for any objects which are in the given
-    // list(s).
+    /**
+     * Counts the number of matching IDs for any objects which are in the given
+     * list(s).
+     * 
+     * @param objects Array containing the individual objs (the lists of categorised
+     *                bean bags).
+     * @param id      ID of bean bags.
+     * @return Number of bean bags with the matching ID.
+     */
     public int countBeanBags(ObjectArrayList[] objects, String id)
             throws BeanBagIDNotRecognisedException, IllegalIDException {
         // Starts the count at 0.
@@ -175,7 +188,6 @@ public class Store implements BeanBagStore {
             throw new BeanBagIDNotRecognisedException("This bean bag ID '" + id + "' could not be found.");
         }
 
-        // Returns the free text component of the first matching bean bag in the list.
         return count;
     }
 
@@ -244,7 +256,12 @@ public class Store implements BeanBagStore {
         return item.getInformation();
     }
 
-    // Gets the price of a given item based on its ID.
+    /**
+     * Gets the price of a given item based on its ID.
+     * 
+     * @param id ID of bean bags.
+     * @return Price of the given bean bag.
+     */
     public int getExistingPrice(String id) {
 
         // Iterates over the available stock list and get the price from the first
@@ -396,8 +413,14 @@ public class Store implements BeanBagStore {
         }
     }
 
-    // Responsible for the selling and cancellation of reservations in the reserved
-    // bean bag stock.
+    /**
+     * Responsible for the selling and cancellation of reservations in the reserved
+     * bean bag stock.
+     * 
+     * @param reservationNumber Identifier for each reservation in the list of
+     *                          reserved bean bags.
+     * @return Attributes of a given reserved bean bag.
+     */
     public Reservation manageReservations(int reservationNumber) throws ReservationNumberNotRecognisedException {
         boolean recognised = false;
         Reservation held = null;
