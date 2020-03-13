@@ -13,7 +13,7 @@ import java.io.FileOutputStream;
  *
  * @author 680033128
  * @author 690065435
- * @version 1.1
+ * @version 1.4
  *
  *
  */
@@ -26,16 +26,19 @@ public class Store implements BeanBagStore {
     private ObjectArrayList sold = new ObjectArrayList();
 
     /**
-     * If no information parameter mentioned, adds a bean bag with no additional
-     * information (empty string).
+     * {@inheritDoc}}
      */
+    @Override
     public void addBeanBags(int num, String manufacturer, String name, String id, short year, byte month)
             throws IllegalNumberOfBeanBagsAddedException, BeanBagMismatchException, IllegalIDException,
             InvalidMonthException {
         addBeanBags(num, manufacturer, name, id, year, month, "");
     }
 
-    // Adds a bean bag to stock list.
+    /**
+     * {@inheritDoc}}
+     */
+    @Override
     public void addBeanBags(int num, String manufacturer, String name, String id, short year, byte month,
             String information) throws IllegalNumberOfBeanBagsAddedException, BeanBagMismatchException,
             IllegalIDException, InvalidMonthException {
@@ -120,7 +123,10 @@ public class Store implements BeanBagStore {
         }
     }
 
-    // Returns the total number of bean bags in stock.
+    /**
+     * {@inheritDoc}}
+     */
+    @Override
     public int beanBagsInStock() {
         return available.size() + reserved.size();
     }
@@ -169,7 +175,10 @@ public class Store implements BeanBagStore {
         return count;
     }
 
-    // Empties the stock of its contents.
+    /**
+     * {@inheritDoc}}
+     */
+    @Override
     public void empty() {
         // Sets lists to be null for garbage collection before creating a new empty
         // list, which enables more efficient use of memory.
@@ -185,7 +194,10 @@ public class Store implements BeanBagStore {
         assert (reserved.size() == 0) : "Reservation list was not emptied correctly.";
     }
 
-    // Gets the details of a particular bean bag based on ID.
+    /**
+     * {@inheritDoc}}
+     */
+    @Override
     public String getBeanBagDetails(String id) throws BeanBagIDNotRecognisedException, IllegalIDException {
         BeanBag item = null;
         boolean recognised = false;
@@ -244,7 +256,10 @@ public class Store implements BeanBagStore {
         return 0;
     }
 
-    // Gets the number of unique bean bags (different types) in the stock list.
+    /**
+     * {@inheritDoc}}
+     */
+    @Override
     public int getNumberOfDifferentBeanBagsInStock() {
         ObjectArrayList uniqueId = new ObjectArrayList();
 
@@ -288,19 +303,27 @@ public class Store implements BeanBagStore {
         return uniqueId.size();
     }
 
-    // Gets the total number of sold bean bags using the sold list.
+    /**
+     * {@inheritDoc}}
+     */
+    @Override
     public int getNumberOfSoldBeanBags() {
         return sold.size();
     }
 
-    // Gets the total number of sold beans bags of a particular type (using ID)
-    // using the sold list.
+    /**
+     * {@inheritDoc}}
+     */
+    @Override
     public int getNumberOfSoldBeanBags(String id) throws BeanBagIDNotRecognisedException, IllegalIDException {
         // Returns the number of bean bags with a matching ID which have been sold.
         return countBeanBags(new ObjectArrayList[] { sold }, id);
     }
 
-    // Gets the total price of bean bags in the reserved list.
+    /**
+     * {@inheritDoc}}
+     */
+    @Override
     public int getTotalPriceOfReservedBeanBags() {
         int count = 0;
 
@@ -313,7 +336,10 @@ public class Store implements BeanBagStore {
         return count;
     }
 
-    // Gets the total price of sold bean bags using the sold list.
+    /**
+     * {@inheritDoc}}
+     */
+    @Override
     public int getTotalPriceOfSoldBeanBags() {
         int count = 0;
 
@@ -326,8 +352,10 @@ public class Store implements BeanBagStore {
         return count;
     }
 
-    // Gets the total price of sold bean bags of a particular type (using ID) using
-    // the sold list.
+    /**
+     * {@inheritDoc}}
+     */
+    @Override
     public int getTotalPriceOfSoldBeanBags(String id) throws BeanBagIDNotRecognisedException, IllegalIDException {
         boolean recognised = false;
         int count = 0;
@@ -351,7 +379,10 @@ public class Store implements BeanBagStore {
         return count;
     }
 
-    // Loads the store contents from a previously saved store.
+    /**
+     * {@inheritDoc}}
+     */
+    @Override
     public void loadStoreContents(String filename) throws IOException, ClassNotFoundException {
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(filename))) {
             // Accesses each element of array.
@@ -385,7 +416,10 @@ public class Store implements BeanBagStore {
         return held;
     }
 
-    // Replaces the ID of a bean bag with another given ID.
+    /**
+     * {@inheritDoc}}
+     */
+    @Override
     public void replace(String oldId, String replacementId) throws BeanBagIDNotRecognisedException, IllegalIDException {
         boolean recognised = false;
 
@@ -427,7 +461,10 @@ public class Store implements BeanBagStore {
         }
     }
 
-    // Reserves a given quantity of bean bags based on ID.
+    /**
+     * {@inheritDoc}}
+     */
+    @Override
     public int reserveBeanBags(int num, String id)
             throws BeanBagNotInStockException, InsufficientStockException, IllegalNumberOfBeanBagsReservedException,
             PriceNotSetException, BeanBagIDNotRecognisedException, IllegalIDException {
@@ -480,12 +517,18 @@ public class Store implements BeanBagStore {
         return reservationNumber;
     }
 
-    // Returns the total number of reserved bean bags in stock.
+    /**
+     * {@inheritDoc}}
+     */
+    @Override
     public int reservedBeanBagsInStock() {
         return reserved.size();
     }
 
-    // Resets the tracking of sales and costs.
+    /**
+     * {@inheritDoc}}
+     */
+    @Override
     public void resetSaleAndCostTracking() {
         // Sets sold list to be null for garbage collection before creating a new empty
         // list, which enables more efficient use of memory.
@@ -496,7 +539,10 @@ public class Store implements BeanBagStore {
         assert (this.getNumberOfSoldBeanBags() == 0) : "Sales have not been reset correctly.";
     }
 
-    // Permanently saves the store contents so it can be used in other programs.
+    /**
+     * {@inheritDoc}}
+     */
+    @Override
     public void saveStoreContents(String filename) throws IOException {
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename))) {
             out.writeObject(available);
@@ -506,7 +552,10 @@ public class Store implements BeanBagStore {
         }
     }
 
-    // Sells a given quantity of a bean bag based on ID.
+    /**
+     * {@inheritDoc}}
+     */
+    @Override
     public void sellBeanBags(int num, String id)
             throws BeanBagNotInStockException, InsufficientStockException, IllegalNumberOfBeanBagsSoldException,
             PriceNotSetException, BeanBagIDNotRecognisedException, IllegalIDException {
@@ -542,7 +591,10 @@ public class Store implements BeanBagStore {
         }
     }
 
-    // Sells a number of beans bags according to a reservation number.
+    /**
+     * {@inheritDoc}}
+     */
+    @Override
     public void sellBeanBags(int reservationNumber) throws ReservationNumberNotRecognisedException {
         // Iterates over the reserved items for a bean bag with a matching reservation
         // number and adds it back to the stock list, removing it from the reserved
@@ -551,7 +603,10 @@ public class Store implements BeanBagStore {
         reserved.remove(manageReservations(reservationNumber));
     }
 
-    // Sets the price of a bean bag in stock.
+    /**
+     * {@inheritDoc}}
+     */
+    @Override
     public void setBeanBagPrice(String id, int priceInPence)
             throws InvalidPriceException, BeanBagIDNotRecognisedException, IllegalIDException {
         // Assumes bean bag is unrecognised until it finds the bean bag with the
@@ -599,7 +654,10 @@ public class Store implements BeanBagStore {
         }
     }
 
-    // Cancels a reservation of bean bags based on reservation number.
+    /**
+     * {@inheritDoc}}
+     */
+    @Override
     public void unreserveBeanBags(int reservationNumber) throws ReservationNumberNotRecognisedException {
         // Iterates over the reserved items for a bean bag with a matching reservation
         // number and adds it back to the stock list, removing it from the reserved
