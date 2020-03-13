@@ -173,7 +173,8 @@ public class Store implements BeanBagStore {
                 BeanBag item;
                 if (object == reserved) {
                     Reservation held = (Reservation) object.get(j);
-                    // Throws an AssertionError if the reserved bean bag fails to return any attributes.
+                    // Throws an AssertionError if the reserved bean bag fails to return any
+                    // attributes.
                     assert (held != null) : "The reserved bean bag incorrectly has information set to null.";
                     item = held.getAttributes();
                 } else {
@@ -299,7 +300,8 @@ public class Store implements BeanBagStore {
             for (int j = 0; j < obj.size(); j++) {
                 if (obj == reserved) {
                     Reservation held = (Reservation) obj.get(j);
-                    // Throws an AssertionError if the reserved bean bag fails to return any attributes.
+                    // Throws an AssertionError if the reserved bean bag fails to return any
+                    // attributes.
                     assert (held != null) : "The reserved bean bag incorrectly has information set to null.";
                     item = held.getAttributes();
                 } else {
@@ -355,7 +357,8 @@ public class Store implements BeanBagStore {
         // Iterates through the reserved list and adds each type of
         for (int j = 0; j < reserved.size(); j++) {
             Reservation held = (Reservation) reserved.get(j);
-            // Throws an AssertionError if the reserved bean bag fails to return any attributes.
+            // Throws an AssertionError if the reserved bean bag fails to return any
+            // attributes.
             assert (held != null) : "The reserved bean bag incorrectly has information set to null.";
             count += held.getAttributes().getPriceInPence();
         }
@@ -437,7 +440,8 @@ public class Store implements BeanBagStore {
         // Iterates over reservations stock to find matching reservation number.
         for (int j = 0; j < reserved.size(); j++) {
             held = (Reservation) reserved.get(j);
-            // Throws an AssertionError if the reserved bean bag fails to return any attributes.
+            // Throws an AssertionError if the reserved bean bag fails to return any
+            // attributes.
             assert (held != null) : "The reserved bean bag incorrectly has information set to null.";
             if (held.getReservation() == reservationNumber) {
                 recognised = true;
@@ -482,7 +486,8 @@ public class Store implements BeanBagStore {
 
                 if (obj == reserved) {
                     Reservation held = (Reservation) obj.get(j);
-                    // Throws an AssertionError if the reserved bean bag fails to return any attributes.
+                    // Throws an AssertionError if the reserved bean bag fails to return any
+                    // attributes.
                     assert (held != null) : "The reserved bean bag incorrectly has information set to null.";
                     item = held.getAttributes();
                 } else {
@@ -531,7 +536,8 @@ public class Store implements BeanBagStore {
                     // checking there isn't a match.
                     for (int k = 0; k < reserved.size(); k++) {
                         Reservation held = (Reservation) reserved.get(k);
-                        // Throws an AssertionError if the reserved bean bag fails to return any attributes.
+                        // Throws an AssertionError if the reserved bean bag fails to return any
+                        // attributes.
                         assert (held != null) : "The reserved bean bag incorrectly has information set to null.";
                         if (reservationNumber != held.getReservation()) {
                             break;
@@ -673,7 +679,8 @@ public class Store implements BeanBagStore {
                     // Checks whether the price of a reserved bean bag was reduced whilst
                     // waiting for final sale and offer them the lower of the two prices.
                     Reservation held = (Reservation) object.get(j);
-                    // Throws an AssertionError if the reserved bean bag fails to return any attributes.
+                    // Throws an AssertionError if the reserved bean bag fails to return any
+                    // attributes.
                     assert (held != null) : "The reserved bean bag incorrectly has information set to null.";
                     BeanBag item = held.getAttributes();
                     if ((item.getIdentifier().equalsIgnoreCase(id)) && (priceInPence < item.getPriceInPence())) {
