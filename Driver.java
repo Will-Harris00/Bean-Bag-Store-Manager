@@ -121,7 +121,7 @@ public class Driver {
         driver.addBeanBags(4, "M", "A", "0000eeee", (short) 2001, (byte) 2);
         driver.setBeanBagPrice("0000eeee", 8888);
         driver.reserveBeanBags(2, "0000eeee");
-        driver.reserveBeanBags(3, "0000eeee");
+        driver.reserveBeanBags(2, "0000eeee");
         driver.array("s");
         driver.array("a");
         driver.array("r");
