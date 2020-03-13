@@ -12,21 +12,21 @@ public class Driver {
             IllegalNumberOfBeanBagsSoldException, IllegalNumberOfBeanBagsReservedException, ReservationNumberNotRecognisedException, IOException, ClassNotFoundException {
         Store driver = new Store();
         // Adding bean bags.
-        /*
+
         driver.addBeanBags(2, "Manufacturer1", "BeanBagName1", "0000ffff", (short) 2001, (byte) 1);
         driver.addBeanBags(6, "Manufacturer1", "BeanBagName1", "0000bbbb", (short) 2001, (byte) 1, "information");
         driver.addBeanBags(6, "Manufacturer1", "BeanBagName1", "0000cccc", (short) 2001, (byte) 1, "information");
         driver.addBeanBags(1, "Manufacturer1", "BeanBagName1", "0000cccc", (short) 2001, (byte) 1, "information");
 
         // Bean bags in stock.
-        // System.out.println(driver.beanBagsInStock("0000bbbb"));
+        System.out.println(driver.beanBagsInStock("0000bbbb"));
 
         // Emptying stock.
         // driver.empty();
         // driver.array("a");
 
         // Getting bean bag details.
-        // System.out.println(driver.getBeanBagDetails("0000bbbb"));
+        System.out.println(driver.getBeanBagDetails("0000bbbb"));
 
         // Getting number of unique bean bags.
         // System.out.println(driver.getNumberOfDifferentBeanBagsInStock());
@@ -94,7 +94,7 @@ public class Driver {
         driver.unreserveBeanBags(2);
         driver.array("a");
         driver.array("r");
-        */
+
 
         driver.empty();
         driver.addBeanBags(4, "Man", "Apple", "0000dfdf", (short) 2001, (byte) 2);
@@ -125,6 +125,7 @@ public class Driver {
         driver.array("s");
         driver.array("a");
         driver.array("r");
+        System.out.println(driver.getNumberOfDifferentBeanBagsInStock());
 
 
     }
