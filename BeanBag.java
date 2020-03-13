@@ -120,7 +120,7 @@ public class BeanBag implements Serializable {
     }
 
     /**
-     * Public setter method for optional information, method included for extended scope.
+     * Public setter method for optional information. Method included for future development.
      *
      * @param information updates the identifier associated with a particular beanbag.
      *
@@ -130,7 +130,7 @@ public class BeanBag implements Serializable {
     }
 
     /**
-     * Public setter method for maker of the beanbag, method included for extended scope.
+     * Public setter method for maker of the beanbag. Method included for future development.
      *
      * @param manufacturer updates the maker of the bean bag.
      *
@@ -140,7 +140,7 @@ public class BeanBag implements Serializable {
     }
 
     /**
-     * Public setter method for month of production, method included for extended scope.
+     * Public setter method for month of production. Method included for future development.
      *
      * @param month updates the month of production.
      *
@@ -150,7 +150,7 @@ public class BeanBag implements Serializable {
     }
 
     /**
-     * Public setter method for name of bean bag, method included for extended scope.
+     * Public setter method for name of bean bag. Method included for future development.
      *
      * @param name updates the name.
      *
@@ -170,7 +170,7 @@ public class BeanBag implements Serializable {
     }
 
     /**
-     * Public setter method for year of production, method included for extended scope.
+     * Public setter method for year of production. Method included for future development.
      *
      * @param year updates the month of production.
      *
