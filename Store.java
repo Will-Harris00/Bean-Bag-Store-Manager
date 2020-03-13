@@ -7,8 +7,9 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
 /**
- * BeanBagStore implementation class. Represents the back end of a stock management system
- * help a user manage reservations, sales and restocking of items more efficiently.
+ * BeanBagStore implementation class. Represents the back end of a stock
+ * management system help a user manage reservations, sales and restocking of
+ * items more efficiently.
  *
  * @author 680033128
  * @author 690065435
@@ -23,8 +24,10 @@ public class Store implements BeanBagStore {
     private ObjectArrayList reserved = new ObjectArrayList();
     private ObjectArrayList sold = new ObjectArrayList();
 
-    // If no information parameter mentioned, adds a bean bag with no additional
-    // information (empty string).
+    /**
+     * If no information parameter mentioned, adds a bean bag with no additional
+     * information (empty string).
+     */
     public void addBeanBags(int num, String manufacturer, String name, String id, short year, byte month)
             throws IllegalNumberOfBeanBagsAddedException, BeanBagMismatchException, IllegalIDException,
             InvalidMonthException {
