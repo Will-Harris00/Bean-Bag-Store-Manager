@@ -7,12 +7,13 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
 /**
- * BeanBagStore interface. The no-argument constructor of a class implementing
- * this interface should initialise the BeanBagStore as an empty store with no
- * initial bean bags contained within it.
+ * BeanBagStore implementation class. Represents the back end of a stock management system
+ * help a user manage reservations, sales and restocking of items more efficiently.
  *
- * @author Jonathan Fieldsend
- * @version 1.3
+ * @author 680033128
+ * @author 690065435
+ * @version 1.1
+ *
  */
 
 public class Store implements BeanBagStore {
