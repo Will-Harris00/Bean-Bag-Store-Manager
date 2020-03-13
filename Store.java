@@ -7,7 +7,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
 /**
- * BeanBagStore implementation class. Represents the back end of a stock
+ * Store class which implements BeanBagStore. Represents the back end of a stock
  * management system help a user manage reservations, sales and restocking of
  * items more efficiently.
  *
