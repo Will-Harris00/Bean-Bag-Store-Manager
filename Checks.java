@@ -87,6 +87,7 @@ public class Checks {
         if (num <= 0)
             throw new IllegalNumberOfBeanBagsReservedException(
                     "The number of bean bags '" + num + "' reserved cannot be less than zero");
+        Checks.validId(id);
         // Throws an exception if there are no bean bags available for reservation.
         if (available == 0)
             throw new BeanBagNotInStockException("None of these bean bags '" + id + "' are available for reservation");

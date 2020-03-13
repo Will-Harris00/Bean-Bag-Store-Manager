@@ -424,7 +424,7 @@ public class Store implements BeanBagStore {
         int reservationNumber = 0;
 
         // Checks if there are enough bean bags with the given ID in stock to reserve.
-        Checks.validReservation(num, id, beanBagsInStock(id));
+        Checks.validReservation(num, id, countBeanBags(new ObjectArrayList[] { available }, id));
 
         // For the number of bean bean bags the customer wishes to reserve, iterates
         // over the list of available bean bags and checks for matching bean
@@ -501,7 +501,7 @@ public class Store implements BeanBagStore {
         boolean recognised = false;
 
         // Checks if there is enough available stock of that item to sell.
-        Checks.validSale(num, id, beanBagsInStock(id));
+        Checks.validSale(num, id, countBeanBags(new ObjectArrayList[] { available }, id));
 
         // For the number of bean bags the customer wishes to sell, iterates over the
         // list of available stock and checks for matching bean bags.
@@ -531,24 +531,10 @@ public class Store implements BeanBagStore {
 
     // Sells a number of beans bags according to a reservation number.
     public void sellBeanBags(int reservationNumber) throws ReservationNumberNotRecognisedException {
-        // Checks whether the price of a reserved bean bag was reduced whilst waiting
-        // for final sale and offers the customer the lowest price.
-        lowestPrice(manageReservations(reservationNumber).getAttributes().getIdentifier(), reservationNumber);
-
         // Iterates over the reserved items for a bean bag with a matching reservation
-        // number and adds it back to the stock list, removing it from the reserved
-        // list.
+        // number and adds it back to the stock list, removing it from the reserved list.
         sold.add(manageReservations(reservationNumber).getAttributes());
         reserved.remove(manageReservations(reservationNumber));
-    }
-
-    // Enables the customer of a reserved bean bag to pay the lower of the two
-    // prices upon sale.
-    public void lowestPrice(String id, int reservationNumber) throws ReservationNumberNotRecognisedException {
-        int reservationPrice = manageReservations(reservationNumber).getAttributes().getPriceInPence();
-        if (getExistingPrice(id) < reservationPrice & getExistingPrice(id) != 0)
-            reservationPrice = getExistingPrice(id);
-        manageReservations(reservationNumber).getAttributes().setPriceInPence(reservationPrice);
     }
 
     // Sets the price of a bean bag in stock.
@@ -557,6 +543,7 @@ public class Store implements BeanBagStore {
         // Assumes bean bag is unrecognised until it finds the bean bag with the
         // mentioned ID.
         boolean recognised = false;
+        ObjectArrayList[] objects = { available, reserved };
 
         // Checks the given ID, and sets the price to that ID if valid.
         Checks.validId(id);
@@ -565,13 +552,30 @@ public class Store implements BeanBagStore {
         if (priceInPence < 0)
             throw new InvalidPriceException("The price '" + priceInPence + "' cannot be below zero pence.");
 
-        // Iterates over the list of available bean bags and sets the given price to
-        // bean bags with matching IDs.
-        for (int j = 0; j < available.size(); j++) {
-            BeanBag item = (BeanBag) available.get(j);
-            if (item.getIdentifier().equalsIgnoreCase(id)) {
-                item.setPriceInPence(priceInPence);
-                recognised = true;
+        // Accesses each element of array.
+        for (ObjectArrayList object : objects) {
+            // Iterates over the stock object and increments the count for each bean
+            // bag with a matching ID.
+            for (int j = 0; j < object.size(); j++) {
+                if (object == reserved) {
+                    // checks whether the price of a reserved bean bag was reduced whilst
+                    // waiting for final sale and offer them the lower of the two prices.
+                    Reservation held = (Reservation) object.get(j);
+                    BeanBag item = held.getAttributes();
+                    if ((item.getIdentifier().equalsIgnoreCase(id)) && (priceInPence < item.getPriceInPence()) ) {
+                        item.setPriceInPence(priceInPence);
+                        recognised = true;
+                    }
+                }
+                else {
+                    // Iterates over the list of available bean bags and sets the given price to
+                    // bean bags with matching IDs.
+                    BeanBag item = (BeanBag) object.get(j);
+                    if (item.getIdentifier().equalsIgnoreCase(id)) {
+                        item.setPriceInPence(priceInPence);
+                        recognised = true;
+                    }
+                }
             }
         }
 

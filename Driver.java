@@ -12,6 +12,7 @@ public class Driver {
             IllegalNumberOfBeanBagsSoldException, IllegalNumberOfBeanBagsReservedException, ReservationNumberNotRecognisedException, IOException, ClassNotFoundException {
         Store driver = new Store();
         // Adding bean bags.
+        /*
         driver.addBeanBags(2, "Manufacturer1", "BeanBagName1", "0000ffff", (short) 2001, (byte) 1);
         driver.addBeanBags(6, "Manufacturer1", "BeanBagName1", "0000bbbb", (short) 2001, (byte) 1, "information");
         driver.addBeanBags(6, "Manufacturer1", "BeanBagName1", "0000cccc", (short) 2001, (byte) 1, "information");
@@ -93,18 +94,38 @@ public class Driver {
         driver.unreserveBeanBags(2);
         driver.array("a");
         driver.array("r");
+        */
 
         driver.empty();
-        driver.addBeanBags(3, "Man", "Apple", "0000dfdf", (short) 2001, (byte) 2);
+        driver.addBeanBags(4, "Man", "Apple", "0000dfdf", (short) 2001, (byte) 2);
         driver.setBeanBagPrice("0000dfdf", 6565);
-        driver.reserveBeanBags(1, "0000dfdf");
-        driver.setBeanBagPrice("0000dfdf", 1111);
+        driver.reserveBeanBags(2, "0000dfdf");
+        driver.setBeanBagPrice("0000dfdf", 6000);
         driver.array("r");
-        driver.sellBeanBags(2, "0000dfdf");
+        driver.array("a");
+        driver.sellBeanBags(1, "0000dfdf");
         driver.sellBeanBags(0);
+        driver.unreserveBeanBags(1);
+        driver.reserveBeanBags(2, "0000dfdf");
         driver.array("s");
         driver.array("a");
         driver.array("r");
+        driver.addBeanBags(1, "Man", "Apple", "0000dfdf", (short) 2001, (byte) 2);
+        driver.setBeanBagPrice("0000dfdf",123);
+        driver.reserveBeanBags(1, "0000dfdf");
+        driver.array("s");
+        driver.array("a");
+        driver.array("r");
+        driver.empty();
+        System.out.println("\n\n");
+        driver.addBeanBags(4, "M", "A", "0000eeee", (short) 2001, (byte) 2);
+        driver.setBeanBagPrice("0000eeee", 8888);
+        driver.reserveBeanBags(2, "0000eeee");
+        driver.reserveBeanBags(3, "0000eeee");
+        driver.array("s");
+        driver.array("a");
+        driver.array("r");
+
 
     }
 }
