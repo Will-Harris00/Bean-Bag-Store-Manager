@@ -9,11 +9,12 @@ public class Reservation implements Serializable {
     private int reference;
 
     /**
-     * Constructor for initialising reserved bean bag objects.
-     * Reserved objects contain the following attributes.
+     * Constructor for initialising reserved bean bag objects. Reserved objects
+     * contain the following attributes.
      *
-     * @param item This is equivalent to an instance of a bean bag object.
-     * @param reference This contains the reservation number associated with a given bean bag.
+     * @param item      This is equivalent to an instance of a bean bag object.
+     * @param reference This contains the reservation number associated with a given
+     *                  bean bag.
      *
      */
     public Reservation(BeanBag item, int reference) {
@@ -34,7 +35,8 @@ public class Reservation implements Serializable {
     /**
      * Public getter method for finding the reservation number of a reserved item.
      *
-     * @return Returns only the reservation number of a bean bag without any of its attributes.
+     * @return Returns only the reservation number of a bean bag without any of its
+     *         attributes.
      *
      */
     public int getReservation() {
@@ -42,9 +44,11 @@ public class Reservation implements Serializable {
     }
 
     /**
-     * Public setter for editing the attributes of a bean bag. Method included for future development.
+     * Public setter method for editing the attributes of a bean bag. Method included for
+     * future development.
      *
-     * @param item This replaces the existing BeanBag object related to a reservation number.
+     * @param item This replaces the existing BeanBag object related to a
+     *             reservation number.
      *
      */
     public void setAttributes(BeanBag item) {
@@ -52,9 +56,11 @@ public class Reservation implements Serializable {
     }
 
     /**
-     * Public setter for editing the reservation number of a bean bag. Method included for future development.
+     * Public setter method for editing the reservation number of a bean bag. Method
+     * included for future development.
      *
-     * @param reference This replaces the reservation number without making changes to a bean bags attributes.
+     * @param reference This replaces the reservation number without making changes
+     *                  to a bean bags attributes.
      *
      */
     public void setReservation(int reference) {
