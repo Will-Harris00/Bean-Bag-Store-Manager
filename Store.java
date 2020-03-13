@@ -156,6 +156,11 @@ public class Store implements BeanBagStore {
      *                bean bags).
      * @param id      ID of bean bags.
      * @return Number of bean bags with the matching ID.
+     * @throws BeanBagIDNotRecognisedException If the ID is legal, but does not
+     *                                         match any bag in (or previously in)
+     *                                         stock.
+     * @throws IllegalIDException              If the ID is not a positive eight
+     *                                         character hexadecimal number.
      */
     public int countBeanBags(ObjectArrayList[] objects, String id)
             throws BeanBagIDNotRecognisedException, IllegalIDException {
