@@ -14,6 +14,7 @@ import java.io.FileOutputStream;
  * @author 690065435
  * @version 1.1
  *
+ *
  */
 
 public class Store implements BeanBagStore {
@@ -39,8 +40,8 @@ public class Store implements BeanBagStore {
         // Throws an exception if the user tries to add a negative number of bean bags.
         if (num <= 0) {
             throw new IllegalNumberOfBeanBagsAddedException(
-                    "The number of bean bags '" + num + "' added must be positive.")
-        };
+                    "The number of bean bags '" + num + "' added must be positive.");
+        }
 
         // Throws an exception if the user tries to add a month of manufacture which
         // doesn't exist.
