@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 // Driver application to test whether the backend code is working as intended.
@@ -9,8 +10,12 @@ public class StoreDriverApp {
         Store driver = new Store();
         // Tests the various methods in the backend code.
         driver.empty();
-        driver.saveStoreContents("BeanBagStore.ser");
-        driver.loadStoreContents("BeanBagStore.ser");
+        try { driver.loadStoreContents("BeanBagStore.ser");
+            System.out.println("Back File Loaded Successfully");
+        } catch(FileNotFoundException e) {
+            System.out.println("No Backup File to Load");
+        }
+
         driver.array("a");
         driver.array("r");
         driver.array("s");

@@ -54,7 +54,13 @@ public class Driver {
         // driver.array("a");
         // driver.empty();
         // driver.array("a");
-        // driver.loadStoreContents("filename");
+        /* 
+        try { driver.loadStoreContents("BeanBagStore.ser");
+            System.out.println("Back File Loaded Successfully");
+        } catch(FileNotFoundException e) {
+            System.out.println("No Backup File to Load");
+        }
+         */
         // driver.array("a");
 
         // Replacing an ID.
