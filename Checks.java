@@ -1,5 +1,3 @@
-package beanbags;
-
 /**
  * Checks class which is called by some Store class methods. Contains exception
  * handler methods to disrupt the program flow when an unplanned event occurs,

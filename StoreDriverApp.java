@@ -1,9 +1,6 @@
-// Driver application to test whether the backend code is working as intended.
-
-package beanbags;
-
 import java.io.IOException;
 
+// Driver application to test whether the backend code is working as intended.
 public class StoreDriverApp {
     public static void main(String[] args) throws IllegalIDException, BeanBagMismatchException, InvalidMonthException,
             IllegalNumberOfBeanBagsAddedException, InvalidPriceException, BeanBagIDNotRecognisedException,
@@ -12,6 +9,7 @@ public class StoreDriverApp {
         Store driver = new Store();
         // Tests the various methods in the backend code.
         driver.empty();
+        driver.saveStoreContents("BeanBagStore.ser");
         driver.loadStoreContents("BeanBagStore.ser");
         driver.array("a");
         driver.array("r");

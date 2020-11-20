@@ -1,10 +1,6 @@
-// Driver application to test whether the backend code is working as intended.
-
-package beanbags;
-
 import java.io.IOException;
 
-
+// Driver application to test whether the backend code is working as intended.
 public class Driver {
     public static void main(String[] args) throws IllegalIDException, BeanBagMismatchException, InvalidMonthException,
             IllegalNumberOfBeanBagsAddedException, InvalidPriceException, BeanBagIDNotRecognisedException,
@@ -68,9 +64,9 @@ public class Driver {
 
         // Reserving bean bags.
         driver.addBeanBags(10, "Manufacturer2", "Name3", "0000bcbc", (short) 2002, (byte) 2);
-        System.out.println(driver.reserveBeanBags(3, "0000cccc")); 
-        System.out.println(driver.reserveBeanBags(4, "0000bbbb")); 
-        
+        System.out.println(driver.reserveBeanBags(3, "0000cccc"));
+        System.out.println(driver.reserveBeanBags(4, "0000bbbb"));
+
         // Getting number of reserved bean bags in stock.
         // System.out.println(driver.reservedBeanBagsInStock());
 
@@ -85,7 +81,7 @@ public class Driver {
         // Setting the price of a bean bag.
         driver.setBeanBagPrice("0000cccc", 4);
         driver.array("a");
-        System.out.println(driver.reserveBeanBags(1, "0000cccc")); 
+        System.out.println(driver.reserveBeanBags(1, "0000cccc"));
         driver.setBeanBagPrice("0000cccc", 2);
         driver.array("a");
         driver.array("r");
@@ -111,7 +107,7 @@ public class Driver {
         driver.array("a");
         driver.array("r");
         driver.addBeanBags(1, "Man", "Apple", "0000dfdf", (short) 2001, (byte) 2);
-        driver.setBeanBagPrice("0000dfdf",123);
+        driver.setBeanBagPrice("0000dfdf", 123);
         driver.reserveBeanBags(1, "0000dfdf");
         driver.array("s");
         driver.array("a");
@@ -126,7 +122,5 @@ public class Driver {
         driver.array("a");
         driver.array("r");
         System.out.println(driver.getNumberOfDifferentBeanBagsInStock());
-
-
     }
 }

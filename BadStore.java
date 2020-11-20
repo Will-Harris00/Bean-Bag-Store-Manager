@@ -1,4 +1,3 @@
-package beanbags;
 import java.io.IOException;
 
 

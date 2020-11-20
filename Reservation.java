@@ -1,5 +1,3 @@
-package beanbags;
-
 import java.io.Serializable;
 
 /**
