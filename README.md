@@ -1,4 +1,4 @@
-# Bean-Bag-Store-Manager
+# Store-Inventory-Manager
 
 ## A stock control management system designed for a bean bag store.
 
